@@ -1,0 +1,565 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20409,        557]
+NotebookOptionsPosition[     18993,        525]
+NotebookOutlinePosition[     19466,        542]
+CellTagsIndexPosition[     19423,        539]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Lagrangian", " ", "dynamics"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Remove", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Define", " ", "reality"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"SetAttributes", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m", ",", "g", ",", "L"}], "}"}], ",", "Constant"}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"$Assumptions", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Element", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"m", ",", "g", ",", "L"}], "}"}], ",", "Reals"}], "]"}], "&&", 
+       RowBox[{"m", ">", "0"}], "&&", 
+       RowBox[{"g", ">", "0"}], "&&", 
+       RowBox[{"L", ">", "0"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"r", "[", "t_", "]"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"x", "[", "t", "]"}], ",", 
+       RowBox[{"y", "[", "t", "]"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"T", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"1", "/", "2"}], " ", "m", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"r", "'"}], "[", "t", "]"}], ".", 
+       RowBox[{
+        RowBox[{"r", "'"}], "[", "t", "]"}]}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"V", "=", " ", 
+     RowBox[{"m", " ", "g", " ", 
+      RowBox[{"y", "[", "t", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"lag", " ", "=", " ", 
+     RowBox[{"T", "-", "V"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Convert", " ", "coords"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"x", "[", "t_", "]"}], " ", "=", " ", 
+     RowBox[{"L", " ", 
+      RowBox[{"Sin", "[", 
+       RowBox[{"\[Theta]", "[", "t", "]"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"y", "[", "t_", "]"}], " ", "=", " ", 
+     RowBox[{
+      RowBox[{"-", " ", "L"}], " ", 
+      RowBox[{"Cos", "[", 
+       RowBox[{"\[Theta]", "[", "t", "]"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<\\nThe Lagrangian for a simple pendulum: \>\"", ",", " ", 
+     RowBox[{"lag", " ", "=", " ", 
+      RowBox[{"lag", "//", "Simplify"}]}]}], "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Create", " ", "Euler"}], "-", 
+     RowBox[{"Lagrange", " ", "operator"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"EL", "[", "q_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"D", "[", 
+        RowBox[{"lag", ",", "q"}], "]"}], "-", 
+       RowBox[{"Dt", "[", 
+        RowBox[{
+         RowBox[{"D", "[", 
+          RowBox[{"lag", ",", 
+           RowBox[{"D", "[", 
+            RowBox[{"q", ",", "t"}], "]"}]}], "]"}], ",", "t"}], "]"}]}], "==",
+       "0"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", "\"\<\\nEq of Motion: \>\"", "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{"EL", "[", 
+     RowBox[{"\[Theta]", "[", "t", "]"}], "]"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.8841883156622763`*^9, 3.8841883563718815`*^9}, {
+  3.8841884651192555`*^9, 3.884188466536476*^9}, {3.884189347827063*^9, 
+  3.8841896063582478`*^9}, {3.8841896436704063`*^9, 3.884189772413862*^9}, {
+  3.8841900099438486`*^9, 3.884190088908883*^9}, {3.884190168031254*^9, 
+  3.8841901781690817`*^9}},ExpressionUUID->"8a06c285-1a8c-432d-8798-\
+2017f96ddacd"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nThe Lagrangian for a simple pendulum: \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{
+    FractionBox["1", "2"], " ", "L", " ", "m", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2", " ", "g", " ", 
+       RowBox[{"Cos", "[", 
+        RowBox[{"\[Theta]", "[", "t", "]"}], "]"}]}], "+", 
+      RowBox[{"L", " ", 
+       SuperscriptBox[
+        RowBox[{
+         SuperscriptBox["\[Theta]", "\[Prime]",
+          MultilineFunction->None], "[", "t", "]"}], "2"]}]}], ")"}]}]}],
+  SequenceForm[
+  "\nThe Lagrangian for a simple pendulum: ", 
+   Rational[1, 2] $CellContext`L $CellContext`m (2 $CellContext`g Cos[
+       $CellContext`\[Theta][$CellContext`t]] + $CellContext`L 
+     Derivative[1][$CellContext`\[Theta]][$CellContext`t]^2)],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.8841896081009846`*^9, 3.8841896116223717`*^9}, {
+   3.884189661021476*^9, 3.884189676192913*^9}, 3.8841900898846364`*^9},
+ CellLabel->
+  "During evaluation of \
+In[39]:=",ExpressionUUID->"38bbd509-19a9-4e49-82d2-b2c2bee2316b"],
+
+Cell[BoxData["\<\"\\nEq of Motion: \"\>"], "Print",
+ CellChangeTimes->{{3.8841896081009846`*^9, 3.8841896116223717`*^9}, {
+   3.884189661021476*^9, 3.884189676192913*^9}, 3.8841900898846364`*^9},
+ CellLabel->
+  "During evaluation of \
+In[39]:=",ExpressionUUID->"e8b707f3-c2cc-4504-a26b-5760e2f27a0a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "g"}], " ", "L", " ", "m", " ", 
+    RowBox[{"Sin", "[", 
+     RowBox[{"\[Theta]", "[", "t", "]"}], "]"}]}], "-", 
+   RowBox[{
+    SuperscriptBox["L", "2"], " ", "m", " ", 
+    RowBox[{
+     SuperscriptBox["\[Theta]", "\[Prime]\[Prime]",
+      MultilineFunction->None], "[", "t", "]"}]}]}], "\[Equal]", 
+  "0"}]], "Print",
+ CellChangeTimes->{{3.8841896081009846`*^9, 3.8841896116223717`*^9}, {
+   3.884189661021476*^9, 3.884189676192913*^9}, 3.8841900898985915`*^9},
+ CellLabel->
+  "During evaluation of \
+In[39]:=",ExpressionUUID->"cb577359-dc99-480e-a287-63a82cd7ff45"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Bungee", " ", 
+    RowBox[{"Jumper", "!"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Remove", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Define", " ", "reality"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"SetAttributes", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m", ",", "k", ",", "g", ",", "L"}], "}"}], ",", "Constant"}], 
+    "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"$Assumptions", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Element", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"m", ",", "k", ",", "g", ",", "L"}], "}"}], ",", "Reals"}], 
+        "]"}], "&&", 
+       RowBox[{"m", ">", "0"}], "&&", 
+       RowBox[{"k", ">", "0"}], "&&", 
+       RowBox[{"g", ">", "0"}], "&&", 
+       RowBox[{"L", ">", "0"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"T", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"1", "/", "2"}], " ", "m", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{
+          RowBox[{"x", "'"}], "[", "t", "]"}], "2"], "+", 
+        SuperscriptBox[
+         RowBox[{
+          RowBox[{"y", "'"}], "[", "t", "]"}], "2"]}], ")"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"V", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"1", "/", "2"}], " ", "k", " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          SqrtBox[
+           RowBox[{
+            SuperscriptBox[
+             RowBox[{"x", "[", "t", "]"}], "2"], "+", 
+            SuperscriptBox[
+             RowBox[{"y", "[", "t", "]"}], "2"]}]], "-", "L"}], ")"}], "2"]}],
+       "+", " ", 
+      RowBox[{"m", " ", "g", " ", 
+       RowBox[{"y", "[", "t", "]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"lag", " ", "=", " ", 
+     RowBox[{"T", "-", "V"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<\\nThe Lagrangian for a bungee jumper in recatngular \
+coorinates:\\n\>\"", ",", " ", "lag"}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Convert", " ", "coords"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"x", "[", "t_", "]"}], " ", "=", " ", 
+     RowBox[{
+      RowBox[{"r", "[", "t", "]"}], 
+      RowBox[{"Sin", "[", 
+       RowBox[{"\[Theta]", "[", "t", "]"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"y", "[", "t_", "]"}], " ", "=", " ", 
+     RowBox[{
+      RowBox[{"-", 
+       RowBox[{"r", "[", "t", "]"}]}], 
+      RowBox[{"Cos", "[", 
+       RowBox[{"\[Theta]", "[", "t", "]"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<\\nThe Lagrangian for a bungee jumper in polar coordinates:\\n\>\"", 
+     ",", " ", 
+     RowBox[{"lag", " ", "=", " ", 
+      RowBox[{"lag", "//", "FullSimplify"}]}]}], "]"}], "\[IndentingNewLine]",
+    "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Create", " ", "Euler"}], "-", 
+     RowBox[{"Lagrange", " ", "operator"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"EL", "[", "q_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"D", "[", 
+        RowBox[{"lag", ",", "q"}], "]"}], "-", 
+       RowBox[{"Dt", "[", 
+        RowBox[{
+         RowBox[{"D", "[", 
+          RowBox[{"lag", ",", 
+           RowBox[{"D", "[", 
+            RowBox[{"q", ",", "t"}], "]"}]}], "]"}], ",", "t"}], "]"}]}], "==",
+       "0"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", "\"\<\\nEqs of Motion: \>\"", "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<r[t]: \>\"", ",", 
+     RowBox[{"eqnr", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"EL", "[", 
+        RowBox[{"r", "[", "t", "]"}], "]"}], "//", "Simplify"}]}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<\[Theta][t]: \>\"", ",", 
+     RowBox[{"eqn\[Theta]", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"EL", "[", 
+        RowBox[{"\[Theta]", "[", "t", "]"}], "]"}], "//", "Simplify"}]}]}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.8841901814815817`*^9, 3.884190223480442*^9}, {
+   3.884190277963526*^9, 3.884190320984449*^9}, 3.8841903604332128`*^9, {
+   3.884190417694215*^9, 3.884190497684987*^9}, {3.8841905359907904`*^9, 
+   3.884190620507784*^9}, {3.884190757390396*^9, 3.884190823354397*^9}, {
+   3.8841908734527054`*^9, 3.884190903921299*^9}, {3.8841909382057734`*^9, 
+   3.884191076457981*^9}, {3.88419116743415*^9, 3.8841911709500504`*^9}, {
+   3.8841912702024994`*^9, 3.884191326656351*^9}},
+ CellLabel->
+  "In[193]:=",ExpressionUUID->"ffa0d8ae-2342-40cd-94b2-955c50d29489"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nThe Lagrangian for a bungee jumper in recatngular \
+coorinates:\\n\"\>", "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "g"}], " ", "m", " ", 
+     RowBox[{"y", "[", "t", "]"}]}], "-", 
+    RowBox[{
+     FractionBox["1", "2"], " ", "k", " ", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "L"}], "+", 
+        SqrtBox[
+         RowBox[{
+          SuperscriptBox[
+           RowBox[{"x", "[", "t", "]"}], "2"], "+", 
+          SuperscriptBox[
+           RowBox[{"y", "[", "t", "]"}], "2"]}]]}], ")"}], "2"]}], "+", 
+    RowBox[{
+     FractionBox["1", "2"], " ", "m", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       SuperscriptBox[
+        RowBox[{
+         SuperscriptBox["x", "\[Prime]",
+          MultilineFunction->None], "[", "t", "]"}], "2"], "+", 
+       SuperscriptBox[
+        RowBox[{
+         SuperscriptBox["y", "\[Prime]",
+          MultilineFunction->None], "[", "t", "]"}], "2"]}], ")"}]}]}]}],
+  SequenceForm[
+  "\nThe Lagrangian for a bungee jumper in recatngular coorinates:\n", \
+-$CellContext`g $CellContext`m $CellContext`y[$CellContext`t] + 
+   Rational[-1, 
+      2] $CellContext`k (-$CellContext`L + ($CellContext`x[$CellContext`t]^2 + \
+$CellContext`y[$CellContext`t]^2)^Rational[1, 2])^2 + 
+   Rational[1, 2] $CellContext`m (
+     Derivative[1][$CellContext`x][$CellContext`t]^2 + 
+     Derivative[1][$CellContext`y][$CellContext`t]^2)],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.884190800694806*^9, 3.8841908243282948`*^9}, 
+   3.8841909050082664`*^9, 3.88419096595859*^9, {3.884191050762684*^9, 
+   3.8841910770230236`*^9}, 3.8841911205228596`*^9, 3.8841911721177225`*^9, {
+   3.884191272652896*^9, 3.884191327536457*^9}},
+ CellLabel->
+  "During evaluation of \
+In[193]:=",ExpressionUUID->"35b75d25-5e3b-4590-af62-96af5cf2fbd5"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nThe Lagrangian for a bungee jumper in polar coordinates:\\n\
+\"\>", "\[InvisibleSpace]", 
+   RowBox[{
+    FractionBox["1", "2"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2", " ", "g", " ", "m", " ", 
+       RowBox[{"Cos", "[", 
+        RowBox[{"\[Theta]", "[", "t", "]"}], "]"}], " ", 
+       RowBox[{"r", "[", "t", "]"}]}], "+", 
+      RowBox[{"k", " ", "L", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "L"}], "+", 
+         RowBox[{"2", " ", 
+          SqrtBox[
+           SuperscriptBox[
+            RowBox[{"r", "[", "t", "]"}], "2"]]}]}], ")"}]}], "+", 
+      RowBox[{"m", " ", 
+       SuperscriptBox[
+        RowBox[{
+         SuperscriptBox["r", "\[Prime]",
+          MultilineFunction->None], "[", "t", "]"}], "2"]}], "+", 
+      RowBox[{
+       SuperscriptBox[
+        RowBox[{"r", "[", "t", "]"}], "2"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "k"}], "+", 
+         RowBox[{"m", " ", 
+          SuperscriptBox[
+           RowBox[{
+            SuperscriptBox["\[Theta]", "\[Prime]",
+             MultilineFunction->None], "[", "t", "]"}], "2"]}]}], ")"}]}]}], 
+     ")"}]}]}],
+  SequenceForm[
+  "\nThe Lagrangian for a bungee jumper in polar coordinates:\n", 
+   Rational[1, 2] (2 $CellContext`g $CellContext`m Cos[
+       $CellContext`\[Theta][$CellContext`t]] $CellContext`r[$CellContext`t] + \
+$CellContext`k $CellContext`L (-$CellContext`L + 
+      2 ($CellContext`r[$CellContext`t]^2)^Rational[1, 2]) + $CellContext`m 
+     Derivative[
+       1][$CellContext`r][$CellContext`t]^2 + \
+$CellContext`r[$CellContext`t]^2 (-$CellContext`k + $CellContext`m 
+       Derivative[1][$CellContext`\[Theta]][$CellContext`t]^2))],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.884190800694806*^9, 3.8841908243282948`*^9}, 
+   3.8841909050082664`*^9, 3.88419096595859*^9, {3.884191050762684*^9, 
+   3.8841910770230236`*^9}, 3.8841911205228596`*^9, 3.8841911721177225`*^9, {
+   3.884191272652896*^9, 3.884191327895759*^9}},
+ CellLabel->
+  "During evaluation of \
+In[193]:=",ExpressionUUID->"82ed7ff1-c995-46a2-ae74-89c7ea70aea3"],
+
+Cell[BoxData["\<\"\\nEqs of Motion: \"\>"], "Print",
+ CellChangeTimes->{{3.884190800694806*^9, 3.8841908243282948`*^9}, 
+   3.8841909050082664`*^9, 3.88419096595859*^9, {3.884191050762684*^9, 
+   3.8841910770230236`*^9}, 3.8841911205228596`*^9, 3.8841911721177225`*^9, {
+   3.884191272652896*^9, 3.884191327895759*^9}},
+ CellLabel->
+  "During evaluation of \
+In[193]:=",ExpressionUUID->"b0c23010-76db-496d-98a4-b4b90cbce0c8"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"r[t]: \"\>", "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"g", " ", "m", " ", 
+      RowBox[{"Cos", "[", 
+       RowBox[{"\[Theta]", "[", "t", "]"}], "]"}]}], "+", 
+     FractionBox[
+      RowBox[{"k", " ", "L", " ", 
+       SqrtBox[
+        SuperscriptBox[
+         RowBox[{"r", "[", "t", "]"}], "2"]]}], 
+      RowBox[{"r", "[", "t", "]"}]], "+", 
+     RowBox[{"m", " ", 
+      RowBox[{"r", "[", "t", "]"}], " ", 
+      SuperscriptBox[
+       RowBox[{
+        SuperscriptBox["\[Theta]", "\[Prime]",
+         MultilineFunction->None], "[", "t", "]"}], "2"]}]}], "\[Equal]", 
+    RowBox[{
+     RowBox[{"k", " ", 
+      RowBox[{"r", "[", "t", "]"}]}], "+", 
+     RowBox[{"m", " ", 
+      RowBox[{
+       SuperscriptBox["r", "\[Prime]\[Prime]",
+        MultilineFunction->None], "[", "t", "]"}]}]}]}]}],
+  SequenceForm["r[t]: ", $CellContext`g $CellContext`m Cos[
+       $CellContext`\[Theta][$CellContext`t]] + $CellContext`k $CellContext`L \
+$CellContext`r[$CellContext`t]^(-1) ($CellContext`r[$CellContext`t]^2)^
+      Rational[1, 2] + $CellContext`m $CellContext`r[$CellContext`t] 
+     Derivative[
+       1][$CellContext`\[Theta]][$CellContext`t]^2 == $CellContext`k \
+$CellContext`r[$CellContext`t] + $CellContext`m 
+     Derivative[2][$CellContext`r][$CellContext`t]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.884190800694806*^9, 3.8841908243282948`*^9}, 
+   3.8841909050082664`*^9, 3.88419096595859*^9, {3.884191050762684*^9, 
+   3.8841910770230236`*^9}, 3.8841911205228596`*^9, 3.8841911721177225`*^9, {
+   3.884191272652896*^9, 3.8841913280214043`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[193]:=",ExpressionUUID->"0070252c-2319-4a24-bf1c-7a050533c330"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\[Theta][t]: \"\>", "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"r", "[", "t", "]"}], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"g", " ", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"\[Theta]", "[", "t", "]"}], "]"}]}], "+", 
+       RowBox[{"2", " ", 
+        RowBox[{
+         SuperscriptBox["r", "\[Prime]",
+          MultilineFunction->None], "[", "t", "]"}], " ", 
+        RowBox[{
+         SuperscriptBox["\[Theta]", "\[Prime]",
+          MultilineFunction->None], "[", "t", "]"}]}], "+", 
+       RowBox[{
+        RowBox[{"r", "[", "t", "]"}], " ", 
+        RowBox[{
+         SuperscriptBox["\[Theta]", "\[Prime]\[Prime]",
+          MultilineFunction->None], "[", "t", "]"}]}]}], ")"}]}], "\[Equal]", 
+    "0"}]}],
+  SequenceForm[
+  "\[Theta][t]: ", $CellContext`r[$CellContext`t] ($CellContext`g Sin[
+        $CellContext`\[Theta][$CellContext`t]] + 
+     2 Derivative[1][$CellContext`r][$CellContext`t] 
+      Derivative[
+       1][$CellContext`\[Theta]][$CellContext`t] + \
+$CellContext`r[$CellContext`t] 
+      Derivative[2][$CellContext`\[Theta]][$CellContext`t]) == 0],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.884190800694806*^9, 3.8841908243282948`*^9}, 
+   3.8841909050082664`*^9, 3.88419096595859*^9, {3.884191050762684*^9, 
+   3.8841910770230236`*^9}, 3.8841911205228596`*^9, 3.8841911721177225`*^9, {
+   3.884191272652896*^9, 3.8841913280686674`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[193]:=",ExpressionUUID->"6de9e67c-19d6-42c8-8533-9b412ed993cd"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{960, 508},
+WindowMargins->{{-5.5, Automatic}, {Automatic, -5.5}},
+FrontEndVersion->"13.1 for Microsoft Windows (64-bit) (June 16, 2022)",
+StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"bfc39cf5-2dc7-4b7f-9398-38f50df31f39"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 3675, 101, 420, "Input",ExpressionUUID->"8a06c285-1a8c-432d-8798-2017f96ddacd"],
+Cell[CellGroupData[{
+Cell[4280, 127, 1069, 26, 56, "Print",ExpressionUUID->"38bbd509-19a9-4e49-82d2-b2c2bee2316b"],
+Cell[5352, 155, 300, 5, 40, "Print",ExpressionUUID->"e8b707f3-c2cc-4504-a26b-5760e2f27a0a"],
+Cell[5655, 162, 635, 17, 23, "Print",ExpressionUUID->"cb577359-dc99-480e-a287-63a82cd7ff45"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6339, 185, 4845, 134, 433, "Input",ExpressionUUID->"ffa0d8ae-2342-40cd-94b2-955c50d29489"],
+Cell[CellGroupData[{
+Cell[11209, 323, 1865, 48, 74, "Print",ExpressionUUID->"35b75d25-5e3b-4590-af62-96af5cf2fbd5"],
+Cell[13077, 373, 2146, 54, 74, "Print",ExpressionUUID->"82ed7ff1-c995-46a2-ae74-89c7ea70aea3"],
+Cell[15226, 429, 425, 7, 40, "Print",ExpressionUUID->"b0c23010-76db-496d-98a4-b4b90cbce0c8"],
+Cell[15654, 438, 1742, 42, 45, "Print",ExpressionUUID->"0070252c-2319-4a24-bf1c-7a050533c330"],
+Cell[17399, 482, 1566, 39, 22, "Print",ExpressionUUID->"6de9e67c-19d6-42c8-8533-9b412ed993cd"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

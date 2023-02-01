@@ -1,0 +1,1543 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     70165,       1535]
+NotebookOptionsPosition[     65361,       1472]
+NotebookOutlinePosition[     65833,       1489]
+CellTagsIndexPosition[     65790,       1486]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Remove", "[", "\"\<Global`*\>\"", "]"}], "//", "Quiet"}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Real", " ", "World"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"$Assumptions", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Elemenent", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+         "m", ",", "R", ",", "\[CapitalOmega]", ",", "t", ",", "v0", ",", 
+          "\[Theta]"}], "}"}], ",", " ", "Reals"}], "]"}], " ", "&&", " ", 
+      RowBox[{"m", ">", "0"}], " ", "&&", " ", 
+      RowBox[{"R", ">", "0"}], "&&", 
+      RowBox[{"\[CapitalOmega]", ">", "0"}], "&&", 
+      RowBox[{"t", ">", "0"}], "&&", 
+      RowBox[{"v0", ">", "0"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", "Dynamics", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Set", " ", "up", " ", "workspace"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"r", "[", 
+    RowBox[{"v0_", ",", "\[Theta]_", ",", "t_"}], "]"}], " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"x", "[", "t", "]"}], ",", 
+     RowBox[{"y", "[", "t", "]"}], ",", 
+     RowBox[{"z", "[", "t", "]"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Omega]", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "\[CapitalOmega]"}], "}"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Fictitious", " ", "forces"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Fcen", "[", 
+    RowBox[{"v0_", ",", "\[Theta]_", ",", "t_"}], "]"}], " ", ":=", 
+   RowBox[{
+    RowBox[{"-", "m"}], " ", 
+    RowBox[{"Cross", "[", 
+     RowBox[{"\[Omega]", ",", 
+      RowBox[{"Cross", "[", 
+       RowBox[{"\[Omega]", ",", 
+        RowBox[{"r", "[", 
+         RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}]}], "]"}]}], 
+     "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Fcor", "[", 
+     RowBox[{"v0_", ",", "\[Theta]_", ",", "t_"}], "]"}], " ", ":=", " ", 
+    RowBox[{
+     RowBox[{"-", "2"}], "m", " ", 
+     RowBox[{"Cross", "[", 
+      RowBox[{"\[Omega]", ",", 
+       RowBox[{"D", "[", 
+        RowBox[{
+         RowBox[{"r", "[", 
+          RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], ",", "t"}], 
+        "]"}]}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Real", " ", "forces"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Fext", "[", "t_", "]"}], " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"F", "[", "t_", "]"}], " ", "=", " ", 
+    RowBox[{
+     RowBox[{"Fcen", "[", 
+      RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], " ", "+", " ", 
+     RowBox[{"Fcor", "[", 
+      RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], " ", "+", " ", 
+     RowBox[{"Fext", "[", "t", "]"}]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"N2", "[", "t_", "]"}], " ", "=", " ", 
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"F", "[", "t", "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], " ", "==", " ", 
+      RowBox[{"m", " ", 
+       RowBox[{
+        RowBox[{"x", "''"}], "[", "t", "]"}]}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"F", "[", "t", "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], " ", "==", " ", 
+      RowBox[{"m", " ", 
+       RowBox[{
+        RowBox[{"y", "''"}], "[", "t", "]"}]}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"F", "[", "t", "]"}], "[", 
+       RowBox[{"[", "3", "]"}], "]"}], " ", "==", " ", 
+      RowBox[{"m", " ", 
+       RowBox[{
+        RowBox[{"z", "''"}], "[", "t", "]"}]}]}]}], "\[IndentingNewLine]", 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"IC", "[", 
+     RowBox[{"v0_", ",", "\[Theta]_"}], "]"}], " ", "=", " ", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", "0", "]"}], " ", "==", " ", "x0"}], ",", " ", 
+      RowBox[{
+       RowBox[{"y", "[", "0", "]"}], " ", "==", " ", "y0"}], ",", " ", 
+      RowBox[{
+       RowBox[{"z", "[", "0", "]"}], " ", "==", " ", "z0"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"x", "'"}], "[", "0", "]"}], " ", "==", " ", 
+       RowBox[{"v0", " ", 
+        RowBox[{"Cos", "[", "\[Theta]", "]"}]}]}], ",", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"y", "'"}], "[", "0", "]"}], " ", "==", " ", 
+       RowBox[{"v0", " ", 
+        RowBox[{"Sin", "[", "\[Theta]", "]"}]}]}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"z", "'"}], "[", "0", "]"}], " ", "==", " ", "0"}]}], 
+     "\[IndentingNewLine]", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"eqnlist", "[", 
+     RowBox[{"v0_", ",", "\[Theta]_"}], "]"}], " ", "=", " ", 
+    RowBox[{"Join", "[", 
+     RowBox[{
+      RowBox[{"N2", "[", "t", "]"}], ",", 
+      RowBox[{"IC", "[", 
+       RowBox[{"v0", ",", "\[Theta]"}], "]"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"**", "**", "**", "**", "**", "**"}], "******)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"soln", "[", 
+    RowBox[{"v0_", ",", "\[Theta]_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"DSolve", "[", 
+      RowBox[{
+       RowBox[{"eqnlist", "[", 
+        RowBox[{"v0", ",", "\[Theta]"}], "]"}], ",", 
+       RowBox[{"r", "[", 
+        RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], ",", "t"}], "]"}], 
+     "[", 
+     RowBox[{"[", "1", "]"}], "]"}], "//", "FullSimplify"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"r", "[", 
+     RowBox[{"v0_", ",", "\[Theta]_", ",", "t_"}], "]"}], " ", "=", " ", 
+    RowBox[{
+     RowBox[{"r", "[", 
+      RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], "/.", 
+     RowBox[{"soln", "[", 
+      RowBox[{"v0", ",", "\[Theta]"}], "]"}]}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"**", "**"}], "*", " ", 
+    RowBox[{"It", "'"}], "s", " ", 
+    RowBox[{"alive", " ", "**"}]}], "******)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Convert", " ", "3", "D"}], " ", "->", " ", 
+    RowBox[{"2", "D"}]}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"D2", "[", "q_", "]"}], " ", ":=", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"q", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", 
+      RowBox[{"q", "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}], "}"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", "Frames", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", "Tags", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rot", " ", "=", " ", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"lab", " ", "=", " ", "2"}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Rotational", " ", "transforms"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"torot", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"tolab", "[", "t_", "]"}], " ", ":=", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Cos", "[", 
+         RowBox[{"\[CapitalOmega]", " ", "t"}], "]"}], ",", " ", 
+        RowBox[{"-", 
+         RowBox[{"Sin", "[", 
+          RowBox[{"\[CapitalOmega]", " ", "t"}], "]"}]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Sin", "[", 
+         RowBox[{"\[CapitalOmega]", " ", "t"}], "]"}], ",", 
+        RowBox[{"Cos", "[", 
+         RowBox[{"\[CapitalOmega]", " ", "t"}], "]"}]}], "}"}]}], "}"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Transform", " ", "2", "D", " ", "to", " ", "correct", " ", "frame"}], " ",
+    "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"toframe", "[", 
+     RowBox[{"frame_", ",", "t_"}], "]"}], " ", "=", " ", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"frame", "==", "rot"}], ",", "torot", ",", 
+      RowBox[{"tolab", "[", "t", "]"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Set", " ", "up", " ", "some", " ", "geometry"}], "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Position", " ", "of", " ", "the", " ", "puck", " ", "in", " ", "frame"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"r2", "[", 
+    RowBox[{"frame_", ",", "v0_", ",", "\[Theta]_", ",", "t_"}], "]"}], " ", 
+   "=", " ", 
+   RowBox[{
+    RowBox[{"toframe", "[", 
+     RowBox[{"frame", ",", "t"}], "]"}], ".", 
+    RowBox[{"D2", "[", 
+     RowBox[{"r", "[", 
+      RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], "]"}]}]}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Position", " ", "of", " ", "the", " ", "launch", " ", "point"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"rp", "[", 
+    RowBox[{"frame_", ",", "t_"}], "]"}], " ", "=", " ", 
+   RowBox[{
+    RowBox[{"toframe", "[", 
+     RowBox[{"frame", ",", "t"}], "]"}], ".", 
+    RowBox[{"{", 
+     RowBox[{"x0", ",", "y0"}], "}"}]}]}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"reference", " ", "lines"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"reflinex", "[", 
+    RowBox[{"frame_", ",", "t_"}], "]"}], ":=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"toframe", "[", 
+       RowBox[{"frame", ",", "t"}], "]"}], ".", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "R"}], ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+      RowBox[{"toframe", "[", 
+       RowBox[{"frame", ",", "t"}], "]"}], ".", 
+      RowBox[{"{", 
+       RowBox[{"R", ",", "0"}], "}"}]}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"refliney", "[", 
+     RowBox[{"frame_", ",", "t_"}], "]"}], ":=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"toframe", "[", 
+        RowBox[{"frame", ",", "t"}], "]"}], ".", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", 
+         RowBox[{"-", "R"}]}], "}"}]}], ",", 
+      RowBox[{
+       RowBox[{"toframe", "[", 
+        RowBox[{"frame", ",", "t"}], "]"}], ".", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "R"}], "}"}]}]}], "}"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Fictitious", " ", "forces"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"cen", "[", 
+    RowBox[{"v0_", ",", "\[Theta]_", ",", "t_"}], "]"}], " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"D2", "[", 
+      RowBox[{"r", "[", 
+       RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], "]"}], ",", 
+     RowBox[{"D2", "[", 
+      RowBox[{
+       RowBox[{"r", "[", 
+        RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], " ", "+", " ", 
+       RowBox[{"scale", " ", 
+        RowBox[{"Fcen", "[", 
+         RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}]}]}], "]"}]}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"cor", "[", 
+     RowBox[{"v0_", ",", "\[Theta]_", ",", "t_"}], "]"}], " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"D2", "[", 
+       RowBox[{"r", "[", 
+        RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], "]"}], ",", 
+      RowBox[{"D2", "[", 
+       RowBox[{
+        RowBox[{"r", "[", 
+         RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], "+", " ", 
+        RowBox[{"scale", " ", 
+         RowBox[{"Fcor", "[", 
+          RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}]}]}], "]"}]}], 
+     "}"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Time", " ", "of", " ", "flight"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"tof", "[", 
+     RowBox[{"frame_", ",", "v0_", ",", "\[Theta]_"}], "]"}], " ", ":=", " ", 
+    RowBox[{"t", "/.", 
+     RowBox[{"FindRoot", "[", 
+      RowBox[{
+       RowBox[{
+        SuperscriptBox["R", "2"], "==", " ", 
+        RowBox[{
+         RowBox[{"r2", "[", 
+          RowBox[{"frame", ",", "v0", ",", "\[Theta]", ",", "t"}], "]"}], ".", 
+         RowBox[{"r2", "[", 
+          RowBox[{"frame", ",", "v0", ",", "\[Theta]", ",", "t"}], "]"}]}]}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "5.0"}], "}"}]}], "]"}]}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Graphics", " ", "objects"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"puck", "[", 
+    RowBox[{"frame_", ",", "v0_", ",", "\[Theta]_", ",", "t_"}], "]"}], " ", ":=",
+    " ", 
+   RowBox[{"Graphics", "[", 
+    RowBox[{"{", 
+     RowBox[{"Black", ",", 
+      RowBox[{"PointSize", "[", "0.04", "]"}], ",", 
+      RowBox[{"Point", "[", 
+       RowBox[{"r2", "[", 
+        RowBox[{"frame", ",", "v0", ",", "\[Theta]", ",", "t"}], "]"}], 
+       "]"}]}], "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"launch", "[", 
+    RowBox[{"frame_", ",", "t_"}], "]"}], " ", ":=", " ", 
+   RowBox[{"Graphics", "[", 
+    RowBox[{"{", 
+     RowBox[{"Red", ",", 
+      RowBox[{"PointSize", "[", "0.02", "]"}], ",", 
+      RowBox[{"Point", "[", 
+       RowBox[{"rp", "[", 
+        RowBox[{"frame", ",", "t"}], "]"}], "]"}]}], "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"lines", "[", 
+    RowBox[{"frame_", ",", "t_"}], "]"}], " ", ":=", " ", 
+   RowBox[{"Graphics", "[", 
+    RowBox[{"{", 
+     RowBox[{"Red", ",", 
+      RowBox[{"Arrow", "[", 
+       RowBox[{"reflinex", "[", 
+        RowBox[{"frame", ",", "t"}], "]"}], "]"}], ",", "Green", ",", 
+      RowBox[{"Arrow", "[", 
+       RowBox[{"refliney", "[", 
+        RowBox[{"frame", ",", "t"}], "]"}], "]"}]}], "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vcen", "[", 
+    RowBox[{"v0_", ",", "\[Theta]_", ",", "t_"}], "]"}], " ", ":=", " ", 
+   RowBox[{"Graphics", "[", 
+    RowBox[{"{", 
+     RowBox[{"Blue", ",", 
+      RowBox[{"Arrow", "[", 
+       RowBox[{"cen", "[", 
+        RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], "]"}]}], "}"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vcor", "[", 
+    RowBox[{"v0_", ",", "\[Theta]_", ",", "t_"}], "]"}], " ", ":=", " ", 
+   RowBox[{"Graphics", "[", 
+    RowBox[{"{", 
+     RowBox[{"Purple", ",", 
+      RowBox[{"Arrow", "[", 
+       RowBox[{"cor", "[", 
+        RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], "]"}]}], "}"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"table", " ", ":=", " ", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"Circle", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0"}], "}"}], ",", "R"}], "]"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Parameter", " ", "block"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"m", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"R", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[CapitalOmega]", " ", "=", " ", "1"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"x0", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"-", "R"}], "/", "2"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"y0", " ", "=", " ", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"z0", " ", "=", " ", "0"}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"**", "**"}], "*****)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"title", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"\"\<rotating\>\"", ",", "\"\<lab\>\""}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"range", " ", "=", " ", 
+   RowBox[{"1.2", "R", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tlo", " ", "=", " ", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"scale", " ", "=", " ", "0.5"}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", "**", "******)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"traj", "[", 
+    RowBox[{"frame_", ",", "v0_", ",", "\[Theta]_"}], "]"}], " ", ":=", " ", 
+   RowBox[{"ParametricPlot", "[", 
+    RowBox[{
+     RowBox[{"r2", "[", 
+      RowBox[{"frame", ",", "v0", ",", "\[Theta]", ",", "t"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "tlo", ",", 
+       RowBox[{"tof", "[", 
+        RowBox[{"frame", ",", "v0", ",", "\[Theta]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotStyle", "->", "Cyan"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"pix", "[", 
+    RowBox[{"frame_", ",", "v0_", ",", "\[Theta]_", ",", "t_"}], "]"}], " ", ":=",
+    " ", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"frame", " ", "==", " ", "rot"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Show", "[", 
+      RowBox[{"table", ",", 
+       RowBox[{"lines", "[", 
+        RowBox[{"frame", ",", "t"}], "]"}], ",", 
+       RowBox[{"launch", "[", 
+        RowBox[{"frame", ",", "t"}], "]"}], ",", 
+       RowBox[{"traj", "[", 
+        RowBox[{"frame", ",", "v0", ",", "\[Theta]"}], "]"}], ",", 
+       RowBox[{"puck", "[", 
+        RowBox[{"frame", ",", "v0", ",", "\[Theta]", ",", "t"}], "]"}], ",", 
+       RowBox[{"Vcen", "[", 
+        RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], ",", 
+       RowBox[{"Vcor", "[", 
+        RowBox[{"v0", ",", "\[Theta]", ",", "t"}], "]"}], ",", 
+       RowBox[{"PlotRange", "->", "range"}], ",", 
+       RowBox[{"PlotLabel", "->", 
+        RowBox[{"title", "[", 
+         RowBox[{"[", "frame", "]"}], "]"}]}]}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Show", "[", 
+      RowBox[{"table", ",", 
+       RowBox[{"lines", "[", 
+        RowBox[{"frame", ",", "t"}], "]"}], ",", 
+       RowBox[{"launch", "[", 
+        RowBox[{"frame", ",", "t"}], "]"}], ",", 
+       RowBox[{"traj", "[", 
+        RowBox[{"frame", ",", "v0", ",", "\[Theta]"}], "]"}], ",", 
+       RowBox[{"puck", "[", 
+        RowBox[{"frame", ",", "v0", ",", "\[Theta]", ",", "t"}], "]"}], ",", 
+       RowBox[{"PlotRange", "->", "range"}], ",", 
+       RowBox[{"PlotLabel", "->", 
+        RowBox[{"title", "[", 
+         RowBox[{"[", "frame", "]"}], "]"}]}]}], "]"}]}], 
+    "\[IndentingNewLine]", "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Animate", "[", 
+    RowBox[{
+     RowBox[{"GraphicsGrid", "[", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"pix", "[", 
+          RowBox[{"rot", ",", "v0", ",", "\[Theta]", ",", "t"}], "]"}], ",", 
+         RowBox[{"pix", "[", 
+          RowBox[{"lab", ",", "v0", ",", "\[Theta]", ",", "t"}], "]"}]}], 
+        "}"}], "}"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "tlo", ",", 
+       RowBox[{"tof", "[", 
+        RowBox[{"lab", ",", "v0", ",", "\[Theta]"}], "]"}]}], "}"}]}], "]"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"v0", ",", "0.01", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Theta]", ",", "0", ",", "\[Pi]"}], "}"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.8581671661819243`*^9, 3.85816716713229*^9}, {
+   3.8581676984619265`*^9, 3.8581677001779356`*^9}, {3.858169182813704*^9, 
+   3.8581692021788745`*^9}, {3.8581692769350214`*^9, 
+   3.8581692794146376`*^9}, {3.858169344974381*^9, 3.858169816601325*^9}, {
+   3.8581698510869265`*^9, 3.858169933369268*^9}, {3.8581701612996626`*^9, 
+   3.8581703998561306`*^9}, {3.8581704384337864`*^9, 3.858170488867729*^9}, {
+   3.858170750935684*^9, 3.8581707589567385`*^9}, 3.85817078948962*^9, {
+   3.8581710259565887`*^9, 3.858171106135975*^9}, {3.8581711427924814`*^9, 
+   3.858171266082651*^9}, {3.8581713240297947`*^9, 3.858171695243788*^9}, {
+   3.858171753367711*^9, 3.858173062920744*^9}, {3.8581731191722803`*^9, 
+   3.858173196456767*^9}, {3.8581732360293646`*^9, 3.858173359229431*^9}, 
+   3.858791914524995*^9, {3.858791987578285*^9, 3.8587919987529087`*^9}, {
+   3.8587920978966055`*^9, 3.8587921627201157`*^9}, {3.858792254918466*^9, 
+   3.858792257393313*^9}},
+ CellLabel->
+  "In[1447]:=",ExpressionUUID->"a2a81b64-76ab-41ab-97c9-ad410103a9fd"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"frame", "\[Equal]", "1"}], ",", "torot", ",", 
+    RowBox[{"tolab", "[", "t", "]"}]}], "]"}], ".", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"x0", "-", 
+        RowBox[{"t", " ", "y0", " ", "\[CapitalOmega]"}]}], ")"}], " ", 
+      RowBox[{"Cos", "[", 
+       RowBox[{"t", " ", "\[CapitalOmega]"}], "]"}]}], "+", 
+     RowBox[{"t", " ", "v0", " ", 
+      RowBox[{"Cos", "[", 
+       RowBox[{"\[Theta]", "-", 
+        RowBox[{"t", " ", "\[CapitalOmega]"}]}], "]"}]}], "+", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"y0", "+", 
+        RowBox[{"t", " ", "x0", " ", "\[CapitalOmega]"}]}], ")"}], " ", 
+      RowBox[{"Sin", "[", 
+       RowBox[{"t", " ", "\[CapitalOmega]"}], "]"}]}]}], ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"y0", "+", 
+        RowBox[{"t", " ", "x0", " ", "\[CapitalOmega]"}]}], ")"}], " ", 
+      RowBox[{"Cos", "[", 
+       RowBox[{"t", " ", "\[CapitalOmega]"}], "]"}]}], "+", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "x0"}], "+", 
+        RowBox[{"t", " ", "y0", " ", "\[CapitalOmega]"}]}], ")"}], " ", 
+      RowBox[{"Sin", "[", 
+       RowBox[{"t", " ", "\[CapitalOmega]"}], "]"}]}], "+", 
+     RowBox[{"t", " ", "v0", " ", 
+      RowBox[{"Sin", "[", 
+       RowBox[{"\[Theta]", "-", 
+        RowBox[{"t", " ", "\[CapitalOmega]"}]}], "]"}]}]}]}], 
+   "}"}]}]], "Output",
+ CellChangeTimes->{{3.8587919212335205`*^9, 3.8587919473462644`*^9}, {
+   3.858791994288715*^9, 3.8587920018130355`*^9}, {3.858792080152709*^9, 
+   3.858792129615307*^9}, 3.858792166634704*^9, {3.8587922492523623`*^9, 
+   3.8587922594056644`*^9}},
+ CellLabel->
+  "Out[1466]=",ExpressionUUID->"f47cd538-59d2-4660-bdb3-26c7aca79f1e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"frame", "\[Equal]", "1"}], ",", "torot", ",", 
+    RowBox[{"tolab", "[", "t", "]"}]}], "]"}], ".", 
+  RowBox[{"{", 
+   RowBox[{"x0", ",", "y0"}], "}"}]}]], "Output",
+ CellChangeTimes->{{3.8587919212335205`*^9, 3.8587919473462644`*^9}, {
+   3.858791994288715*^9, 3.8587920018130355`*^9}, {3.858792080152709*^9, 
+   3.858792129615307*^9}, 3.858792166634704*^9, {3.8587922492523623`*^9, 
+   3.8587922594104023`*^9}},
+ CellLabel->
+  "Out[1467]=",ExpressionUUID->"050e54cc-3cb8-473d-97f4-749b02eb3d0e"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`v0$$ = 0.01, $CellContext`\[Theta]$$ = 0, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`v0$$], 0.01, 2}, {
+      Hold[$CellContext`\[Theta]$$], 0, Pi}}, Typeset`size$$ = {
+    949., {176.134033203125, 181.865966796875}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`v0$$ = 0.01, $CellContext`\[Theta]$$ = 0}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Animate[
+        GraphicsGrid[{{
+           $CellContext`pix[$CellContext`rot, $CellContext`v0$$, \
+$CellContext`\[Theta]$$, $CellContext`t], 
+           $CellContext`pix[$CellContext`lab, $CellContext`v0$$, \
+$CellContext`\[Theta]$$, $CellContext`t]}}], {$CellContext`t, \
+$CellContext`tlo, 
+         $CellContext`tof[$CellContext`lab, $CellContext`v0$$, $CellContext`\
+\[Theta]$$]}], 
+      "Specifications" :> {{$CellContext`v0$$, 0.01, 
+         2}, {$CellContext`\[Theta]$$, 0, Pi}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{1226., {207.134033203125, 212.865966796875}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.8587919212335205`*^9, 3.8587919473462644`*^9}, {
+   3.858791994288715*^9, 3.8587920018130355`*^9}, {3.858792080152709*^9, 
+   3.858792129615307*^9}, 3.858792166634704*^9, {3.8587922492523623`*^9, 
+   3.8587922594845676`*^9}},
+ CellLabel->
+  "Out[1491]=",ExpressionUUID->"45c8b294-60ef-4b17-bfe0-1b07dfe2c308"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`v0$$ = 0.202, $CellContext`\[Theta]$$ = 
+    0.4084070449666731, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`v0$$], 0.01, 2}, {
+      Hold[$CellContext`\[Theta]$$], 0, Pi}}, Typeset`size$$ = {
+    543.66162109375, {60.343994140625, 11.958984375}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`v0$$ = 0.01, $CellContext`\[Theta]$$ = 0}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Animate[
+        GraphicsGrid[{{
+           $CellContext`pix[$CellContext`rot, $CellContext`v0$$, \
+$CellContext`\[Theta]$$, $CellContext`t], 
+           $CellContext`pix[$CellContext`lab, $CellContext`v0$$, \
+$CellContext`\[Theta]$$, $CellContext`t]}}], {$CellContext`t, \
+$CellContext`tlo, 
+         $CellContext`tof[$CellContext`frame, $CellContext`v0$$, \
+$CellContext`\[Theta]$$]}], 
+      "Specifications" :> {{$CellContext`v0$$, 0.01, 
+         2}, {$CellContext`\[Theta]$$, 0, Pi}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{830., {64.134033203125, 69.865966796875}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Input",
+ CellChangeTimes->{{3.8587922413437734`*^9, 
+  3.8587922426549206`*^9}},ExpressionUUID->"57bbf746-1bc1-41c0-a502-\
+a1a44201739e"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FindRoot", "nlnum", 
+   "\"The function value \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"1.`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"1.`\\\", \\\" \\\", RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\",\\\", \\\
+\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \\\"t\\\", \
+\\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.2696627031993946`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"1.1406713872564778`\\\"}]}], \\\"}\\\"}], \\\".\\\", RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\
+\",\\\", \\\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \
+\\\"t\\\", \\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", RowBox[{\
+\\\"2.2696627031993946`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"1.1406713872564778`\\\"}]}], \\\"}\\\"}]}]}]}], \\\"}\\\"}]\\) is not a \
+list of numbers with dimensions \\!\\(\\*RowBox[{\\\"{\\\", \\\"1\\\", \
+\\\"}\\\"}]\\) at \\!\\(\\*RowBox[{\\\"{\\\", \\\"t\\\", \\\"}\\\"}]\\) = \\!\
+\\(\\*RowBox[{\\\"{\\\", \\\"5.`\\\", \\\"}\\\"}]\\).\"", 2, 1402, 40, 
+   34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922174838047`*^9},
+ CellLabel->"",ExpressionUUID->"2ec4605d-2e68-415f-af2d-051bfa93afea"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"FindRoot\\\", \\\"[\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"R\\\", \\\"2\\\"], \\\"\[Equal]\\\", \
+RowBox[{RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.01`\\\", \\\",\\\", \\\"0\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}], \
+\\\".\\\", RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.01`\\\", \\\",\\\", \\\"0\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}]}]}], \
+\\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\", \\\"5.`\\\"}], \\\
+\"}\\\"}]}], \\\"]\\\"}], \\\"}\\\"}]\\) is neither a list of replacement \
+rules nor a valid dispatch table, and so cannot be used for replacing.\"", 2, 
+   1402, 41, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922175272017`*^9},
+ CellLabel->"",ExpressionUUID->"db0ea344-1498-46ad-9860-f159357ac42a"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FindRoot", "nlnum", 
+   "\"The function value \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"1.`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"1.`\\\", \\\" \\\", RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\",\\\", \\\
+\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \\\"t\\\", \
+\\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.2696627031993946`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"1.1406713872564778`\\\"}]}], \\\"}\\\"}], \\\".\\\", RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\
+\",\\\", \\\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \
+\\\"t\\\", \\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", RowBox[{\
+\\\"2.2696627031993946`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"1.1406713872564778`\\\"}]}], \\\"}\\\"}]}]}]}], \\\"}\\\"}]\\) is not a \
+list of numbers with dimensions \\!\\(\\*RowBox[{\\\"{\\\", \\\"1\\\", \
+\\\"}\\\"}]\\) at \\!\\(\\*RowBox[{\\\"{\\\", \\\"t\\\", \\\"}\\\"}]\\) = \\!\
+\\(\\*RowBox[{\\\"{\\\", \\\"5.`\\\", \\\"}\\\"}]\\).\"", 2, 1402, 42, 
+   34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922175832872`*^9},
+ CellLabel->"",ExpressionUUID->"a9836896-d622-47c8-b7b2-a013d81d0d51"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"FindRoot\\\", \\\"[\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"R\\\", \\\"2\\\"], \\\"\[Equal]\\\", \
+RowBox[{RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.01`\\\", \\\",\\\", \\\"0\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}], \
+\\\".\\\", RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.01`\\\", \\\",\\\", \\\"0\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}]}]}], \
+\\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\", \\\"5.`\\\"}], \\\
+\"}\\\"}]}], \\\"]\\\"}], \\\"}\\\"}]\\) is neither a list of replacement \
+rules nor a valid dispatch table, and so cannot be used for replacing.\"", 2, 
+   1402, 43, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922176183376`*^9},
+ CellLabel->"",ExpressionUUID->"23400d07-703a-47e9-adbf-f97bce3afcb0"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FindRoot", "nlnum", 
+   "\"The function value \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"1.`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"1.`\\\", \\\" \\\", RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\",\\\", \\\
+\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \\\"t\\\", \
+\\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.2696627031993946`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"1.1406713872564778`\\\"}]}], \\\"}\\\"}], \\\".\\\", RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\
+\",\\\", \\\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \
+\\\"t\\\", \\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", RowBox[{\
+\\\"2.2696627031993946`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"1.1406713872564778`\\\"}]}], \\\"}\\\"}]}]}]}], \\\"}\\\"}]\\) is not a \
+list of numbers with dimensions \\!\\(\\*RowBox[{\\\"{\\\", \\\"1\\\", \
+\\\"}\\\"}]\\) at \\!\\(\\*RowBox[{\\\"{\\\", \\\"t\\\", \\\"}\\\"}]\\) = \\!\
+\\(\\*RowBox[{\\\"{\\\", \\\"5.`\\\", \\\"}\\\"}]\\).\"", 2, 1402, 44, 
+   34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922176549697`*^9},
+ CellLabel->"",ExpressionUUID->"1a4a7421-af2b-4d7f-b388-e8df29307ca0"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"FindRoot\\\", \
+\\\"::\\\", \\\"nlnum\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"", 2, 1402, 45, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922176927357`*^9},
+ CellLabel->"",ExpressionUUID->"cd4d495e-4f8f-421f-99c0-bb64460b4527"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"FindRoot\\\", \\\"[\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"R\\\", \\\"2\\\"], \\\"\[Equal]\\\", \
+RowBox[{RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.01`\\\", \\\",\\\", \\\"0\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}], \
+\\\".\\\", RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.01`\\\", \\\",\\\", \\\"0\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}]}]}], \
+\\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\", \\\"5.`\\\"}], \\\
+\"}\\\"}]}], \\\"]\\\"}], \\\"}\\\"}]\\) is neither a list of replacement \
+rules nor a valid dispatch table, and so cannot be used for replacing.\"", 2, 
+   1402, 46, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.858792217721322*^9},
+ CellLabel->"",ExpressionUUID->"08183aff-605f-4188-8570-07bc8db5f60d"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"ReplaceAll\\\", \
+\\\"::\\\", \\\"reps\\\"}], \\\"MessageName\\\"]\\) will be suppressed during \
+this calculation.\"", 2, 1402, 47, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922177834024`*^9},
+ CellLabel->"",ExpressionUUID->"273f5746-d840-4356-8216-ea1459adc2fa"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Animate", "vsform", 
+   "\"Animate argument \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\
+\", \\\"tlo\\\", \\\",\\\", RowBox[{\\\"tof\\\", \\\"[\\\", RowBox[{\\\"frame\
+\\\", \\\",\\\", \\\"FE`v0$$149\\\", \\\",\\\", \\\"FE`\[Theta]$$149\\\"}], \
+\\\"]\\\"}]}], \\\"}\\\"}]\\) does not have the correct form for a variable \
+specification.\"", 2, 1402, 48, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922178167114`*^9},
+ CellLabel->"",ExpressionUUID->"9e5b4e25-58d4-425a-9bfb-ffb6216bb3b9"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Animate", "vsform", 
+   "\"Animate argument \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\
+\", \\\"tlo\\\", \\\",\\\", RowBox[{\\\"tof\\\", \\\"[\\\", RowBox[{\\\"frame\
+\\\", \\\",\\\", \\\"FE`v0$$149\\\", \\\",\\\", \\\"FE`\[Theta]$$149\\\"}], \
+\\\"]\\\"}]}], \\\"}\\\"}]\\) does not have the correct form for a variable \
+specification.\"", 2, 1402, 49, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.858792217850955*^9},
+ CellLabel->"",ExpressionUUID->"a5cc8b00-b937-4996-8428-65961d72b17c"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FindRoot", "nlnum", 
+   "\"The function value \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"1.`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"1.`\\\", \\\" \\\", RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\",\\\", \\\
+\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \\\"t\\\", \
+\\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}], \\\".\\\", RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\
+\",\\\", \\\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \
+\\\"t\\\", \\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", RowBox[{\
+\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}]}]}]}], \\\"}\\\"}]\\) is not a \
+list of numbers with dimensions \\!\\(\\*RowBox[{\\\"{\\\", \\\"1\\\", \
+\\\"}\\\"}]\\) at \\!\\(\\*RowBox[{\\\"{\\\", \\\"t\\\", \\\"}\\\"}]\\) = \\!\
+\\(\\*RowBox[{\\\"{\\\", \\\"5.`\\\", \\\"}\\\"}]\\).\"", 2, 1402, 120, 
+   34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922379212193`*^9},
+ CellLabel->"",ExpressionUUID->"e11137a2-2025-49f2-b2a9-ca7185bf1c32"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"FindRoot\\\", \\\"[\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"R\\\", \\\"2\\\"], \\\"\[Equal]\\\", \
+RowBox[{RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.202`\\\", \\\",\\\", \\\"0.4084070449666731`\\\", \\\",\\\", \
+\\\"t\\\"}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"r2\\\", \\\"[\\\", \
+RowBox[{\\\"frame\\\", \\\",\\\", \\\"0.202`\\\", \\\",\\\", \
+\\\"0.4084070449666731`\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}]}]}], \\\",\\\
+\", RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\", \\\"5.`\\\"}], \
+\\\"}\\\"}]}], \\\"]\\\"}], \\\"}\\\"}]\\) is neither a list of replacement \
+rules nor a valid dispatch table, and so cannot be used for replacing.\"", 2, 
+   1402, 121, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922379502306`*^9},
+ CellLabel->"",ExpressionUUID->"9a570a7a-a22c-43c9-8d7c-7b822ba728d1"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FindRoot", "nlnum", 
+   "\"The function value \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"1.`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"1.`\\\", \\\" \\\", RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\",\\\", \\\
+\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \\\"t\\\", \
+\\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}], \\\".\\\", RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\
+\",\\\", \\\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \
+\\\"t\\\", \\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", RowBox[{\
+\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}]}]}]}], \\\"}\\\"}]\\) is not a \
+list of numbers with dimensions \\!\\(\\*RowBox[{\\\"{\\\", \\\"1\\\", \
+\\\"}\\\"}]\\) at \\!\\(\\*RowBox[{\\\"{\\\", \\\"t\\\", \\\"}\\\"}]\\) = \\!\
+\\(\\*RowBox[{\\\"{\\\", \\\"5.`\\\", \\\"}\\\"}]\\).\"", 2, 1402, 122, 
+   34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922379760222`*^9},
+ CellLabel->"",ExpressionUUID->"bf7e3520-98ff-400b-bf34-6faa53e6194d"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"FindRoot\\\", \\\"[\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"R\\\", \\\"2\\\"], \\\"\[Equal]\\\", \
+RowBox[{RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.202`\\\", \\\",\\\", \\\"0.4084070449666731`\\\", \\\",\\\", \
+\\\"t\\\"}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"r2\\\", \\\"[\\\", \
+RowBox[{\\\"frame\\\", \\\",\\\", \\\"0.202`\\\", \\\",\\\", \
+\\\"0.4084070449666731`\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}]}]}], \\\",\\\
+\", RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\", \\\"5.`\\\"}], \
+\\\"}\\\"}]}], \\\"]\\\"}], \\\"}\\\"}]\\) is neither a list of replacement \
+rules nor a valid dispatch table, and so cannot be used for replacing.\"", 2, 
+   1402, 123, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.858792238016987*^9},
+ CellLabel->"",ExpressionUUID->"6f172645-1175-49dc-a463-88effd9b1a3a"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FindRoot", "nlnum", 
+   "\"The function value \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"1.`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"1.`\\\", \\\" \\\", RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\",\\\", \\\
+\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \\\"t\\\", \
+\\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}], \\\".\\\", RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\
+\",\\\", \\\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \
+\\\"t\\\", \\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", RowBox[{\
+\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}]}]}]}], \\\"}\\\"}]\\) is not a \
+list of numbers with dimensions \\!\\(\\*RowBox[{\\\"{\\\", \\\"1\\\", \
+\\\"}\\\"}]\\) at \\!\\(\\*RowBox[{\\\"{\\\", \\\"t\\\", \\\"}\\\"}]\\) = \\!\
+\\(\\*RowBox[{\\\"{\\\", \\\"5.`\\\", \\\"}\\\"}]\\).\"", 2, 1402, 124, 
+   34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.85879223809122*^9},
+ CellLabel->"",ExpressionUUID->"866de289-cde5-436a-bbcd-58a8aa338518"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"FindRoot\\\", \
+\\\"::\\\", \\\"nlnum\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"", 2, 1402, 125, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922381506767`*^9},
+ CellLabel->"",ExpressionUUID->"1af77835-c594-4593-b80c-01887fe7da46"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"FindRoot\\\", \\\"[\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"R\\\", \\\"2\\\"], \\\"\[Equal]\\\", \
+RowBox[{RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.202`\\\", \\\",\\\", \\\"0.4084070449666731`\\\", \\\",\\\", \
+\\\"t\\\"}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"r2\\\", \\\"[\\\", \
+RowBox[{\\\"frame\\\", \\\",\\\", \\\"0.202`\\\", \\\",\\\", \
+\\\"0.4084070449666731`\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}]}]}], \\\",\\\
+\", RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\", \\\"5.`\\\"}], \
+\\\"}\\\"}]}], \\\"]\\\"}], \\\"}\\\"}]\\) is neither a list of replacement \
+rules nor a valid dispatch table, and so cannot be used for replacing.\"", 2, 
+   1402, 126, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.858792238216058*^9},
+ CellLabel->"",ExpressionUUID->"d374c702-d916-4cd2-a164-6c248d8a2b2c"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"ReplaceAll\\\", \
+\\\"::\\\", \\\"reps\\\"}], \\\"MessageName\\\"]\\) will be suppressed during \
+this calculation.\"", 2, 1402, 127, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.858792238286996*^9},
+ CellLabel->"",ExpressionUUID->"77aea07a-6404-44de-b37b-9290f53c6d6b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Animate", "vsform", 
+   "\"Animate argument \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\
+\", \\\"tlo\\\", \\\",\\\", RowBox[{\\\"tof\\\", \\\"[\\\", RowBox[{\\\"frame\
+\\\", \\\",\\\", \\\"FE`v0$$149\\\", \\\",\\\", \\\"FE`\[Theta]$$149\\\"}], \
+\\\"]\\\"}]}], \\\"}\\\"}]\\) does not have the correct form for a variable \
+specification.\"", 2, 1402, 128, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922383366203`*^9},
+ CellLabel->"",ExpressionUUID->"d520f220-f3e3-4b65-8168-af9d3245015b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Animate", "vsform", 
+   "\"Animate argument \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\
+\", \\\"tlo\\\", \\\",\\\", RowBox[{\\\"tof\\\", \\\"[\\\", RowBox[{\\\"frame\
+\\\", \\\",\\\", \\\"FE`v0$$149\\\", \\\",\\\", \\\"FE`\[Theta]$$149\\\"}], \
+\\\"]\\\"}]}], \\\"}\\\"}]\\) does not have the correct form for a variable \
+specification.\"", 2, 1402, 129, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922383850975`*^9},
+ CellLabel->"",ExpressionUUID->"09ba1b71-f17d-41c9-a7df-9ea59b91e9e6"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FindRoot", "nlnum", 
+   "\"The function value \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"1.`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"1.`\\\", \\\" \\\", RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\",\\\", \\\
+\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \\\"t\\\", \
+\\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}], \\\".\\\", RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\
+\",\\\", \\\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \
+\\\"t\\\", \\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", RowBox[{\
+\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}]}]}]}], \\\"}\\\"}]\\) is not a \
+list of numbers with dimensions \\!\\(\\*RowBox[{\\\"{\\\", \\\"1\\\", \
+\\\"}\\\"}]\\) at \\!\\(\\*RowBox[{\\\"{\\\", \\\"t\\\", \\\"}\\\"}]\\) = \\!\
+\\(\\*RowBox[{\\\"{\\\", \\\"5.`\\\", \\\"}\\\"}]\\).\"", 2, 1447, 140, 
+   34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922500515995`*^9},
+ CellLabel->"",ExpressionUUID->"b6257f1d-49a7-463b-9c8d-13dcef765c55"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"FindRoot\\\", \\\"[\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"R\\\", \\\"2\\\"], \\\"\[Equal]\\\", \
+RowBox[{RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.202`\\\", \\\",\\\", \\\"0.4084070449666731`\\\", \\\",\\\", \
+\\\"t\\\"}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"r2\\\", \\\"[\\\", \
+RowBox[{\\\"frame\\\", \\\",\\\", \\\"0.202`\\\", \\\",\\\", \
+\\\"0.4084070449666731`\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}]}]}], \\\",\\\
+\", RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\", \\\"5.`\\\"}], \
+\\\"}\\\"}]}], \\\"]\\\"}], \\\"}\\\"}]\\) is neither a list of replacement \
+rules nor a valid dispatch table, and so cannot be used for replacing.\"", 2, 
+   1447, 141, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.858792250084079*^9},
+ CellLabel->"",ExpressionUUID->"463bc83f-09a2-4995-9421-7e5ea45d74e9"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FindRoot", "nlnum", 
+   "\"The function value \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"1.`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"1.`\\\", \\\" \\\", RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\",\\\", \\\
+\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \\\"t\\\", \
+\\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}], \\\".\\\", RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\
+\",\\\", \\\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \
+\\\"t\\\", \\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", RowBox[{\
+\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}]}]}]}], \\\"}\\\"}]\\) is not a \
+list of numbers with dimensions \\!\\(\\*RowBox[{\\\"{\\\", \\\"1\\\", \
+\\\"}\\\"}]\\) at \\!\\(\\*RowBox[{\\\"{\\\", \\\"t\\\", \\\"}\\\"}]\\) = \\!\
+\\(\\*RowBox[{\\\"{\\\", \\\"5.`\\\", \\\"}\\\"}]\\).\"", 2, 1447, 142, 
+   34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922501504793`*^9},
+ CellLabel->"",ExpressionUUID->"19fb3481-09de-4572-a70a-dbc99d47bca5"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"FindRoot\\\", \\\"[\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"R\\\", \\\"2\\\"], \\\"\[Equal]\\\", \
+RowBox[{RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.202`\\\", \\\",\\\", \\\"0.4084070449666731`\\\", \\\",\\\", \
+\\\"t\\\"}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"r2\\\", \\\"[\\\", \
+RowBox[{\\\"frame\\\", \\\",\\\", \\\"0.202`\\\", \\\",\\\", \
+\\\"0.4084070449666731`\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}]}]}], \\\",\\\
+\", RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\", \\\"5.`\\\"}], \
+\\\"}\\\"}]}], \\\"]\\\"}], \\\"}\\\"}]\\) is neither a list of replacement \
+rules nor a valid dispatch table, and so cannot be used for replacing.\"", 2, 
+   1447, 143, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922501852083`*^9},
+ CellLabel->"",ExpressionUUID->"7d8b64ae-4bfe-4aa1-9f2c-6b478699c2cc"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FindRoot", "nlnum", 
+   "\"The function value \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"1.`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"1.`\\\", \\\" \\\", RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\",\\\", \\\
+\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \\\"t\\\", \
+\\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}], \\\".\\\", RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\
+\",\\\", \\\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \
+\\\"t\\\", \\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", RowBox[{\
+\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}]}]}]}], \\\"}\\\"}]\\) is not a \
+list of numbers with dimensions \\!\\(\\*RowBox[{\\\"{\\\", \\\"1\\\", \
+\\\"}\\\"}]\\) at \\!\\(\\*RowBox[{\\\"{\\\", \\\"t\\\", \\\"}\\\"}]\\) = \\!\
+\\(\\*RowBox[{\\\"{\\\", \\\"5.`\\\", \\\"}\\\"}]\\).\"", 2, 1447, 144, 
+   34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.858792250233899*^9},
+ CellLabel->"",ExpressionUUID->"2eeb40c3-b96d-467b-b94c-25f120378748"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"FindRoot\\\", \
+\\\"::\\\", \\\"nlnum\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"", 2, 1447, 145, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922502924356`*^9},
+ CellLabel->"",ExpressionUUID->"03dbd954-a672-407d-8105-84edd5d520d0"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"FindRoot\\\", \\\"[\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"R\\\", \\\"2\\\"], \\\"\[Equal]\\\", \
+RowBox[{RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.202`\\\", \\\",\\\", \\\"0.4084070449666731`\\\", \\\",\\\", \
+\\\"t\\\"}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"r2\\\", \\\"[\\\", \
+RowBox[{\\\"frame\\\", \\\",\\\", \\\"0.202`\\\", \\\",\\\", \
+\\\"0.4084070449666731`\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}]}]}], \\\",\\\
+\", RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\", \\\"5.`\\\"}], \
+\\\"}\\\"}]}], \\\"]\\\"}], \\\"}\\\"}]\\) is neither a list of replacement \
+rules nor a valid dispatch table, and so cannot be used for replacing.\"", 2, 
+   1447, 146, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922503520308`*^9},
+ CellLabel->"",ExpressionUUID->"97029015-181f-4ddc-8d87-1c8f34f5f33b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"ReplaceAll\\\", \
+\\\"::\\\", \\\"reps\\\"}], \\\"MessageName\\\"]\\) will be suppressed during \
+this calculation.\"", 2, 1447, 147, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922504280715`*^9},
+ CellLabel->"",ExpressionUUID->"6dcbe409-1bcc-4c79-a04a-cea238a8bcd6"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Animate", "vsform", 
+   "\"Animate argument \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\
+\", \\\"tlo\\\", \\\",\\\", RowBox[{\\\"tof\\\", \\\"[\\\", RowBox[{\\\"frame\
+\\\", \\\",\\\", \\\"FE`v0$$149\\\", \\\",\\\", \\\"FE`\[Theta]$$149\\\"}], \
+\\\"]\\\"}]}], \\\"}\\\"}]\\) does not have the correct form for a variable \
+specification.\"", 2, 1447, 148, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922504923763`*^9},
+ CellLabel->"",ExpressionUUID->"9d4cf21e-abf2-4ab7-8084-1f19be5f774a"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Animate", "vsform", 
+   "\"Animate argument \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\
+\", \\\"tlo\\\", \\\",\\\", RowBox[{\\\"tof\\\", \\\"[\\\", RowBox[{\\\"frame\
+\\\", \\\",\\\", \\\"FE`v0$$149\\\", \\\",\\\", \\\"FE`\[Theta]$$149\\\"}], \
+\\\"]\\\"}]}], \\\"}\\\"}]\\) does not have the correct form for a variable \
+specification.\"", 2, 1447, 149, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922505514803`*^9},
+ CellLabel->"",ExpressionUUID->"991d7eae-8836-4bfa-b0c0-c978ffc57e93"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FindRoot", "nlnum", 
+   "\"The function value \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"1.`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"1.`\\\", \\\" \\\", RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\",\\\", \\\
+\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \\\"t\\\", \
+\\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}], \\\".\\\", RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\
+\",\\\", \\\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \
+\\\"t\\\", \\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", RowBox[{\
+\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}]}]}]}], \\\"}\\\"}]\\) is not a \
+list of numbers with dimensions \\!\\(\\*RowBox[{\\\"{\\\", \\\"1\\\", \
+\\\"}\\\"}]\\) at \\!\\(\\*RowBox[{\\\"{\\\", \\\"t\\\", \\\"}\\\"}]\\) = \\!\
+\\(\\*RowBox[{\\\"{\\\", \\\"5.`\\\", \\\"}\\\"}]\\).\"", 2, 1492, 150, 
+   34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922627797174`*^9},
+ CellLabel->"",ExpressionUUID->"16dfaa8f-0ba2-4fff-b9d4-193725a76e5b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"FindRoot\\\", \\\"[\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"R\\\", \\\"2\\\"], \\\"\[Equal]\\\", \
+RowBox[{RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.202`\\\", \\\",\\\", \\\"0.4084070449666731`\\\", \\\",\\\", \
+\\\"t\\\"}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"r2\\\", \\\"[\\\", \
+RowBox[{\\\"frame\\\", \\\",\\\", \\\"0.202`\\\", \\\",\\\", \
+\\\"0.4084070449666731`\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}]}]}], \\\",\\\
+\", RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\", \\\"5.`\\\"}], \
+\\\"}\\\"}]}], \\\"]\\\"}], \\\"}\\\"}]\\) is neither a list of replacement \
+rules nor a valid dispatch table, and so cannot be used for replacing.\"", 2, 
+   1492, 151, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.858792262825717*^9},
+ CellLabel->"",ExpressionUUID->"f37926d2-bd10-4e39-85b0-5b96881e115f"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FindRoot", "nlnum", 
+   "\"The function value \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"1.`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"1.`\\\", \\\" \\\", RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\",\\\", \\\
+\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \\\"t\\\", \
+\\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}], \\\".\\\", RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\
+\",\\\", \\\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \
+\\\"t\\\", \\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", RowBox[{\
+\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}]}]}]}], \\\"}\\\"}]\\) is not a \
+list of numbers with dimensions \\!\\(\\*RowBox[{\\\"{\\\", \\\"1\\\", \
+\\\"}\\\"}]\\) at \\!\\(\\*RowBox[{\\\"{\\\", \\\"t\\\", \\\"}\\\"}]\\) = \\!\
+\\(\\*RowBox[{\\\"{\\\", \\\"5.`\\\", \\\"}\\\"}]\\).\"", 2, 1492, 152, 
+   34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.858792262858565*^9},
+ CellLabel->"",ExpressionUUID->"ebde6ae1-1c8c-45ba-8dc1-9532b020e0a3"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"FindRoot\\\", \\\"[\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"R\\\", \\\"2\\\"], \\\"\[Equal]\\\", \
+RowBox[{RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.202`\\\", \\\",\\\", \\\"0.4084070449666731`\\\", \\\",\\\", \
+\\\"t\\\"}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"r2\\\", \\\"[\\\", \
+RowBox[{\\\"frame\\\", \\\",\\\", \\\"0.202`\\\", \\\",\\\", \
+\\\"0.4084070449666731`\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}]}]}], \\\",\\\
+\", RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\", \\\"5.`\\\"}], \
+\\\"}\\\"}]}], \\\"]\\\"}], \\\"}\\\"}]\\) is neither a list of replacement \
+rules nor a valid dispatch table, and so cannot be used for replacing.\"", 2, 
+   1492, 153, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922629079514`*^9},
+ CellLabel->"",ExpressionUUID->"6e64b745-f575-4f15-aa29-46c744c1c593"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FindRoot", "nlnum", 
+   "\"The function value \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"1.`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"1.`\\\", \\\" \\\", RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\",\\\", \\\
+\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \\\"t\\\", \
+\\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}], \\\".\\\", RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"frame\\\", \\\"\[Equal]\\\", \\\"1.`\\\"}], \\\
+\",\\\", \\\"torot\\\", \\\",\\\", RowBox[{\\\"tolab\\\", \\\"[\\\", \
+\\\"t\\\", \\\"]\\\"}]}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"{\\\", RowBox[{\
+\\\"2.133772099104579`\\\", \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"0.18597744335368765`\\\"}]}], \\\"}\\\"}]}]}]}], \\\"}\\\"}]\\) is not a \
+list of numbers with dimensions \\!\\(\\*RowBox[{\\\"{\\\", \\\"1\\\", \
+\\\"}\\\"}]\\) at \\!\\(\\*RowBox[{\\\"{\\\", \\\"t\\\", \\\"}\\\"}]\\) = \\!\
+\\(\\*RowBox[{\\\"{\\\", \\\"5.`\\\", \\\"}\\\"}]\\).\"", 2, 1492, 154, 
+   34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922629619904`*^9},
+ CellLabel->"",ExpressionUUID->"dfc68775-e3ef-4260-bb94-58576d849d7b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"FindRoot\\\", \
+\\\"::\\\", \\\"nlnum\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"", 2, 1492, 155, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.858792263010358*^9},
+ CellLabel->"",ExpressionUUID->"d65206bf-e22a-4a4f-98e9-582e20f24cf9"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"FindRoot\\\", \\\"[\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"R\\\", \\\"2\\\"], \\\"\[Equal]\\\", \
+RowBox[{RowBox[{\\\"r2\\\", \\\"[\\\", RowBox[{\\\"frame\\\", \\\",\\\", \
+\\\"0.202`\\\", \\\",\\\", \\\"0.4084070449666731`\\\", \\\",\\\", \
+\\\"t\\\"}], \\\"]\\\"}], \\\".\\\", RowBox[{\\\"r2\\\", \\\"[\\\", \
+RowBox[{\\\"frame\\\", \\\",\\\", \\\"0.202`\\\", \\\",\\\", \
+\\\"0.4084070449666731`\\\", \\\",\\\", \\\"t\\\"}], \\\"]\\\"}]}]}], \\\",\\\
+\", RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\", \\\"5.`\\\"}], \
+\\\"}\\\"}]}], \\\"]\\\"}], \\\"}\\\"}]\\) is neither a list of replacement \
+rules nor a valid dispatch table, and so cannot be used for replacing.\"", 2, 
+   1492, 156, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.858792263070631*^9},
+ CellLabel->"",ExpressionUUID->"bff7263a-5381-406e-9f3d-c49c234fe26b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"ReplaceAll\\\", \
+\\\"::\\\", \\\"reps\\\"}], \\\"MessageName\\\"]\\) will be suppressed during \
+this calculation.\"", 2, 1492, 157, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8587922631435266`*^9},
+ CellLabel->"",ExpressionUUID->"0cd40593-82dd-47e6-96ef-73e9a02f609f"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Animate", "vsform", 
+   "\"Animate argument \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\
+\", \\\"tlo\\\", \\\",\\\", RowBox[{\\\"tof\\\", \\\"[\\\", RowBox[{\\\"frame\
+\\\", \\\",\\\", \\\"FE`v0$$149\\\", \\\",\\\", \\\"FE`\[Theta]$$149\\\"}], \
+\\\"]\\\"}]}], \\\"}\\\"}]\\) does not have the correct form for a variable \
+specification.\"", 2, 1492, 158, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.858792263193611*^9},
+ CellLabel->"",ExpressionUUID->"16b1b056-dec4-462d-b823-e3e4d521da33"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Animate", "vsform", 
+   "\"Animate argument \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"t\\\", \\\",\\\
+\", \\\"tlo\\\", \\\",\\\", RowBox[{\\\"tof\\\", \\\"[\\\", RowBox[{\\\"frame\
+\\\", \\\",\\\", \\\"FE`v0$$149\\\", \\\",\\\", \\\"FE`\[Theta]$$149\\\"}], \
+\\\"]\\\"}]}], \\\"}\\\"}]\\) does not have the correct form for a variable \
+specification.\"", 2, 1492, 159, 34498266311939007864, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.858792263246953*^9},
+ CellLabel->"",ExpressionUUID->"34b9f427-7159-4eb6-845c-153e3268f6da"]
+}, Open  ]]
+},
+WindowSize->{960, 508},
+WindowMargins->{{-5.5, Automatic}, {Automatic, -5.5}},
+FrontEndVersion->"12.3 for Microsoft Windows (64-bit) (July 9, 2021)",
+StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"7de644b5-c0d9-4e6e-befe-b72f105af4cc"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 21264, 606, 2021, "Input",ExpressionUUID->"a2a81b64-76ab-41ab-97c9-ad410103a9fd"],
+Cell[21847, 630, 1810, 49, 59, "Output",ExpressionUUID->"f47cd538-59d2-4660-bdb3-26c7aca79f1e"],
+Cell[23660, 681, 568, 13, 39, "Output",ExpressionUUID->"050e54cc-3cb8-473d-97f4-749b02eb3d0e"],
+Cell[24231, 696, 2336, 47, 473, "Output",ExpressionUUID->"45c8b294-60ef-4b17-bfe0-1b07dfe2c308"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26604, 748, 2156, 44, 160, InheritFromParent,ExpressionUUID->"57bbf746-1bc1-41c0-a502-a1a44201739e"],
+Cell[28763, 794, 1391, 22, 46, "Message",ExpressionUUID->"2ec4605d-2e68-415f-af2d-051bfa93afea"],
+Cell[30157, 818, 944, 15, 47, "Message",ExpressionUUID->"db0ea344-1498-46ad-9860-f159357ac42a"],
+Cell[31104, 835, 1391, 22, 46, "Message",ExpressionUUID->"a9836896-d622-47c8-b7b2-a013d81d0d51"],
+Cell[32498, 859, 944, 15, 47, "Message",ExpressionUUID->"23400d07-703a-47e9-adbf-f97bce3afcb0"],
+Cell[33445, 876, 1391, 22, 46, "Message",ExpressionUUID->"1a4a7421-af2b-4d7f-b388-e8df29307ca0"],
+Cell[34839, 900, 424, 8, 28, "Message",ExpressionUUID->"cd4d495e-4f8f-421f-99c0-bb64460b4527"],
+Cell[35266, 910, 942, 15, 47, "Message",ExpressionUUID->"08183aff-605f-4188-8570-07bc8db5f60d"],
+Cell[36211, 927, 425, 8, 28, "Message",ExpressionUUID->"273f5746-d840-4356-8216-ea1459adc2fa"],
+Cell[36639, 937, 586, 10, 28, "Message",ExpressionUUID->"9e5b4e25-58d4-425a-9bfb-ffb6216bb3b9"],
+Cell[37228, 949, 584, 10, 28, "Message",ExpressionUUID->"a5cc8b00-b937-4996-8428-65961d72b17c"],
+Cell[37815, 961, 1392, 22, 46, "Message",ExpressionUUID->"e11137a2-2025-49f2-b2a9-ca7185bf1c32"],
+Cell[39210, 985, 985, 16, 47, "Message",ExpressionUUID->"9a570a7a-a22c-43c9-8d7c-7b822ba728d1"],
+Cell[40198, 1003, 1392, 22, 46, "Message",ExpressionUUID->"bf7e3520-98ff-400b-bf34-6faa53e6194d"],
+Cell[41593, 1027, 983, 16, 47, "Message",ExpressionUUID->"6f172645-1175-49dc-a463-88effd9b1a3a"],
+Cell[42579, 1045, 1389, 22, 46, "Message",ExpressionUUID->"866de289-cde5-436a-bbcd-58a8aa338518"],
+Cell[43971, 1069, 425, 8, 28, "Message",ExpressionUUID->"1af77835-c594-4593-b80c-01887fe7da46"],
+Cell[44399, 1079, 983, 16, 47, "Message",ExpressionUUID->"d374c702-d916-4cd2-a164-6c248d8a2b2c"],
+Cell[45385, 1097, 424, 8, 28, "Message",ExpressionUUID->"77aea07a-6404-44de-b37b-9290f53c6d6b"],
+Cell[45812, 1107, 587, 10, 28, "Message",ExpressionUUID->"d520f220-f3e3-4b65-8168-af9d3245015b"],
+Cell[46402, 1119, 587, 10, 28, "Message",ExpressionUUID->"09ba1b71-f17d-41c9-a7df-9ea59b91e9e6"],
+Cell[46992, 1131, 1392, 22, 46, "Message",ExpressionUUID->"b6257f1d-49a7-463b-9c8d-13dcef765c55"],
+Cell[48387, 1155, 983, 16, 47, "Message",ExpressionUUID->"463bc83f-09a2-4995-9421-7e5ea45d74e9"],
+Cell[49373, 1173, 1392, 22, 46, "Message",ExpressionUUID->"19fb3481-09de-4572-a70a-dbc99d47bca5"],
+Cell[50768, 1197, 985, 16, 47, "Message",ExpressionUUID->"7d8b64ae-4bfe-4aa1-9f2c-6b478699c2cc"],
+Cell[51756, 1215, 1390, 22, 46, "Message",ExpressionUUID->"2eeb40c3-b96d-467b-b94c-25f120378748"],
+Cell[53149, 1239, 425, 8, 28, "Message",ExpressionUUID->"03dbd954-a672-407d-8105-84edd5d520d0"],
+Cell[53577, 1249, 985, 16, 47, "Message",ExpressionUUID->"97029015-181f-4ddc-8d87-1c8f34f5f33b"],
+Cell[54565, 1267, 426, 8, 28, "Message",ExpressionUUID->"6dcbe409-1bcc-4c79-a04a-cea238a8bcd6"],
+Cell[54994, 1277, 587, 10, 28, "Message",ExpressionUUID->"9d4cf21e-abf2-4ab7-8084-1f19be5f774a"],
+Cell[55584, 1289, 587, 10, 28, "Message",ExpressionUUID->"991d7eae-8836-4bfa-b0c0-c978ffc57e93"],
+Cell[56174, 1301, 1392, 22, 46, "Message",ExpressionUUID->"16dfaa8f-0ba2-4fff-b9d4-193725a76e5b"],
+Cell[57569, 1325, 983, 16, 47, "Message",ExpressionUUID->"f37926d2-bd10-4e39-85b0-5b96881e115f"],
+Cell[58555, 1343, 1390, 22, 46, "Message",ExpressionUUID->"ebde6ae1-1c8c-45ba-8dc1-9532b020e0a3"],
+Cell[59948, 1367, 985, 16, 47, "Message",ExpressionUUID->"6e64b745-f575-4f15-aa29-46c744c1c593"],
+Cell[60936, 1385, 1392, 22, 46, "Message",ExpressionUUID->"dfc68775-e3ef-4260-bb94-58576d849d7b"],
+Cell[62331, 1409, 423, 8, 28, "Message",ExpressionUUID->"d65206bf-e22a-4a4f-98e9-582e20f24cf9"],
+Cell[62757, 1419, 983, 16, 47, "Message",ExpressionUUID->"bff7263a-5381-406e-9f3d-c49c234fe26b"],
+Cell[63743, 1437, 426, 8, 28, "Message",ExpressionUUID->"0cd40593-82dd-47e6-96ef-73e9a02f609f"],
+Cell[64172, 1447, 585, 10, 28, "Message",ExpressionUUID->"16b1b056-dec4-462d-b823-e3e4d521da33"],
+Cell[64760, 1459, 585, 10, 28, "Message",ExpressionUUID->"34b9f427-7159-4eb6-845c-153e3268f6da"]
+}, Open  ]]
+}
+]
+*)
+

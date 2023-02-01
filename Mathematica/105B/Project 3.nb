@@ -1,0 +1,1705 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     75708,       1697]
+NotebookOptionsPosition[     72048,       1634]
+NotebookOutlinePosition[     72598,       1653]
+CellTagsIndexPosition[     72555,       1650]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+Nathan Magari. 805505312. natemagari@g.ucla.edu
+Mathematica Project 3\
+\>", "Text",
+ CellChangeTimes->{{3.859372945234264*^9, 3.859373001929894*^9}, {
+  3.8604981057052984`*^9, 3.860498105829023*^9}, {3.8617277736689205`*^9, 
+  3.861727773831608*^9}},ExpressionUUID->"4680e70d-bee4-4e21-acb7-\
+19d7d60986aa"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Prob", " ", "1"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Remove", "[", "\"\<Global`*\>\"", "]"}], "//", "Quiet"}], ";"}],
+    "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"$Assumptions", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Element", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"m1", ",", "m2"}], "}"}], ",", " ", "Reals"}], "]"}], " ", "&&",
+        " ", 
+       RowBox[{"m1", ">", "0"}], " ", "&&", " ", 
+       RowBox[{"m2", ">", "0"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Mu]", " ", "=", " ", 
+     RowBox[{"m1", " ", 
+      RowBox[{"m2", " ", "/", " ", 
+       RowBox[{"(", 
+        RowBox[{"m1", "+", "m2"}], ")"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"r21", " ", "=", " ", 
+     RowBox[{"r2", "-", "r1"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"v21", " ", "=", " ", 
+     RowBox[{"v2", "-", "v1"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"rcm", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"m1", " ", "r1"}], " ", "+", 
+        RowBox[{"m2", " ", "r2"}]}], ")"}], "/", 
+      RowBox[{"(", 
+       RowBox[{"m1", " ", "+", " ", "m2"}], ")"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"vcm", " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"m1", " ", "v1"}], " ", "+", 
+         RowBox[{"m2", " ", "v2"}]}], ")"}], "/", 
+       RowBox[{"(", 
+        RowBox[{"m1", " ", "+", " ", "m2"}], ")"}]}], "//", "Simplify"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", "a", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"v1cm", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"v1", "-", "vcm"}], "//", "Simplify"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"v2cm", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"v2", "-", "vcm"}], "//", "Simplify"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<\\nPart a: The velocities in the center of mass frame are given by \
+\\nv1cm = \>\"", ",", "v1cm", ",", "\"\< = \>\"", ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "\[Mu]"}], " ", 
+       RowBox[{"v21", "/", "m1"}]}], "//", "HoldForm"}], ",", 
+     "\"\< \\nv2cm = \>\"", ",", "v2cm", ",", "\"\< = \>\"", ",", 
+     RowBox[{
+      RowBox[{"\[Mu]", " ", 
+       RowBox[{"v21", "/", "m2"}]}], "//", "HoldForm"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", "b", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"p1cm", " ", "=", " ", 
+     RowBox[{"m1", " ", "v1cm"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"p2cm", " ", "=", " ", 
+     RowBox[{"m2", " ", "v2cm"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Ecm", " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"m1", " ", "v1cm", " ", "v1cm"}], " ", "+", " ", 
+       RowBox[{"m2", " ", "v2cm", " ", "v2cm"}]}], "//", "Simplify"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<\\nPart b: The momenta in the center of mass frame are given by \
+\\np1cm = \>\"", ",", "p1cm", ",", "\"\< = \>\"", ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "\[Mu]"}], " ", "v21"}], "//", "HoldForm"}], ",", 
+     "\"\< \\np2cm = \>\"", ",", "p2cm", ",", "\"\< = \>\"", ",", 
+     RowBox[{
+      RowBox[{"\[Mu]", " ", "v21"}], "//", "HoldForm"}], ",", 
+     "\"\<\\nWhile the energy in the center of mass frame is given by \\nEcm \
+= \>\"", ",", "Ecm", ",", "\"\< = \>\"", ",", 
+     RowBox[{
+      RowBox[{"\[Mu]", " ", 
+       SuperscriptBox["v21", "2"]}], "//", "HoldForm"}], ",", 
+     "\"\<\\nWe see that instead of the apparent 3 degrees of freedom for \
+each particle in the lab, the particles are each actually confined to one \
+dimension on lines parallel to v21 and passing through the points. These \
+lines move through the lab (along with the COM) so it is hard to see this \
+constraint without first transforming to the center of mass frame\>\""}], 
+    "]"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", "c", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"pcm", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"p1cm", "+", "p2cm"}], "//", "Simplify"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<\\nPart c: Unsurprisingly, the momentum in the center of mass frame \
+is \\npcm = \>\"", ",", " ", 
+     RowBox[{
+      RowBox[{"p1cm", " ", "+", " ", "p2cm"}], "//", "HoldForm"}], ",", 
+     "\"\< = \>\"", ",", "pcm", ",", " ", 
+     "\"\<\\nThis is not surprising and not a coincidence because the center \
+of mass is the mass-weighted average of position and the total momentum is a \
+mass-weighted sum of velocities (change in position), which should be 0 in \
+the center of mass frame (because the center of mass stays at the origin in \
+this frame). In other words, when we take the time derivative of the center \
+of mass equation we get a sum of the momenta divided by the total mass, so in \
+a frame where the center of mass is at rest, the sum of the momenta must be \
+zero.\>\""}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", "d", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+   "Print", "[", 
+    "\"\<\\nPart d: There are three cases to consider for an elastic \
+collision between these two particles. The first case is a head on collision \
+where the two masses end up with the negative velocity of what they had \
+before and remain on the same line in the center of mass frame. This case \
+looks like a time reversal of the situation before the collision. The second \
+case is that the particles had enough energy to get through the potential \
+barrier and end up with the same velocity and continue on the same line \
+parallel to the initial v21. These first two cases require the particles have \
+a velocity straight toward the center of mass. The third case is that it is \
+not a perfectly head-on collision (i.e. parallel trajectories but offset from \
+COM) and the lines of motion (parallel to v21) are rotated by some angle \
+after the collision because of this asymmetry. In every case the magnitude of \
+each particle's velocity is the same after the collision as it was before in \
+order to obey energy conservation.\>\"", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.85937327975598*^9, 3.859373312661188*^9}, {
+   3.859373395181918*^9, 3.8593735019085197`*^9}, {3.859373534775406*^9, 
+   3.859373538382871*^9}, {3.859373625525921*^9, 3.859373693868785*^9}, {
+   3.859373733255644*^9, 3.859373735990789*^9}, {3.8593738280226355`*^9, 
+   3.859373862245633*^9}, {3.859373904603146*^9, 3.859374056614607*^9}, {
+   3.8593741035168223`*^9, 3.8593741484122143`*^9}, {3.8593741949033422`*^9, 
+   3.8593741973106346`*^9}, {3.8593748693449416`*^9, 3.859374883185871*^9}, {
+   3.859374917091822*^9, 3.8593749241293635`*^9}, {3.8593750094989567`*^9, 
+   3.859375009946454*^9}, {3.859375278667128*^9, 3.859375281141988*^9}, {
+   3.8593753562012396`*^9, 3.859375359438425*^9}, {3.8593753910482163`*^9, 
+   3.859375393031991*^9}, {3.8593754382498384`*^9, 3.859375438430626*^9}, {
+   3.8593754991699934`*^9, 3.8593755087794666`*^9}, {3.859375581094353*^9, 
+   3.8593757286270003`*^9}, {3.859375765952552*^9, 3.85937591212694*^9}, {
+   3.8593759456935616`*^9, 3.8593759517583675`*^9}, {3.8593766313824015`*^9, 
+   3.8593766485972805`*^9}, {3.8593766936860104`*^9, 
+   3.8593766944838233`*^9}, {3.859376809211999*^9, 3.85937685290111*^9}, {
+   3.8593769174877424`*^9, 3.8593769626258316`*^9}, {3.85937703697398*^9, 
+   3.859377046657837*^9}, {3.8593771491982937`*^9, 3.8593771505888*^9}, {
+   3.8593771894328756`*^9, 3.859377226956343*^9}, {3.859377320334361*^9, 
+   3.8593773261976776`*^9}, {3.8593774444683237`*^9, 
+   3.8593774515294757`*^9}, {3.8593800458116426`*^9, 3.859380097251755*^9}, {
+   3.859380131647587*^9, 3.859380165529133*^9}, {3.859388921425753*^9, 
+   3.859388939560663*^9}, {3.8593889966650524`*^9, 3.8593890093225164`*^9}, {
+   3.8593890708178577`*^9, 3.8593891019245443`*^9}, {3.8593891393300843`*^9, 
+   3.8593892820314455`*^9}, {3.859389394253664*^9, 3.8593893968493323`*^9}, {
+   3.8593894675811234`*^9, 3.859389523955553*^9}, {3.8593896148780146`*^9, 
+   3.8593896206587963`*^9}, {3.85955202841092*^9, 3.859552029660982*^9}, {
+   3.8595521124313235`*^9, 3.8595522191726174`*^9}, {3.859552375121446*^9, 
+   3.859552384422287*^9}, {3.8595524286543665`*^9, 3.8595525983423233`*^9}, {
+   3.8595526812412577`*^9, 3.8595526919790416`*^9}, 3.8595862909558167`*^9, {
+   3.859586322146077*^9, 3.859586521606553*^9}, {3.859586559492463*^9, 
+   3.8595865801751986`*^9}, {3.8595866262337*^9, 3.8595866264008102`*^9}, {
+   3.8595874868866205`*^9, 3.859587487607306*^9}, {3.8595875234283047`*^9, 
+   3.8595875246992664`*^9}, 3.860498122133336*^9, {3.8604982038647614`*^9, 
+   3.8604982539709606`*^9}, {3.860498295849204*^9, 3.8604983543259783`*^9}, {
+   3.86049839226577*^9, 3.8604984572398887`*^9}, {3.860498488408953*^9, 
+   3.8604984949233437`*^9}, {3.860498576441223*^9, 3.860498611988984*^9}, {
+   3.8604986587132225`*^9, 3.8604987282135887`*^9}, {3.8605023394603596`*^9, 
+   3.860502404370576*^9}, {3.860502438282238*^9, 3.8605027401904764`*^9}, {
+   3.860502794199193*^9, 3.860502814835537*^9}, {3.8605028467502546`*^9, 
+   3.8605028479282923`*^9}, {3.8605045074130445`*^9, 
+   3.8605045226452494`*^9}, {3.86050455391039*^9, 3.8605045571049867`*^9}, {
+   3.860504589608584*^9, 3.860504781786311*^9}, {3.860504889623705*^9, 
+   3.860504930443446*^9}, {3.8605050105888786`*^9, 3.860505089050033*^9}, {
+   3.860505321106259*^9, 3.8605054072861943`*^9}, {3.8605054503527627`*^9, 
+   3.860505581827423*^9}, 3.8605056163311596`*^9, {3.86050567384254*^9, 
+   3.8605057169021654`*^9}, {3.860505764038449*^9, 3.8605060186761065`*^9}, {
+   3.860506057073457*^9, 3.8605061422878313`*^9}, {3.8605064972630434`*^9, 
+   3.8605065453862047`*^9}, {3.8605065971144514`*^9, 3.860506607691018*^9}, {
+   3.8605066394493327`*^9, 3.860506703874984*^9}, {3.860506797324317*^9, 
+   3.860506807199047*^9}, {3.860506844724766*^9, 3.8605068552119503`*^9}, {
+   3.860506895538512*^9, 3.8605069450578117`*^9}, {3.86050705225006*^9, 
+   3.8605071499050007`*^9}, {3.860511187587534*^9, 3.8605111963830805`*^9}, {
+   3.860511261753519*^9, 3.860511271553956*^9}, {3.860511322851406*^9, 
+   3.860511328058928*^9}, {3.860511360308075*^9, 3.8605113615310106`*^9}, {
+   3.86051153212668*^9, 3.860511596048064*^9}, {3.8605121217080417`*^9, 
+   3.8605121451446047`*^9}, {3.860512229710165*^9, 3.8605123605338683`*^9}, {
+   3.860512407906386*^9, 3.860512473352096*^9}, {3.860513008876894*^9, 
+   3.8605130273548393`*^9}, {3.8605132256794243`*^9, 3.860513228082988*^9}, {
+   3.8605132952691956`*^9, 3.860513382662016*^9}, {3.8605134323613305`*^9, 
+   3.8605134393483405`*^9}, {3.860513611007329*^9, 3.860513617076445*^9}, {
+   3.8605136578281803`*^9, 3.8605137422034984`*^9}, {3.8605137857962155`*^9, 
+   3.8605139673722277`*^9}, {3.860514000232605*^9, 3.86051404612283*^9}, {
+   3.860514104673335*^9, 3.8605141088489466`*^9}, {3.8605141806251993`*^9, 
+   3.860514222400613*^9}, {3.860514252662916*^9, 3.8605146762424793`*^9}, {
+   3.8605147762016077`*^9, 3.8605148856340823`*^9}, {3.8617277557434106`*^9, 
+   3.8617277821461782`*^9}, {3.8617280006006665`*^9, 
+   3.8617282176725955`*^9}, {3.861728284067922*^9, 3.861728289745304*^9}, {
+   3.861728331443921*^9, 3.8617283382757874`*^9}, {3.861728426348794*^9, 
+   3.8617285418544054`*^9}, {3.8617285978366475`*^9, 3.861728631972097*^9}, {
+   3.8617286653658223`*^9, 3.8617287145983605`*^9}, {3.8617288099527836`*^9, 
+   3.861729138998538*^9}, {3.861729187928881*^9, 3.8617292694911447`*^9}, {
+   3.861729378610014*^9, 3.861729406301548*^9}, {3.86172948051613*^9, 
+   3.8617295628435817`*^9}, {3.8617296344708543`*^9, 3.86172963685073*^9}, {
+   3.861729668384674*^9, 3.861729797524721*^9}, {3.861729830688303*^9, 
+   3.861730039672144*^9}, {3.8617300842834964`*^9, 3.8617302716592665`*^9}, {
+   3.8617303415905313`*^9, 3.861730581086207*^9}, {3.8617306237086782`*^9, 
+   3.8617306404410677`*^9}, {3.8617308033746004`*^9, 
+   3.8617308254610786`*^9}, {3.861730990178255*^9, 3.8617310124198437`*^9}, {
+   3.8617310550417614`*^9, 3.861731173319307*^9}, {3.861731220168662*^9, 
+   3.8617312909833994`*^9}, {3.861731332819621*^9, 3.8617316929541817`*^9}, {
+   3.8617318314139614`*^9, 3.861731845446704*^9}, {3.8617319868815565`*^9, 
+   3.8617320191924767`*^9}, {3.8617545717632217`*^9, 
+   3.8617546290434375`*^9}, {3.8617546597759523`*^9, 3.861754705223033*^9}, {
+   3.861754749786495*^9, 3.8617547720882444`*^9}, {3.861754852670369*^9, 
+   3.8617550818074656`*^9}, {3.861755266610593*^9, 3.8617554575689826`*^9}, {
+   3.861755489771395*^9, 3.861755491661949*^9}, {3.861755530923397*^9, 
+   3.8617555321707106`*^9}},
+ CellLabel->
+  "In[838]:=",ExpressionUUID->"5a00e2f8-f104-469f-850b-30269927d302"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nPart a: The velocities in the center of mass frame are \
+given by \\nv1cm = \"\>", "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{"m2", " ", 
+     RowBox[{"(", 
+      RowBox[{"v1", "-", "v2"}], ")"}]}], 
+    RowBox[{"m1", "+", "m2"}]], "\[InvisibleSpace]", "\<\" = \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{"\[Mu]", " ", "v21"}], "m1"]}],
+    HoldForm], "\[InvisibleSpace]", "\<\" \\nv2cm = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{"m1", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "v1"}], "+", "v2"}], ")"}]}], 
+    RowBox[{"m1", "+", "m2"}]], "\[InvisibleSpace]", "\<\" = \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    FractionBox[
+     RowBox[{"\[Mu]", " ", "v21"}], "m2"],
+    HoldForm]}],
+  SequenceForm[
+  "\nPart a: The velocities in the center of mass frame are given by \nv1cm = \
+", $CellContext`m2 ($CellContext`m1 + $CellContext`m2)^(-1) ($CellContext`v1 - \
+$CellContext`v2), " = ", 
+   HoldForm[(-$CellContext`\[Mu]) ($CellContext`v21/$CellContext`m1)], 
+   " \nv2cm = ", $CellContext`m1 ($CellContext`m1 + $CellContext`m2)^(-1) \
+(-$CellContext`v1 + $CellContext`v2), " = ", 
+   HoldForm[$CellContext`\[Mu] ($CellContext`v21/$CellContext`m2)]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.86175409807652*^9, 3.861755538365959*^9},
+ CellLabel->
+  "During evaluation of \
+In[838]:=",ExpressionUUID->"110f40d8-322d-4479-a026-54d5c151e574"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nPart b: The momenta in the center of mass frame are given \
+by \\np1cm = \"\>", "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{"m1", " ", "m2", " ", 
+     RowBox[{"(", 
+      RowBox[{"v1", "-", "v2"}], ")"}]}], 
+    RowBox[{"m1", "+", "m2"}]], "\[InvisibleSpace]", "\<\" = \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{
+     RowBox[{"-", "\[Mu]"}], " ", "v21"}],
+    HoldForm], "\[InvisibleSpace]", "\<\" \\np2cm = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{"m1", " ", "m2", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "v1"}], "+", "v2"}], ")"}]}], 
+    RowBox[{"m1", "+", "m2"}]], "\[InvisibleSpace]", "\<\" = \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"\[Mu]", " ", "v21"}],
+    HoldForm], 
+   "\[InvisibleSpace]", "\<\"\\nWhile the energy in the center of mass frame \
+is given by \\nEcm = \"\>", "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{"m1", " ", "m2", " ", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"v1", "-", "v2"}], ")"}], "2"]}], 
+    RowBox[{"m1", "+", "m2"}]], "\[InvisibleSpace]", "\<\" = \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"\[Mu]", " ", 
+     SuperscriptBox["v21", "2"]}],
+    HoldForm], 
+   "\[InvisibleSpace]", "\<\"\\nWe see that instead of the apparent 3 degrees \
+of freedom for each particle in the lab, the particles are each actually \
+confined to one dimension on lines parallel to v21 and passing through the \
+points. These lines move through the lab (along with the COM) so it is hard \
+to see this constraint without first transforming to the center of mass frame\
+\"\>"}],
+  SequenceForm[
+  "\nPart b: The momenta in the center of mass frame are given by \np1cm = ", \
+$CellContext`m1 $CellContext`m2 ($CellContext`m1 + $CellContext`m2)^(-1) \
+($CellContext`v1 - $CellContext`v2), " = ", 
+   HoldForm[(-$CellContext`\[Mu]) $CellContext`v21], 
+   " \np2cm = ", $CellContext`m1 $CellContext`m2 ($CellContext`m1 + \
+$CellContext`m2)^(-1) (-$CellContext`v1 + $CellContext`v2), " = ", 
+   HoldForm[$CellContext`\[Mu] $CellContext`v21], 
+   "\nWhile the energy in the center of mass frame is given by \nEcm = ", \
+$CellContext`m1 $CellContext`m2 ($CellContext`m1 + $CellContext`m2)^(-1) \
+($CellContext`v1 - $CellContext`v2)^2, " = ", 
+   HoldForm[$CellContext`\[Mu] $CellContext`v21^2], 
+   "\nWe see that instead of the apparent 3 degrees of freedom for each \
+particle in the lab, the particles are each actually confined to one \
+dimension on lines parallel to v21 and passing through the points. These \
+lines move through the lab (along with the COM) so it is hard to see this \
+constraint without first transforming to the center of mass frame"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.86175409807652*^9, 3.8617555383729887`*^9},
+ CellLabel->
+  "During evaluation of \
+In[838]:=",ExpressionUUID->"29d93b04-be3f-4cc8-9e6a-d4cc3b9d2b1a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nPart c: Unsurprisingly, the momentum in the center of mass \
+frame is \\npcm = \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"p1cm", "+", "p2cm"}],
+    HoldForm], "\[InvisibleSpace]", "\<\" = \"\>", "\[InvisibleSpace]", "0", 
+   "\[InvisibleSpace]", "\<\"\\nThis is not surprising and not a coincidence \
+because the center of mass is the mass-weighted average of position and the \
+total momentum is a mass-weighted sum of velocities (change in position), \
+which should be 0 in the center of mass frame (because the center of mass \
+stays at the origin in this frame). In other words, when we take the time \
+derivative of the center of mass equation we get a sum of the momenta divided \
+by the total mass, so in a frame where the center of mass is at rest, the sum \
+of the momenta must be zero.\"\>"}],
+  SequenceForm[
+  "\nPart c: Unsurprisingly, the momentum in the center of mass frame is \n\
+pcm = ", 
+   HoldForm[$CellContext`p1cm + $CellContext`p2cm], " = ", 0, 
+   "\nThis is not surprising and not a coincidence because the center of mass \
+is the mass-weighted average of position and the total momentum is a \
+mass-weighted sum of velocities (change in position), which should be 0 in \
+the center of mass frame (because the center of mass stays at the origin in \
+this frame). In other words, when we take the time derivative of the center \
+of mass equation we get a sum of the momenta divided by the total mass, so in \
+a frame where the center of mass is at rest, the sum of the momenta must be \
+zero."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.86175409807652*^9, 3.861755538380479*^9},
+ CellLabel->
+  "During evaluation of \
+In[838]:=",ExpressionUUID->"78f2ac92-3190-43bf-9ac7-47e82c8e7175"],
+
+Cell[BoxData["\<\"\\nPart d: There are three cases to consider for an elastic \
+collision between these two particles. The first case is a head on collision \
+where the two masses end up with the negative velocity of what they had \
+before and remain on the same line in the center of mass frame. This case \
+looks like a time reversal of the situation before the collision. The second \
+case is that the particles had enough energy to get through the potential \
+barrier and end up with the same velocity and continue on the same line \
+parallel to the initial v21. These first two cases require the particles have \
+a velocity straight toward the center of mass. The third case is that it is \
+not a perfectly head-on collision (i.e. parallel trajectories but offset from \
+COM) and the lines of motion (parallel to v21) are rotated by some angle \
+after the collision because of this asymmetry. In every case the magnitude of \
+each particle's velocity is the same after the collision as it was before in \
+order to obey energy conservation.\"\>"], "Print",
+ CellChangeTimes->{3.86175409807652*^9, 3.861755538380479*^9},
+ CellLabel->
+  "During evaluation of \
+In[838]:=",ExpressionUUID->"acc1f808-907c-45d2-af8f-ee97f813f79a"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Prob", " ", "2"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Remove", "[", "\"\<Global`*\>\"", "]"}], "//", "Quiet"}], ";"}],
+    "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"$Assumptions", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Element", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"s", ",", "\[Mu]", ",", "T0", ",", "k"}], "}"}], ",", " ", 
+         "Reals"}], "]"}], " ", "&&", " ", 
+       RowBox[{"s", ">", "0"}], " ", "&&", " ", 
+       RowBox[{"\[Mu]", ">", "0"}], "&&", " ", 
+       RowBox[{"T0", ">", "0"}], " ", "&&", " ", 
+       RowBox[{"k", ">", "0"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+   "Print", "[", 
+    "\"\<Rutherford scattering! The initial angular momentum for an impact \
+parameter s is \\nl = \[Mu] v0 s = s\!\(\*SqrtBox[\(2\\\ \[Mu]\\\ \
+\*SubscriptBox[\(T\), \(0\)]'\)]\). \\nThe number of particles with impact \
+parameters between s and s + ds must be equal to the number scattered in \
+scattering angle \[CapitalTheta] and \[CapitalTheta] + d\[CapitalTheta]. \
+\\nBecause of the solid angle involved, this gives the relationship s ds = \
+\[Sigma](\[CapitalTheta]) sin(\[CapitalTheta]) d\[CapitalTheta]. \\n\[Sigma](\
+\[CapitalTheta])=\!\(\*FractionBox[\(\(\\\ \)\(s\)\), \(sin \
+\((\[CapitalTheta])\)\)]\)\!\(\*FractionBox[\(ds\), \(d\[CapitalTheta]\)]\)\>\
+\"", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"r", "[", "\[Theta]_", "]"}], "=", 
+     RowBox[{"1", "/", 
+      RowBox[{"u", "[", "\[Theta]", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"l", "=", 
+     RowBox[{"s", 
+      SqrtBox[
+       RowBox[{"2", " ", "\[Mu]", " ", "T0"}]]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"U", "[", "\[Theta]_", "]"}], " ", "=", " ", 
+     RowBox[{"k", "/", 
+      RowBox[{"r", "[", "\[Theta]", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "We", " ", "know", " ", "that", " ", "we", " ", "can", " ", "replace", 
+      " ", "the", " ", 
+      RowBox[{"d\[Theta]", "/", "dt"}], " ", "with", " ", 
+      RowBox[{"l", "/", 
+       RowBox[{"(", 
+        RowBox[{"\[Mu]", " ", 
+         SuperscriptBox["r", "2"]}], ")"}]}]}], ",", " ", 
+     RowBox[{"so", " ", "I", " ", "will", " ", "make", " ", "a", " ", 
+      RowBox[{"rule", "!"}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+   "Print", "[", 
+    "\"\<\\nWe can replace the d\[Theta]/dt in the total energy with l/(\[Mu] \
+\!\(\*SuperscriptBox[\(r\), \(2\)]\))\>\"", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"lrule", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"Dt", "[", 
+       RowBox[{"\[Theta]", ",", "t"}], "]"}], "->", 
+      RowBox[{"l", "/", 
+       RowBox[{"(", 
+        RowBox[{"\[Mu]", " ", 
+         SuperscriptBox[
+          RowBox[{"r", "[", "\[Theta]", "]"}], "2"]}], ")"}]}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"H", "[", "\[Theta]_", "]"}], " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"1", "/", "2"}], " ", "\[Mu]", 
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox[
+            RowBox[{"Dt", "[", 
+             RowBox[{
+              RowBox[{"r", "[", "\[Theta]", "]"}], ",", "t"}], "]"}], "2"], 
+           "+", 
+           RowBox[{
+            SuperscriptBox[
+             RowBox[{"r", "[", "\[Theta]", "]"}], "2"], 
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"Dt", "[", 
+               RowBox[{"\[Theta]", ",", "t"}], "]"}], ")"}], "2"]}]}], 
+          ")"}]}], " ", "+", " ", 
+        RowBox[{"U", "[", "\[Theta]", "]"}]}], "/.", "lrule"}], "//", 
+      "Simplify"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<\\nThe total energy can be written as \\nE = \>\"", ",", 
+     RowBox[{"H", "[", "\[Theta]", "]"}]}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"fixrule", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"ConditionalExpression", "[", 
+       RowBox[{"a_", ",", "b__"}], "]"}], "->", "a"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"usoln", " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Solve", "[", 
+        RowBox[{
+         RowBox[{"T0", "==", 
+          RowBox[{"H", "[", "\[Theta]", "]"}]}], ",", 
+         RowBox[{
+          RowBox[{"u", "'"}], "[", "\[Theta]", "]"}], ",", "Reals"}], "]"}], 
+       "[", 
+       RowBox[{"[", "2", "]"}], "]"}], "/.", "fixrule"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<\\nAfter solving T0 == E for u'[\[Theta]] \\nu'[\[Theta]] = \>\"", 
+     ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"u", "'"}], "[", "\[Theta]", "]"}], "/.", "usoln"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+   "Print", "[", 
+    "\"\<The angle \[Psi] is defined in terms of the scattering angle by \
+\[CapitalTheta] = \[Pi] - 2\[Psi]. We can get \[Psi] by integrating \
+\!\(\*FractionBox[\(du\), \(\(u'\)[\[Theta]]\)]\) from 0 to umax. We get umax \
+by setting u'[\[Theta]] = 0\>\"", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"umax", " ", "=", " ", 
+     RowBox[{"umax", "/.", 
+      RowBox[{
+       RowBox[{"Solve", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"T0", "-", 
+           RowBox[{"k", " ", "umax"}], "-", 
+           RowBox[{
+            SuperscriptBox["s", "2"], " ", "T0", " ", 
+            SuperscriptBox["umax", "2"]}]}], "==", "0"}], ",", "umax", ",", 
+         "Reals"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<\\numax = \>\"", ",", "umax"}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Psi]", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"1", "/", 
+          RowBox[{
+           RowBox[{"u", "'"}], "[", "\[Theta]", "]"}]}], "/.", "usoln"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"u", "[", "\[Theta]", "]"}], ",", "0", ",", "umax"}], 
+         "}"}]}], "]"}], "//", "Simplify"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<From the integration we get the equation \\n\[Psi] = \>\"", ",", " ",
+      "\[Psi]", ",", 
+     "\"\<\\nNow we can set this equal to \!\(\*FractionBox[\(\[Pi]\), \(2\)]\
+\) - \!\(\*FractionBox[\(\[CapitalTheta]\), \(2\)]\) and solve for s(\
+\[CapitalTheta]).\>\""}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"b", "[", "\[CapitalTheta]_", "]"}], " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"s", "/.", 
+        RowBox[{
+         RowBox[{"Solve", "[", 
+          RowBox[{
+           RowBox[{"\[Psi]", " ", "==", " ", 
+            RowBox[{
+             FractionBox["\[Pi]", "2"], " ", "-", " ", 
+             FractionBox["\[CapitalTheta]", "2"]}]}], ",", "s"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "/.", "fixrule"}], "//", 
+      "FullSimplify"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<After solving we find \\ns(\[CapitalTheta]) = \>\"", ",", " ", 
+     RowBox[{"b", "[", "\[CapitalTheta]", "]"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[Sigma]", "[", "\[CapitalTheta]_", "]"}], " ", "=", " ", 
+     RowBox[{
+      RowBox[{"RealAbs", "[", 
+       RowBox[{
+        RowBox[{"b", "[", "\[CapitalTheta]", "]"}], " ", 
+        RowBox[{
+         RowBox[{"D", "[", 
+          RowBox[{
+           RowBox[{"b", "[", "\[CapitalTheta]", "]"}], ",", 
+           "\[CapitalTheta]"}], "]"}], "/", 
+         RowBox[{"Sin", "[", "\[CapitalTheta]", "]"}]}]}], "]"}], "//", 
+      "FullSimplify"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<And by the equation above: \\n\[Sigma](\[CapitalTheta]) = \
+\!\(\*FractionBox[\(\(\\\ \)\(s\)\), \(sin \
+\((\[CapitalTheta])\)\)]\)\!\(\*FractionBox[\(ds\), \(d\[CapitalTheta]\)]\) = \
+\>\"", ",", 
+     RowBox[{"\[Sigma]", "[", "\[CapitalTheta]", "]"}], ",", 
+     "\"\< = \!\(\*FractionBox[\(\(\\\ \)\*SuperscriptBox[\(k\), \(2\)]\), \
+SuperscriptBox[\((4\\\ \*SubscriptBox[\(T\), \(0\)])\), \
+\(2\)]]\)\!\(\*FractionBox[\(1\), \(\*SuperscriptBox[\(sin\), \(4\)] \
+\((\*FractionBox[\(\[CapitalTheta]\), \(2\)])\)\)]\)\>\""}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Sigma]T", " ", "=", " ", 
+     RowBox[{"2", "\[Pi]", " ", 
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"\[Sigma]", "[", "\[CapitalTheta]", "]"}], " ", 
+         RowBox[{"Sin", "[", "\[CapitalTheta]", "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"\[CapitalTheta]", ",", "0", ",", "\[Pi]"}], "}"}]}], 
+       "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<When we try to evaluate the total cross section we get \\n\[Sigma]T \
+= \>\"", ",", " ", "\[Sigma]T", ",", "\"\< = \[Infinity]\>\""}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+   "Print", "[", 
+    "\"\<This is because the force is infinite in its extent\>\"", 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{
+  3.859587008109127*^9, {3.8595870758752584`*^9, 3.8595871353762956`*^9}, {
+   3.859587260548998*^9, 3.8595872791679115`*^9}, {3.859587311398406*^9, 
+   3.8595873553127794`*^9}, {3.8595873865833263`*^9, 
+   3.8595874188274727`*^9}, {3.8595874563391867`*^9, 
+   3.8595874754704657`*^9}, {3.8595875567857523`*^9, 3.859587594618764*^9}, {
+   3.859587648005516*^9, 3.85958767340228*^9}, {3.859587761649878*^9, 
+   3.8595879606434345`*^9}, {3.8595880308122053`*^9, 
+   3.8595880310924234`*^9}, {3.8595880954890704`*^9, 3.859588098906996*^9}, {
+   3.859588139345527*^9, 3.85958821592651*^9}, {3.859588251872099*^9, 
+   3.8595882595021725`*^9}, {3.859588294179364*^9, 3.8595882971707635`*^9}, {
+   3.85958850855068*^9, 3.8595885109232564`*^9}, {3.85958858033223*^9, 
+   3.859588586663184*^9}, {3.85958893577242*^9, 3.8595889498406677`*^9}, {
+   3.8595889944063296`*^9, 3.8595891119340515`*^9}, {3.8595891804669437`*^9, 
+   3.859589278785906*^9}, {3.859589340470233*^9, 3.8595893406281996`*^9}, {
+   3.859589442997235*^9, 3.859589448117484*^9}, {3.8604981418982306`*^9, 
+   3.8604981432668705`*^9}, {3.860680967222949*^9, 3.86068097646268*^9}, {
+   3.860681017995034*^9, 3.860681128766153*^9}, {3.860681190333672*^9, 
+   3.8606812487157197`*^9}, {3.8606812979301233`*^9, 
+   3.8606813247225494`*^9}, {3.8606826430136127`*^9, 
+   3.8606826475083003`*^9}, {3.8606829547396054`*^9, 3.860683006438388*^9}, {
+   3.860683047027588*^9, 3.8606830662982416`*^9}, {3.860686846384333*^9, 
+   3.8606868767276173`*^9}, {3.860686939680512*^9, 3.8606871500605273`*^9}, {
+   3.860687187110817*^9, 3.860687193811837*^9}, 3.8606872401556735`*^9, 
+   3.8606873176608696`*^9, {3.860687452911231*^9, 3.860687553424371*^9}, {
+   3.8606875874615912`*^9, 3.8606876298227406`*^9}, {3.860687669007584*^9, 
+   3.860687700175256*^9}, {3.860687770043541*^9, 3.860687805956357*^9}, {
+   3.86068797503703*^9, 3.8606880719140167`*^9}, {3.860688295250258*^9, 
+   3.8606883354309254`*^9}, {3.8606884110846477`*^9, 
+   3.8606884817541666`*^9}, {3.8606887128903117`*^9, 
+   3.8606888561894374`*^9}, {3.8606890018707676`*^9, 3.860689048052435*^9}, {
+   3.86068910206396*^9, 3.8606892951987123`*^9}, {3.8606893547275534`*^9, 
+   3.860689361697713*^9}, {3.860689412231124*^9, 3.8606894196399717`*^9}, {
+   3.8606894718207746`*^9, 3.860689472480121*^9}, {3.8606905220967064`*^9, 
+   3.8606905528761387`*^9}, {3.8606910439947033`*^9, 3.8606911069992723`*^9}, 
+   3.8617277660148153`*^9, {3.86173229610736*^9, 3.861732302347733*^9}, {
+   3.8617327871513405`*^9, 3.861732916584881*^9}, {3.8617329580053415`*^9, 
+   3.8617332556111403`*^9}, {3.8617332873438067`*^9, 3.861733350561097*^9}, {
+   3.861733633229943*^9, 3.861733666642871*^9}, {3.8617366415057216`*^9, 
+   3.861736650099886*^9}, {3.8617378362995543`*^9, 3.8617379292530746`*^9}, {
+   3.8617380062101746`*^9, 3.8617381124346323`*^9}, {3.8617388218240385`*^9, 
+   3.8617389000118837`*^9}, {3.8617390628453765`*^9, 
+   3.8617391638702745`*^9}, {3.861739198290344*^9, 3.86173930543937*^9}, {
+   3.8617393720712566`*^9, 3.8617394011358223`*^9}, {3.8617396701364794`*^9, 
+   3.861739675500079*^9}, {3.86173972396169*^9, 3.861739804977148*^9}, {
+   3.861739883181775*^9, 3.86173990329329*^9}, {3.8617399886995573`*^9, 
+   3.8617400341422195`*^9}, {3.8617401603406477`*^9, 3.861740197154109*^9}, {
+   3.861740262528157*^9, 3.861740368874997*^9}, {3.8617404393209896`*^9, 
+   3.8617405614152164`*^9}, {3.861740605143523*^9, 3.8617407388647504`*^9}, {
+   3.86174078694462*^9, 3.861741167460168*^9}, {3.8617412251255293`*^9, 
+   3.8617414206921206`*^9}, {3.861741870946492*^9, 3.861741873692205*^9}, {
+   3.8617420007384562`*^9, 3.8617420736924095`*^9}, {3.8617421291386986`*^9, 
+   3.8617424458700504`*^9}, {3.8617425311166806`*^9, 3.861742546847289*^9}, {
+   3.861742694848884*^9, 3.8617427730980577`*^9}, {3.8617428292441907`*^9, 
+   3.8617428686354365`*^9}, {3.8617429699850082`*^9, 
+   3.8617429856649075`*^9}, {3.8617431087308846`*^9, 
+   3.8617431340178547`*^9}, {3.8617431798267803`*^9, 
+   3.8617431851410074`*^9}, {3.861743415350966*^9, 3.861743476440815*^9}, {
+   3.8617438240766907`*^9, 3.861743832280531*^9}, {3.8617439028811235`*^9, 
+   3.8617440362891335`*^9}, {3.861744154340067*^9, 3.8617441555481815`*^9}, {
+   3.861744251454028*^9, 3.861744251536287*^9}, {3.8617444387562866`*^9, 
+   3.8617444474196606`*^9}, {3.8617444997554474`*^9, 3.861744500394825*^9}, {
+   3.8617448012487416`*^9, 3.861744846277688*^9}, {3.861745182579117*^9, 
+   3.8617452182952404`*^9}, {3.861745272192461*^9, 3.861745278940784*^9}, {
+   3.8617453757698793`*^9, 3.861745382023125*^9}, {3.8617455437244406`*^9, 
+   3.8617457506811085`*^9}, {3.861745893472747*^9, 3.8617459268225346`*^9}, {
+   3.861745986404172*^9, 3.861746143677286*^9}, {3.8617461837444353`*^9, 
+   3.8617462923468075`*^9}, {3.8617463802614813`*^9, 3.861746386399544*^9}, {
+   3.86174649946107*^9, 3.861746547304845*^9}, {3.861746582867469*^9, 
+   3.86174660287031*^9}, {3.8617466458926425`*^9, 3.8617466472157836`*^9}, {
+   3.8617466822517595`*^9, 3.861746839555386*^9}, 3.8617468819103274`*^9, {
+   3.861746916322154*^9, 3.8617469644470406`*^9}, {3.861747041606045*^9, 
+   3.861747086652729*^9}, {3.861747126919958*^9, 3.8617471655549393`*^9}, {
+   3.861747207711367*^9, 3.8617472918517685`*^9}, {3.861747397615693*^9, 
+   3.8617474195498*^9}, {3.8617500864091663`*^9, 3.861750157545725*^9}, {
+   3.861750370246852*^9, 3.8617504586132803`*^9}, {3.8617505874429045`*^9, 
+   3.861750591959978*^9}, {3.861750771240713*^9, 3.8617508009280005`*^9}, {
+   3.8617509632904654`*^9, 3.861750964577175*^9}, {3.861751024026419*^9, 
+   3.8617510513956723`*^9}, {3.8617512196034207`*^9, 
+   3.8617512260322156`*^9}, {3.861751496555115*^9, 3.8617516033463955`*^9}, {
+   3.8617516526721716`*^9, 3.8617516752423306`*^9}, {3.8617523239248576`*^9, 
+   3.8617523302335668`*^9}, {3.861752362039632*^9, 3.861752362926752*^9}},
+ CellLabel->
+  "In[813]:=",ExpressionUUID->"5c128f66-1a25-4aa3-a97c-fb18c15c8194"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"Rutherford scattering! The initial angular momentum for an \
+impact parameter s is \\nl = \[Mu] v0 s = s\\!\\(\\*SqrtBox[\\(2\\\\ \
+\[Mu]\\\\ \\*SubscriptBox[\\(T\\), \\(0\\)]'\\)]\\). \\nThe number of \
+particles with impact parameters between s and s + ds must be equal to the \
+number scattered in scattering angle \[CapitalTheta] and \[CapitalTheta] + d\
+\[CapitalTheta]. \\nBecause of the solid angle involved, this gives the \
+relationship s ds = \[Sigma](\[CapitalTheta]) sin(\[CapitalTheta]) d\
+\[CapitalTheta]. \\n\[Sigma](\[CapitalTheta])=\\!\\(\\*FractionBox[\\(\\(\\\\ \
+\\)\\(s\\)\\), \\(sin \
+\\((\[CapitalTheta])\\)\\)]\\)\\!\\(\\*FractionBox[\\(ds\\), \\(d\
+\[CapitalTheta]\\)]\\)\"\>"], "Print",
+ CellChangeTimes->{3.861746387145929*^9, 3.8617465498912907`*^9, 
+  3.8617466046553783`*^9, 3.861746850724492*^9, 3.861746882956864*^9, 
+  3.8617469736333323`*^9, 3.861747087177973*^9, 3.8617471349472494`*^9, 
+  3.8617472926666126`*^9, 3.861750459912279*^9, 3.86175160489408*^9, 
+  3.8617523317260275`*^9, 3.86175410799706*^9},
+ CellLabel->
+  "During evaluation of \
+In[813]:=",ExpressionUUID->"183c78cd-24f4-4f17-b367-837fdbc2fcdc"],
+
+Cell[BoxData["\<\"\\nWe can replace the d\[Theta]/dt in the total energy with \
+l/(\[Mu] \\!\\(\\*SuperscriptBox[\\(r\\), \\(2\\)]\\))\"\>"], "Print",
+ CellChangeTimes->{3.861746387145929*^9, 3.8617465498912907`*^9, 
+  3.8617466046553783`*^9, 3.861746850724492*^9, 3.861746882956864*^9, 
+  3.8617469736333323`*^9, 3.861747087177973*^9, 3.8617471349472494`*^9, 
+  3.8617472926666126`*^9, 3.861750459912279*^9, 3.86175160489408*^9, 
+  3.8617523317260275`*^9, 3.8617541080017376`*^9},
+ CellLabel->
+  "During evaluation of \
+In[813]:=",ExpressionUUID->"d126a6fa-f251-41ec-ad9c-59e6282b2cb4"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nThe total energy can be written as \\nE = \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{"k", " ", 
+     RowBox[{"u", "[", "\[Theta]", "]"}]}], "+", 
+    RowBox[{
+     SuperscriptBox["s", "2"], " ", "T0", " ", 
+     SuperscriptBox[
+      RowBox[{"u", "[", "\[Theta]", "]"}], "2"]}], "+", 
+    RowBox[{
+     SuperscriptBox["s", "2"], " ", "T0", " ", 
+     SuperscriptBox[
+      RowBox[{
+       SuperscriptBox["u", "\[Prime]",
+        MultilineFunction->None], "[", "\[Theta]", "]"}], "2"]}]}]}],
+  SequenceForm[
+  "\nThe total energy can be written as \nE = ", $CellContext`k \
+$CellContext`u[$CellContext`\[Theta]] + $CellContext`s^2 $CellContext`T0 \
+$CellContext`u[$CellContext`\[Theta]]^2 + $CellContext`s^2 $CellContext`T0 
+    Derivative[1][$CellContext`u][$CellContext`\[Theta]]^2],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.861746387145929*^9, 3.8617465498912907`*^9, 
+  3.8617466046553783`*^9, 3.861746850724492*^9, 3.861746882956864*^9, 
+  3.8617469736333323`*^9, 3.861747087177973*^9, 3.8617471349472494`*^9, 
+  3.8617472926666126`*^9, 3.861750459912279*^9, 3.86175160489408*^9, 
+  3.8617523317260275`*^9, 3.861754108012632*^9},
+ CellLabel->
+  "During evaluation of \
+In[813]:=",ExpressionUUID->"4946757c-e7a7-4b38-8a5e-d5148850073a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nAfter solving T0 == E for u'[\[Theta]] \\nu'[\[Theta]] = \"\
+\>", "\[InvisibleSpace]", 
+   FractionBox[
+    SqrtBox[
+     RowBox[{"T0", "-", 
+      RowBox[{"k", " ", 
+       RowBox[{"u", "[", "\[Theta]", "]"}]}], "-", 
+      RowBox[{
+       SuperscriptBox["s", "2"], " ", "T0", " ", 
+       SuperscriptBox[
+        RowBox[{"u", "[", "\[Theta]", "]"}], "2"]}]}]], 
+    RowBox[{"s", " ", 
+     SqrtBox["T0"]}]]}],
+  SequenceForm[
+  "\nAfter solving T0 == E for u'[\[Theta]] \nu'[\[Theta]] = ", \
+$CellContext`s^(-1) $CellContext`T0^
+    Rational[-1, 
+      2] ($CellContext`T0 - $CellContext`k $CellContext`u[$CellContext`\
+\[Theta]] - $CellContext`s^2 $CellContext`T0 $CellContext`u[$CellContext`\
+\[Theta]]^2)^Rational[1, 2]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.861746387145929*^9, 3.8617465498912907`*^9, 
+  3.8617466046553783`*^9, 3.861746850724492*^9, 3.861746882956864*^9, 
+  3.8617469736333323`*^9, 3.861747087177973*^9, 3.8617471349472494`*^9, 
+  3.8617472926666126`*^9, 3.861750459912279*^9, 3.86175160489408*^9, 
+  3.8617523317260275`*^9, 3.8617541080232663`*^9},
+ CellLabel->
+  "During evaluation of \
+In[813]:=",ExpressionUUID->"8599e2b3-1466-4c41-a0df-8c92bc75d7f8"],
+
+Cell[BoxData["\<\"The angle \[Psi] is defined in terms of the scattering \
+angle by \[CapitalTheta] = \[Pi] - 2\[Psi]. We can get \[Psi] by integrating \
+\\!\\(\\*FractionBox[\\(du\\), \\(\\(u'\\)[\[Theta]]\\)]\\) from 0 to umax. \
+We get umax by setting u'[\[Theta]] = 0\"\>"], "Print",
+ CellChangeTimes->{3.861746387145929*^9, 3.8617465498912907`*^9, 
+  3.8617466046553783`*^9, 3.861746850724492*^9, 3.861746882956864*^9, 
+  3.8617469736333323`*^9, 3.861747087177973*^9, 3.8617471349472494`*^9, 
+  3.8617472926666126`*^9, 3.861750459912279*^9, 3.86175160489408*^9, 
+  3.8617523317260275`*^9, 3.8617541080290594`*^9},
+ CellLabel->
+  "During evaluation of \
+In[813]:=",ExpressionUUID->"3ca2afda-24a0-45cd-b9af-135f5b69e962"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\numax = \"\>", "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox["k", 
+      RowBox[{"2", " ", 
+       SuperscriptBox["s", "2"], " ", "T0"}]]}], "+", 
+    FractionBox[
+     SqrtBox[
+      RowBox[{
+       SuperscriptBox["k", "2"], "+", 
+       RowBox[{"4", " ", 
+        SuperscriptBox["s", "2"], " ", 
+        SuperscriptBox["T0", "2"]}]}]], 
+     RowBox[{"2", " ", 
+      SuperscriptBox["s", "2"], " ", "T0"}]]}]}],
+  SequenceForm[
+  "\numax = ", 
+   Rational[-1, 2] $CellContext`k $CellContext`s^(-2)/$CellContext`T0 + 
+   Rational[1, 2] $CellContext`s^(-2) $CellContext`T0^(-1) ($CellContext`k^2 + 
+      4 $CellContext`s^2 $CellContext`T0^2)^Rational[1, 2]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.861746387145929*^9, 3.8617465498912907`*^9, 
+  3.8617466046553783`*^9, 3.861746850724492*^9, 3.861746882956864*^9, 
+  3.8617469736333323`*^9, 3.861747087177973*^9, 3.8617471349472494`*^9, 
+  3.8617472926666126`*^9, 3.861750459912279*^9, 3.86175160489408*^9, 
+  3.8617523317260275`*^9, 3.861754108036672*^9},
+ CellLabel->
+  "During evaluation of \
+In[813]:=",ExpressionUUID->"4450ce4e-e73e-44c9-b1fc-f3ad155e7287"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"From the integration we get the equation \\n\[Psi] = \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"ArcTan", "[", 
+    FractionBox[
+     RowBox[{"2", " ", "s", " ", "T0"}], "k"], "]"}], 
+   "\[InvisibleSpace]", "\<\"\\nNow we can set this equal to \
+\\!\\(\\*FractionBox[\\(\[Pi]\\), \\(2\\)]\\) - \\!\\(\\*FractionBox[\\(\
+\[CapitalTheta]\\), \\(2\\)]\\) and solve for s(\[CapitalTheta]).\"\>"}],
+  SequenceForm["From the integration we get the equation \n\[Psi] = ", 
+   ArcTan[2 $CellContext`k^(-1) $CellContext`s $CellContext`T0], 
+   "\nNow we can set this equal to \!\(\*FractionBox[\(\[Pi]\), \(2\)]\) - \!\
+\(\*FractionBox[\(\[CapitalTheta]\), \(2\)]\) and solve for \
+s(\[CapitalTheta])."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.861746387145929*^9, 3.8617465498912907`*^9, 
+  3.8617466046553783`*^9, 3.861746850724492*^9, 3.861746882956864*^9, 
+  3.8617469736333323`*^9, 3.861747087177973*^9, 3.8617471349472494`*^9, 
+  3.8617472926666126`*^9, 3.861750459912279*^9, 3.86175160489408*^9, 
+  3.8617523317260275`*^9, 3.861754127229498*^9},
+ CellLabel->
+  "During evaluation of \
+In[813]:=",ExpressionUUID->"2163c79e-713c-43e9-8339-85067878b14b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"After solving we find \\ns(\[CapitalTheta]) = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{"k", " ", 
+     RowBox[{"Cot", "[", 
+      FractionBox["\[CapitalTheta]", "2"], "]"}]}], 
+    RowBox[{"2", " ", "T0"}]]}],
+  SequenceForm[
+  "After solving we find \ns(\[CapitalTheta]) = ", 
+   Rational[1, 2] $CellContext`k $CellContext`T0^(-1) 
+   Cot[Rational[1, 2] $CellContext`\[CapitalTheta]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.861746387145929*^9, 3.8617465498912907`*^9, 
+  3.8617466046553783`*^9, 3.861746850724492*^9, 3.861746882956864*^9, 
+  3.8617469736333323`*^9, 3.861747087177973*^9, 3.8617471349472494`*^9, 
+  3.8617472926666126`*^9, 3.861750459912279*^9, 3.86175160489408*^9, 
+  3.8617523317260275`*^9, 3.8617541273219013`*^9},
+ CellLabel->
+  "During evaluation of \
+In[813]:=",ExpressionUUID->"28840dc6-2a27-401a-b7ec-057f2ea44c21"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"And by the equation above: \\n\[Sigma](\[CapitalTheta]) = \
+\\!\\(\\*FractionBox[\\(\\(\\\\ \\)\\(s\\)\\), \\(sin \\((\[CapitalTheta])\\)\
+\\)]\\)\\!\\(\\*FractionBox[\\(ds\\), \\(d\[CapitalTheta]\\)]\\) = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{
+     SuperscriptBox["k", "2"], " ", 
+     SuperscriptBox[
+      RowBox[{"Csc", "[", 
+       FractionBox["\[CapitalTheta]", "2"], "]"}], "4"]}], 
+    RowBox[{"16", " ", 
+     SuperscriptBox["T0", "2"]}]], 
+   "\[InvisibleSpace]", "\<\" = \\!\\(\\*FractionBox[\\(\\(\\\\ \
+\\)\\*SuperscriptBox[\\(k\\), \\(2\\)]\\), SuperscriptBox[\\((4\\\\ \
+\\*SubscriptBox[\\(T\\), \\(0\\)])\\), \
+\\(2\\)]]\\)\\!\\(\\*FractionBox[\\(1\\), \\(\\*SuperscriptBox[\\(sin\\), \
+\\(4\\)] \\((\\*FractionBox[\\(\[CapitalTheta]\\), \\(2\\)])\\)\\)]\\)\"\>"}],
+  SequenceForm[
+  "And by the equation above: \n\[Sigma](\[CapitalTheta]) = \
+\!\(\*FractionBox[\(\(\\ \)\(s\)\), \(sin \
+\((\[CapitalTheta])\)\)]\)\!\(\*FractionBox[\(ds\), \(d\[CapitalTheta]\)]\) = \
+", Rational[1, 16] $CellContext`k^2 $CellContext`T0^(-2) 
+   Csc[Rational[1, 2] $CellContext`\[CapitalTheta]]^4, 
+   " = \!\(\*FractionBox[\(\(\\ \)\*SuperscriptBox[\(k\), \(2\)]\), \
+SuperscriptBox[\((4\\ \*SubscriptBox[\(T\), \(0\)])\), \
+\(2\)]]\)\!\(\*FractionBox[\(1\), \(\*SuperscriptBox[\(sin\), \(4\)] \
+\((\*FractionBox[\(\[CapitalTheta]\), \(2\)])\)\)]\)"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.861746387145929*^9, 3.8617465498912907`*^9, 
+  3.8617466046553783`*^9, 3.861746850724492*^9, 3.861746882956864*^9, 
+  3.8617469736333323`*^9, 3.861747087177973*^9, 3.8617471349472494`*^9, 
+  3.8617472926666126`*^9, 3.861750459912279*^9, 3.86175160489408*^9, 
+  3.8617523317260275`*^9, 3.8617541273529787`*^9},
+ CellLabel->
+  "During evaluation of \
+In[813]:=",ExpressionUUID->"e9e26944-8f9c-4eb5-a2ef-356dd89383a6"]
+}, Open  ]],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Integrate", "idiv", 
+   "\"Integral of \\!\\(\\*FractionBox[RowBox[{SuperscriptBox[\\\"k\\\", \
+\\\"2\\\"], \\\" \\\", SuperscriptBox[RowBox[{\\\"Csc\\\", \\\"[\\\", \
+FractionBox[\\\"\[CapitalTheta]\\\", \\\"2\\\"], \\\"]\\\"}], \\\"4\\\"], \
+\\\" \\\", RowBox[{\\\"Sin\\\", \\\"[\\\", \\\"\[CapitalTheta]\\\", \
+\\\"]\\\"}]}], RowBox[{\\\"16\\\", \\\" \\\", SuperscriptBox[\\\"T0\\\", \
+\\\"2\\\"]}]]\\) does not converge on \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"0\\\", \\\",\\\", \\\"\[Pi]\\\"}], \\\"}\\\"}]\\).\"", 2, 835, 63,
+    34521707354103484362, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8617516250166454`*^9, 3.861752351985325*^9, 
+  3.861754128257758*^9},
+ CellLabel->
+  "During evaluation of \
+In[813]:=",ExpressionUUID->"2d03c116-467a-4247-97ea-85b5d641549f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"When we try to evaluate the total cross section we get \\n\
+\[Sigma]T = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"2", " ", "\[Pi]", " ", 
+    RowBox[{
+     SubsuperscriptBox["\[Integral]", "0", "\[Pi]"], 
+     RowBox[{
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["k", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"Csc", "[", 
+          FractionBox["\[CapitalTheta]", "2"], "]"}], "4"], " ", 
+        RowBox[{"Sin", "[", "\[CapitalTheta]", "]"}]}], 
+       RowBox[{"16", " ", 
+        SuperscriptBox["T0", "2"]}]], 
+      RowBox[{"\[DifferentialD]", "\[CapitalTheta]"}]}]}]}], 
+   "\[InvisibleSpace]", "\<\" = \[Infinity]\"\>"}],
+  SequenceForm[
+  "When we try to evaluate the total cross section we get \n\[Sigma]T = ", 2 
+   Pi Integrate[
+    Rational[1, 16] $CellContext`k^2 $CellContext`T0^(-2) 
+     Csc[Rational[1, 2] $CellContext`\[CapitalTheta]]^4 
+     Sin[$CellContext`\[CapitalTheta]], {$CellContext`\[CapitalTheta], 0, 
+      Pi}], " = \[Infinity]"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.861746387145929*^9, 3.8617465498912907`*^9, 
+  3.8617466046553783`*^9, 3.861746850724492*^9, 3.861746882956864*^9, 
+  3.8617469736333323`*^9, 3.861747087177973*^9, 3.8617471349472494`*^9, 
+  3.8617472926666126`*^9, 3.861750459912279*^9, 3.86175160489408*^9, 
+  3.8617523317260275`*^9, 3.8617541282713366`*^9},
+ CellLabel->
+  "During evaluation of \
+In[813]:=",ExpressionUUID->"c008bed8-bc8d-4d6f-9b8c-eda21bcda2b4"],
+
+Cell[BoxData["\<\"This is because the force is infinite in its extent\"\>"], \
+"Print",
+ CellChangeTimes->{3.861746387145929*^9, 3.8617465498912907`*^9, 
+  3.8617466046553783`*^9, 3.861746850724492*^9, 3.861746882956864*^9, 
+  3.8617469736333323`*^9, 3.861747087177973*^9, 3.8617471349472494`*^9, 
+  3.8617472926666126`*^9, 3.861750459912279*^9, 3.86175160489408*^9, 
+  3.8617523317260275`*^9, 3.8617541282774296`*^9},
+ CellLabel->
+  "During evaluation of \
+In[813]:=",ExpressionUUID->"74f41e16-d885-4c74-9520-cea1144f5500"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Prob", " ", "3"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Remove", "[", "\"\<Global`*\>\"", "]"}], "//", "Quiet"}], ";"}],
+    "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"$Assumptions", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Element", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"s", ",", "m", ",", "v0", ",", "k"}], "}"}], ",", " ", 
+         "Reals"}], "]"}], " ", "&&", " ", 
+       RowBox[{"s", ">", "0"}], " ", "&&", " ", 
+       RowBox[{"m", ">", "0"}], "&&", " ", 
+       RowBox[{"v0", ">", "0"}], " ", "&&", " ", 
+       RowBox[{"k", ">", "0"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+   "Print", "[", 
+    "\"\<This problem is going to be very similar to problem 2 but with a \
+different potential\>\"", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"r", "[", "\[Theta]_", "]"}], "=", 
+     RowBox[{"1", "/", 
+      RowBox[{"u", "[", "\[Theta]", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"l", "=", 
+     RowBox[{"s", " ", "m", " ", "v0"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"T0", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"1", "/", "2"}], " ", "m", " ", 
+      SuperscriptBox["v0", "2"]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"U", "[", "\[Theta]_", "]"}], " ", "=", " ", 
+     RowBox[{"k", "/", 
+      SuperscriptBox[
+       RowBox[{"r", "[", "\[Theta]", "]"}], "2"]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "We", " ", "know", " ", "that", " ", "we", " ", "can", " ", "replace", 
+      " ", "the", " ", 
+      RowBox[{"d\[Theta]", "/", "dt"}], " ", "with", " ", 
+      RowBox[{"l", "/", 
+       RowBox[{"(", 
+        RowBox[{"\[Mu]", " ", 
+         SuperscriptBox["r", "2"]}], ")"}]}]}], ",", " ", 
+     RowBox[{"so", " ", "I", " ", "will", " ", "make", " ", "a", " ", 
+      RowBox[{"rule", "!"}]}]}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"lrule", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"Dt", "[", 
+       RowBox[{"\[Theta]", ",", "t"}], "]"}], "->", 
+      RowBox[{"l", "/", 
+       RowBox[{"(", 
+        RowBox[{"m", " ", 
+         SuperscriptBox[
+          RowBox[{"r", "[", "\[Theta]", "]"}], "2"]}], ")"}]}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"H", "[", "\[Theta]_", "]"}], " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"1", "/", "2"}], " ", "m", 
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox[
+            RowBox[{"Dt", "[", 
+             RowBox[{
+              RowBox[{"r", "[", "\[Theta]", "]"}], ",", "t"}], "]"}], "2"], 
+           "+", 
+           RowBox[{
+            SuperscriptBox[
+             RowBox[{"r", "[", "\[Theta]", "]"}], "2"], 
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"Dt", "[", 
+               RowBox[{"\[Theta]", ",", "t"}], "]"}], ")"}], "2"]}]}], 
+          ")"}]}], " ", "+", " ", 
+        RowBox[{"U", "[", "\[Theta]", "]"}]}], "/.", "lrule"}], "//", 
+      "Simplify"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<\\nThe total energy can be written as \\nE = \>\"", ",", 
+     RowBox[{"H", "[", "\[Theta]", "]"}]}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"fixrule", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"ConditionalExpression", "[", 
+       RowBox[{"a_", ",", "b__"}], "]"}], "->", "a"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"usoln", " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Solve", "[", 
+        RowBox[{
+         RowBox[{"T0", "==", 
+          RowBox[{"H", "[", "\[Theta]", "]"}]}], ",", 
+         RowBox[{
+          RowBox[{"u", "'"}], "[", "\[Theta]", "]"}], ",", "Reals"}], "]"}], 
+       "[", 
+       RowBox[{"[", "2", "]"}], "]"}], "/.", "fixrule"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<\\nAfter solving T0 = 1/2 m \!\(\*SuperscriptBox[\(v0\), \(2\)]\) == \
+E for u'[\[Theta]] \\nu'[\[Theta]] = \>\"", ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"u", "'"}], "[", "\[Theta]", "]"}], "/.", "usoln"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+   "Print", "[", 
+    "\"\<The angle \[Psi] is defined in terms of the scattering angle by \
+\[CapitalTheta] = \[Pi] - 2\[Psi]. We can get \[Psi] by integrating \
+\!\(\*FractionBox[\(du\), \(\(u'\)[\[Theta]]\)]\) from 0 to umax. We get umax \
+by setting u'[\[Theta]] = 0\>\"", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"umax", " ", "=", " ", 
+     RowBox[{"umax", "/.", 
+      RowBox[{
+       RowBox[{"Solve", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"T0", "-", 
+           RowBox[{"k", " ", 
+            SuperscriptBox["umax", "2"]}], "-", 
+           RowBox[{
+            SuperscriptBox["s", "2"], " ", "T0", " ", 
+            SuperscriptBox["umax", "2"]}]}], "==", "0"}], ",", "umax", ",", 
+         "Reals"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<\\numax = \>\"", ",", "umax"}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Psi]", " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Integrate", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"1", "/", 
+           RowBox[{
+            RowBox[{"u", "'"}], "[", "\[Theta]", "]"}]}], "/.", "usoln"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"u", "[", "\[Theta]", "]"}], ",", "0", ",", "umax"}], 
+          "}"}]}], "]"}], "/.", "fixrule"}], "//", "Simplify"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<From the integration we get the equation \\n\[Psi] = \>\"", ",", " ",
+      "\[Psi]", ",", 
+     "\"\<\\nNow we can set this equal to \!\(\*FractionBox[\(\[Pi]\), \(2\)]\
+\) - \!\(\*FractionBox[\(\[CapitalTheta]\), \(2\)]\) and solve for s(\
+\[CapitalTheta]).\>\""}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"b", "[", "\[CapitalTheta]_", "]"}], " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"s", "/.", 
+        RowBox[{
+         RowBox[{"Solve", "[", 
+          RowBox[{
+           RowBox[{"\[Psi]", " ", "==", " ", 
+            RowBox[{
+             FractionBox["\[Pi]", "2"], " ", "-", " ", 
+             FractionBox["\[CapitalTheta]", "2"]}]}], ",", "s"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "/.", "fixrule"}], "//", 
+      "FullSimplify"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<After solving we find \\ns(\[CapitalTheta]) = \>\"", ",", " ", 
+     RowBox[{"b", "[", "\[CapitalTheta]", "]"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[Sigma]", "[", "\[CapitalTheta]_", "]"}], " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", 
+        RowBox[{"b", "[", "\[CapitalTheta]", "]"}]}], " ", 
+       RowBox[{
+        RowBox[{"D", "[", 
+         RowBox[{
+          RowBox[{"b", "[", "\[CapitalTheta]", "]"}], ",", 
+          "\[CapitalTheta]"}], "]"}], "/", 
+        RowBox[{"Sin", "[", "\[CapitalTheta]", "]"}]}]}], "//", 
+      "FullSimplify"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<And by the equation above: \\n\[Sigma](\[CapitalTheta]) = \
+\!\(\*FractionBox[\(\(\\\ \)\(s\)\), \(sin \
+\((\[CapitalTheta])\)\)]\)\!\(\*FractionBox[\(ds\), \(d\[CapitalTheta]\)]\) = \
+\>\"", ",", 
+     RowBox[{"\[Sigma]", "[", "\[CapitalTheta]", "]"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Sigma]T", " ", "=", " ", 
+     RowBox[{"2", "\[Pi]", " ", 
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"\[Sigma]", "[", "\[CapitalTheta]", "]"}], " ", 
+         RowBox[{"Sin", "[", "\[CapitalTheta]", "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"\[CapitalTheta]", ",", "0", ",", "\[Pi]"}], "}"}]}], 
+       "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<When we try to evaluate the total cross section we get \\n\[Sigma]T \
+= \>\"", ",", " ", "\[Sigma]T", ",", "\"\< = \[Infinity]\>\""}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+   "Print", "[", 
+    "\"\<This is because the force is infinite in its extent\>\"", 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.861751716031921*^9, 3.8617517336080866`*^9}, {
+  3.861751864771065*^9, 3.8617519016856527`*^9}, {3.861752089745541*^9, 
+  3.861752090045009*^9}, {3.8617522998314457`*^9, 3.8617523090983963`*^9}, {
+  3.8617524148627806`*^9, 3.8617524192459955`*^9}, {3.8617524662613473`*^9, 
+  3.8617524817115993`*^9}, {3.8617537688054085`*^9, 3.861753845682612*^9}, {
+  3.8617538878463063`*^9, 3.861753890634453*^9}, {3.861753922017028*^9, 
+  3.861753922096263*^9}, {3.861753977370404*^9, 3.8617539774471397`*^9}, {
+  3.8617540227260184`*^9, 3.861754029022563*^9}},
+ CellLabel->
+  "In[772]:=",ExpressionUUID->"d825a751-f665-43da-99b6-8b525150d52c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"This problem is going to be very similar to problem 2 but \
+with a different potential\"\>"], "Print",
+ CellChangeTimes->{
+  3.861751910491876*^9, 3.8617520931194143`*^9, 3.861752435737609*^9, {
+   3.8617524668758345`*^9, 3.8617524828124905`*^9}, 3.8617538355877047`*^9, 
+   3.861753892064254*^9, 3.861753934877427*^9, 3.8617539871180162`*^9, 
+   3.861754031857192*^9},
+ CellLabel->
+  "During evaluation of \
+In[772]:=",ExpressionUUID->"ab8379b2-7c74-47c4-bf3f-1adf4dfecc1c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nThe total energy can be written as \\nE = \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{"k", " ", 
+     SuperscriptBox[
+      RowBox[{"u", "[", "\[Theta]", "]"}], "2"]}], "+", 
+    RowBox[{
+     FractionBox["1", "2"], " ", "m", " ", 
+     SuperscriptBox["s", "2"], " ", 
+     SuperscriptBox["v0", "2"], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       SuperscriptBox[
+        RowBox[{"u", "[", "\[Theta]", "]"}], "2"], "+", 
+       SuperscriptBox[
+        RowBox[{
+         SuperscriptBox["u", "\[Prime]",
+          MultilineFunction->None], "[", "\[Theta]", "]"}], "2"]}], 
+      ")"}]}]}]}],
+  SequenceForm[
+  "\nThe total energy can be written as \nE = ", $CellContext`k \
+$CellContext`u[$CellContext`\[Theta]]^2 + 
+   Rational[1, 
+      2] $CellContext`m $CellContext`s^2 $CellContext`v0^2 \
+($CellContext`u[$CellContext`\[Theta]]^2 + 
+     Derivative[1][$CellContext`u][$CellContext`\[Theta]]^2)],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.861751910491876*^9, 3.8617520931194143`*^9, 3.861752435737609*^9, {
+   3.8617524668758345`*^9, 3.8617524828124905`*^9}, 3.8617538355877047`*^9, 
+   3.861753892064254*^9, 3.861753934877427*^9, 3.8617539871180162`*^9, 
+   3.8617540318621783`*^9},
+ CellLabel->
+  "During evaluation of \
+In[772]:=",ExpressionUUID->"09052925-2a56-4336-a4c4-363047978a96"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nAfter solving T0 = 1/2 m \\!\\(\\*SuperscriptBox[\\(v0\\), \
+\\(2\\)]\\) == E for u'[\[Theta]] \\nu'[\[Theta]] = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox[
+    SqrtBox[
+     RowBox[{
+      RowBox[{"m", " ", 
+       SuperscriptBox["v0", "2"]}], "-", 
+      RowBox[{"2", " ", "k", " ", 
+       SuperscriptBox[
+        RowBox[{"u", "[", "\[Theta]", "]"}], "2"]}], "-", 
+      RowBox[{"m", " ", 
+       SuperscriptBox["s", "2"], " ", 
+       SuperscriptBox["v0", "2"], " ", 
+       SuperscriptBox[
+        RowBox[{"u", "[", "\[Theta]", "]"}], "2"]}]}]], 
+    RowBox[{
+     SqrtBox["m"], " ", "s", " ", "v0"}]]}],
+  SequenceForm[
+  "\nAfter solving T0 = 1/2 m \!\(\*SuperscriptBox[\(v0\), \(2\)]\) == E for \
+u'[\[Theta]] \nu'[\[Theta]] = ", $CellContext`m^
+    Rational[-1, 
+      2] $CellContext`s^(-1) $CellContext`v0^(-1) ($CellContext`m \
+$CellContext`v0^2 - 
+     2 $CellContext`k $CellContext`u[$CellContext`\[Theta]]^2 - \
+$CellContext`m $CellContext`s^2 $CellContext`v0^2 \
+$CellContext`u[$CellContext`\[Theta]]^2)^Rational[1, 2]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.861751910491876*^9, 3.8617520931194143`*^9, 3.861752435737609*^9, {
+   3.8617524668758345`*^9, 3.8617524828124905`*^9}, 3.8617538355877047`*^9, 
+   3.861753892064254*^9, 3.861753934877427*^9, 3.8617539871180162`*^9, 
+   3.8617540318895288`*^9},
+ CellLabel->
+  "During evaluation of \
+In[772]:=",ExpressionUUID->"91a86fa6-8a39-47d3-bc82-c2fee45cded9"],
+
+Cell[BoxData["\<\"The angle \[Psi] is defined in terms of the scattering \
+angle by \[CapitalTheta] = \[Pi] - 2\[Psi]. We can get \[Psi] by integrating \
+\\!\\(\\*FractionBox[\\(du\\), \\(\\(u'\\)[\[Theta]]\\)]\\) from 0 to umax. \
+We get umax by setting u'[\[Theta]] = 0\"\>"], "Print",
+ CellChangeTimes->{
+  3.861751910491876*^9, 3.8617520931194143`*^9, 3.861752435737609*^9, {
+   3.8617524668758345`*^9, 3.8617524828124905`*^9}, 3.8617538355877047`*^9, 
+   3.861753892064254*^9, 3.861753934877427*^9, 3.8617539871180162`*^9, 
+   3.8617540318946333`*^9},
+ CellLabel->
+  "During evaluation of \
+In[772]:=",ExpressionUUID->"c4afd564-de49-463e-9af1-acf21d50dce1"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\numax = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"v0", " ", 
+    SqrtBox[
+     FractionBox["m", 
+      RowBox[{
+       RowBox[{"2", " ", "k"}], "+", 
+       RowBox[{"m", " ", 
+        SuperscriptBox["s", "2"], " ", 
+        SuperscriptBox["v0", "2"]}]}]]]}]}],
+  SequenceForm[
+  "\numax = ", $CellContext`v0 ($CellContext`m/(
+     2 $CellContext`k + $CellContext`m $CellContext`s^2 $CellContext`v0^2))^
+    Rational[1, 2]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.861751910491876*^9, 3.8617520931194143`*^9, 3.861752435737609*^9, {
+   3.8617524668758345`*^9, 3.8617524828124905`*^9}, 3.8617538355877047`*^9, 
+   3.861753892064254*^9, 3.861753934877427*^9, 3.8617539871180162`*^9, 
+   3.8617540319003077`*^9},
+ CellLabel->
+  "During evaluation of \
+In[772]:=",ExpressionUUID->"c99e0403-6c81-43a9-bcc4-98f65b758506"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"From the integration we get the equation \\n\[Psi] = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{"\[Pi]", " ", "s", " ", "v0"}], 
+    RowBox[{"2", " ", 
+     SqrtBox[
+      RowBox[{
+       FractionBox[
+        RowBox[{"2", " ", "k"}], "m"], "+", 
+       RowBox[{
+        SuperscriptBox["s", "2"], " ", 
+        SuperscriptBox["v0", "2"]}]}]]}]], 
+   "\[InvisibleSpace]", "\<\"\\nNow we can set this equal to \
+\\!\\(\\*FractionBox[\\(\[Pi]\\), \\(2\\)]\\) - \\!\\(\\*FractionBox[\\(\
+\[CapitalTheta]\\), \\(2\\)]\\) and solve for s(\[CapitalTheta]).\"\>"}],
+  SequenceForm[
+  "From the integration we get the equation \n\[Psi] = ", Rational[1, 2] 
+   Pi $CellContext`s $CellContext`v0 (
+     2 $CellContext`k/$CellContext`m + $CellContext`s^2 $CellContext`v0^2)^
+    Rational[-1, 2], 
+   "\nNow we can set this equal to \!\(\*FractionBox[\(\[Pi]\), \(2\)]\) - \!\
+\(\*FractionBox[\(\[CapitalTheta]\), \(2\)]\) and solve for \
+s(\[CapitalTheta])."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.861751910491876*^9, 3.8617520931194143`*^9, 3.861752435737609*^9, {
+   3.8617524668758345`*^9, 3.8617524828124905`*^9}, 3.8617538355877047`*^9, 
+   3.861753892064254*^9, 3.861753934877427*^9, 3.8617539871180162`*^9, 
+   3.8617540381671853`*^9},
+ CellLabel->
+  "During evaluation of \
+In[772]:=",ExpressionUUID->"0d1d1732-7ac1-439f-9ab3-9484b5f1f9a1"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"After solving we find \\ns(\[CapitalTheta]) = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{
+     SqrtBox["2"], " ", 
+     SqrtBox[
+      RowBox[{"k", " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"\[Pi]", "-", "\[CapitalTheta]"}], ")"}], "2"]}]], " ", 
+     SqrtBox[
+      FractionBox["1", 
+       RowBox[{
+        RowBox[{"2", " ", "m", " ", "\[Pi]", " ", "\[CapitalTheta]"}], "-", 
+        RowBox[{"m", " ", 
+         SuperscriptBox["\[CapitalTheta]", "2"]}]}]]]}], "v0"]}],
+  SequenceForm[
+  "After solving we find \ns(\[CapitalTheta]) = ", 
+   2^Rational[
+     1, 2] $CellContext`v0^(-1) ($CellContext`k (
+       Pi - $CellContext`\[CapitalTheta])^2)^
+    Rational[1, 2] ((
+      2 $CellContext`m 
+       Pi $CellContext`\[CapitalTheta] - $CellContext`m $CellContext`\
+\[CapitalTheta]^2)^(-1))^Rational[1, 2]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.861751910491876*^9, 3.8617520931194143`*^9, 3.861752435737609*^9, {
+   3.8617524668758345`*^9, 3.8617524828124905`*^9}, 3.8617538355877047`*^9, 
+   3.861753892064254*^9, 3.861753934877427*^9, 3.8617539871180162`*^9, 
+   3.861754038529647*^9},
+ CellLabel->
+  "During evaluation of \
+In[772]:=",ExpressionUUID->"8f302599-1596-4273-bd1f-2a715337d512"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"And by the equation above: \\n\[Sigma](\[CapitalTheta]) = \
+\\!\\(\\*FractionBox[\\(\\(\\\\ \\)\\(s\\)\\), \\(sin \\((\[CapitalTheta])\\)\
+\\)]\\)\\!\\(\\*FractionBox[\\(ds\\), \\(d\[CapitalTheta]\\)]\\) = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{"2", " ", "k", " ", 
+     SuperscriptBox["\[Pi]", "2"], " ", 
+     RowBox[{"(", 
+      RowBox[{"\[Pi]", "-", "\[CapitalTheta]"}], ")"}], " ", 
+     RowBox[{"Csc", "[", "\[CapitalTheta]", "]"}]}], 
+    RowBox[{"m", " ", 
+     SuperscriptBox["v0", "2"], " ", 
+     SuperscriptBox["\[CapitalTheta]", "2"], " ", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "2"}], " ", "\[Pi]"}], "+", "\[CapitalTheta]"}], ")"}], 
+      "2"]}]]}],
+  SequenceForm[
+  "And by the equation above: \n\[Sigma](\[CapitalTheta]) = \
+\!\(\*FractionBox[\(\(\\ \)\(s\)\), \(sin \
+\((\[CapitalTheta])\)\)]\)\!\(\*FractionBox[\(ds\), \(d\[CapitalTheta]\)]\) = \
+", 2 $CellContext`k $CellContext`m^(-1) 
+   Pi^2 $CellContext`v0^(-2) (
+    Pi - $CellContext`\[CapitalTheta]) $CellContext`\[CapitalTheta]^(-2) ((-2)
+        Pi + $CellContext`\[CapitalTheta])^(-2) 
+   Csc[$CellContext`\[CapitalTheta]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.861751910491876*^9, 3.8617520931194143`*^9, 3.861752435737609*^9, {
+   3.8617524668758345`*^9, 3.8617524828124905`*^9}, 3.8617538355877047`*^9, 
+   3.861753892064254*^9, 3.861753934877427*^9, 3.8617539871180162`*^9, 
+   3.8617540386285896`*^9},
+ CellLabel->
+  "During evaluation of \
+In[772]:=",ExpressionUUID->"664f7d67-3396-4c00-8297-6b9eacd8b793"]
+}, Open  ]],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Integrate", "idiv", 
+   "\"Integral of \\!\\(\\*RowBox[{FractionBox[RowBox[{\\\"2\\\", \\\" \\\", \
+\\\"k\\\", \\\" \\\", SuperscriptBox[\\\"\[Pi]\\\", \\\"3\\\"]}], \
+RowBox[{\\\"m\\\", \\\" \\\", SuperscriptBox[\\\"v0\\\", \\\"2\\\"], \\\" \
+\\\", SuperscriptBox[\\\"\[CapitalTheta]\\\", \\\"2\\\"], \\\" \\\", \
+SuperscriptBox[RowBox[{\\\"(\\\", RowBox[{RowBox[{RowBox[{\\\"-\\\", \
+\\\"2\\\"}], \\\" \\\", \\\"\[Pi]\\\"}], \\\"+\\\", \
+\\\"\[CapitalTheta]\\\"}], \\\")\\\"}], \\\"2\\\"]}]], \\\"-\\\", \
+FractionBox[RowBox[{\\\"2\\\", \\\" \\\", \\\"k\\\", \\\" \\\", \
+SuperscriptBox[\\\"\[Pi]\\\", \\\"2\\\"]}], RowBox[{\\\"m\\\", \\\" \\\", \
+SuperscriptBox[\\\"v0\\\", \\\"2\\\"], \\\" \\\", \\\"\[CapitalTheta]\\\", \\\
+\" \\\", SuperscriptBox[RowBox[{\\\"(\\\", RowBox[{RowBox[{RowBox[{\\\"-\\\", \
+\\\"2\\\"}], \\\" \\\", \\\"\[Pi]\\\"}], \\\"+\\\", \
+\\\"\[CapitalTheta]\\\"}], \\\")\\\"}], \\\"2\\\"]}]]}]\\) does not converge \
+on \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"0\\\", \\\",\\\", \\\"\[Pi]\\\"}], \
+\\\"}\\\"}]\\).\"", 2, 794, 62, 34521707354103484362, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.8617519490909166`*^9, 3.861752098849081*^9, 3.8617524409247584`*^9, {
+   3.861752472089718*^9, 3.8617524880157366`*^9}, 3.8617538569306965`*^9, 
+   3.861753912531371*^9, 3.8617539468656273`*^9, 3.8617539941339664`*^9, 
+   3.8617540388737726`*^9},
+ CellLabel->
+  "During evaluation of \
+In[772]:=",ExpressionUUID->"e5a37296-f3db-4286-a377-f0c4436c8145"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"When we try to evaluate the total cross section we get \\n\
+\[Sigma]T = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"2", " ", "\[Pi]", " ", 
+    RowBox[{
+     SubsuperscriptBox["\[Integral]", "0", "\[Pi]"], 
+     RowBox[{
+      FractionBox[
+       RowBox[{"2", " ", "k", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{"\[Pi]", "-", "\[CapitalTheta]"}], ")"}]}], 
+       RowBox[{"m", " ", 
+        SuperscriptBox["v0", "2"], " ", 
+        SuperscriptBox["\[CapitalTheta]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "2"}], " ", "\[Pi]"}], "+", "\[CapitalTheta]"}], 
+          ")"}], "2"]}]], 
+      RowBox[{"\[DifferentialD]", "\[CapitalTheta]"}]}]}]}], 
+   "\[InvisibleSpace]", "\<\" = \[Infinity]\"\>"}],
+  SequenceForm[
+  "When we try to evaluate the total cross section we get \n\[Sigma]T = ", 2 
+   Pi Integrate[
+    2 $CellContext`k $CellContext`m^(-1) 
+     Pi^2 $CellContext`v0^(-2) (
+      Pi - $CellContext`\[CapitalTheta]) $CellContext`\[CapitalTheta]^(-2) \
+((-2) Pi + $CellContext`\[CapitalTheta])^(-2), {$CellContext`\[CapitalTheta], 
+      0, Pi}], " = \[Infinity]"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.861751910491876*^9, 3.8617520931194143`*^9, 3.861752435737609*^9, {
+   3.8617524668758345`*^9, 3.8617524828124905`*^9}, 3.8617538355877047`*^9, 
+   3.861753892064254*^9, 3.861753934877427*^9, 3.8617539871180162`*^9, 
+   3.8617540388866577`*^9},
+ CellLabel->
+  "During evaluation of \
+In[772]:=",ExpressionUUID->"a5c8f9fe-7cf4-4ce8-80ec-9857465bb24d"],
+
+Cell[BoxData["\<\"This is because the force is infinite in its extent\"\>"], \
+"Print",
+ CellChangeTimes->{
+  3.861751910491876*^9, 3.8617520931194143`*^9, 3.861752435737609*^9, {
+   3.8617524668758345`*^9, 3.8617524828124905`*^9}, 3.8617538355877047`*^9, 
+   3.861753892064254*^9, 3.861753934877427*^9, 3.8617539871180162`*^9, 
+   3.8617540388866577`*^9},
+ CellLabel->
+  "During evaluation of \
+In[772]:=",ExpressionUUID->"6264bfb7-54c4-49e1-85ad-6f4ef9628eee"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{950.5, 497.},
+WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+TaggingRules->Association["TryRealOnly" -> False],
+Magnification:>1.1 Inherited,
+FrontEndVersion->"12.3 for Microsoft Windows (64-bit) (July 9, 2021)",
+StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"637d7c10-d651-4414-af4c-ae0ccc236f82"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 318, 7, 62, "Text",ExpressionUUID->"4680e70d-bee4-4e21-acb7-19d7d60986aa"],
+Cell[CellGroupData[{
+Cell[901, 31, 12959, 239, 1075, "Input",ExpressionUUID->"5a00e2f8-f104-469f-850b-30269927d302"],
+Cell[CellGroupData[{
+Cell[13885, 274, 1502, 39, 118, "Print",ExpressionUUID->"110f40d8-322d-4479-a026-54d5c151e574"],
+Cell[15390, 315, 2932, 65, 258, "Print",ExpressionUUID->"29d93b04-be3f-4cc8-9e6a-d4cc3b9d2b1a"],
+Cell[18325, 382, 1781, 31, 160, "Print",ExpressionUUID->"78f2ac92-3190-43bf-9ac7-47e82c8e7175"],
+Cell[20109, 415, 1229, 17, 218, "Print",ExpressionUUID->"acc1f808-907c-45d2-af8f-ee97f813f79a"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21387, 438, 15216, 323, 937, "Input",ExpressionUUID->"5c128f66-1a25-4aa3-a97c-fb18c15c8194"],
+Cell[CellGroupData[{
+Cell[36628, 765, 1164, 18, 142, "Print",ExpressionUUID->"183c78cd-24f4-4f17-b367-837fdbc2fcdc"],
+Cell[37795, 785, 587, 9, 45, "Print",ExpressionUUID->"d126a6fa-f251-41ec-ad9c-59e6282b2cb4"],
+Cell[38385, 796, 1315, 30, 64, "Print",ExpressionUUID->"4946757c-e7a7-4b38-8a5e-d5148850073a"],
+Cell[39703, 828, 1245, 30, 92, "Print",ExpressionUUID->"8599e2b3-1466-4c41-a0df-8c92bc75d7f8"],
+Cell[40951, 860, 724, 11, 64, "Print",ExpressionUUID->"3ca2afda-24a0-45cd-b9af-135f5b69e962"],
+Cell[41678, 873, 1197, 30, 69, "Print",ExpressionUUID->"4450ce4e-e73e-44c9-b1fc-f3ad155e7287"],
+Cell[42878, 905, 1211, 23, 98, "Print",ExpressionUUID->"2163c79e-713c-43e9-8339-85067878b14b"],
+Cell[44092, 930, 922, 21, 72, "Print",ExpressionUUID->"28840dc6-2a27-401a-b7ec-057f2ea44c21"],
+Cell[45017, 953, 1890, 37, 86, "Print",ExpressionUUID->"e9e26944-8f9c-4eb5-a2ef-356dd89383a6"]
+}, Open  ]],
+Cell[46922, 993, 841, 16, 51, "Message",ExpressionUUID->"2d03c116-467a-4247-97ea-85b5d641549f"],
+Cell[CellGroupData[{
+Cell[47788, 1013, 1498, 34, 75, "Print",ExpressionUUID->"c008bed8-bc8d-4d6f-9b8c-eda21bcda2b4"],
+Cell[49289, 1049, 524, 9, 24, "Print",ExpressionUUID->"74f41e16-d885-4c74-9520-cea1144f5500"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49862, 1064, 9157, 242, 799, "Input",ExpressionUUID->"d825a751-f665-43da-99b6-8b525150d52c"],
+Cell[CellGroupData[{
+Cell[59044, 1310, 493, 9, 24, "Print",ExpressionUUID->"ab8379b2-7c74-47c4-bf3f-1adf4dfecc1c"],
+Cell[59540, 1321, 1368, 36, 80, "Print",ExpressionUUID->"09052925-2a56-4336-a4c4-363047978a96"],
+Cell[60911, 1359, 1498, 37, 93, "Print",ExpressionUUID->"91a86fa6-8a39-47d3-bc82-c2fee45cded9"],
+Cell[62412, 1398, 662, 11, 64, "Print",ExpressionUUID->"c4afd564-de49-463e-9af1-acf21d50dce1"],
+Cell[63077, 1411, 878, 23, 69, "Print",ExpressionUUID->"c99e0403-6c81-43a9-bcc4-98f65b758506"],
+Cell[63958, 1436, 1419, 33, 116, "Print",ExpressionUUID->"0d1d1732-7ac1-439f-9ab3-9484b5f1f9a1"],
+Cell[65380, 1471, 1304, 35, 81, "Print",ExpressionUUID->"8f302599-1596-4273-bd1f-2a715337d512"],
+Cell[66687, 1508, 1640, 38, 69, "Print",ExpressionUUID->"664f7d67-3396-4c00-8297-6b9eacd8b793"]
+}, Open  ]],
+Cell[68342, 1549, 1535, 26, 47, "Message",ExpressionUUID->"e5a37296-f3db-4286-a377-f0c4436c8145"],
+Cell[CellGroupData[{
+Cell[69902, 1579, 1653, 40, 69, "Print",ExpressionUUID->"a5c8f9fe-7cf4-4ce8-80ec-9857465bb24d"],
+Cell[71558, 1621, 462, 9, 24, "Print",ExpressionUUID->"6264bfb7-54c4-49e1-85ad-6f4ef9628eee"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

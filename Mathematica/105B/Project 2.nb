@@ -1,0 +1,1352 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     54670,       1344]
+NotebookOptionsPosition[     52599,       1304]
+NotebookOutlinePosition[     53146,       1323]
+CellTagsIndexPosition[     53103,       1320]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+Nathan Magari. 805505312. natemagari@g.ucla.edu
+Mathematica Project 2\
+\>", "Text",
+ CellChangeTimes->{{3.859372945234264*^9, 3.859373001929894*^9}, {
+  3.8604981057052984`*^9, 
+  3.860498105829023*^9}},ExpressionUUID->"4680e70d-bee4-4e21-acb7-\
+19d7d60986aa"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Remove", "[", "\"\<Global`*\>\"", "]"}], "//", "Quiet"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"$Assumptions", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Element", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"m", ",", "M", ",", "R", ",", "v", ",", "\[Omega]"}], "}"}], 
+       ",", " ", "Reals"}], "]"}], " ", "&&", " ", 
+     RowBox[{"m", ">", "0"}], " ", "&&", " ", 
+     RowBox[{"M", ">", "0"}], "&&", 
+     RowBox[{"R", ">", "0"}], "&&", 
+     RowBox[{"\[Omega]", ">", "0"}], "&&", 
+     RowBox[{"v", ">", "0"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SetAttributes", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m", ",", "M", ",", "R", ",", "v", ",", "\[Omega]"}], "}"}], 
+     ",", "Constant"}], "]"}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Moment", " ", "of", " ", "inertia", " ", "of", " ", "the", " ", "sphere", 
+    " ", "and", " ", "the", " ", "particle", " ", "wrpt", " ", "the", " ", 
+    "z", " ", "axis"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Isphere", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"2", "/", "5"}], ")"}], "M", " ", 
+    SuperscriptBox["R", "2"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Theta]", "[", "t", "]"}], " ", "=", " ", 
+   RowBox[{"v", " ", 
+    RowBox[{"t", " ", "/", "R"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Ipart", "[", "t_", "]"}], " ", "=", " ", 
+    RowBox[{"m", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"R", " ", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"\[Theta]", "[", "t", "]"}], "]"}]}], ")"}], "2"]}]}], ";"}],
+   "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "The", " ", "z", " ", "component", " ", "of", " ", "the", " ", "angular", 
+    " ", "momentum", " ", "will", " ", "be", " ", "conserved"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Lzi", " ", "=", " ", 
+   RowBox[{"Isphere", " ", "\[Omega]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Lz", "[", "t_", "]"}], " ", "=", " ", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"Isphere", "+", 
+       RowBox[{"Ipart", "[", "t", "]"}]}], ")"}], 
+     RowBox[{
+      RowBox[{"\[Phi]", "'"}], "[", "t", "]"}]}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Time", " ", "T", " ", "to", " ", "get", " ", "from", " ", "one", " ", 
+    "pole", " ", "to", " ", "the", " ", "other"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"T", " ", "=", " ", 
+    RowBox[{"\[Pi]", " ", 
+     RowBox[{"R", "/", "v"}]}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Solve", " ", "angular", " ", "momentum", " ", "conservation", " ", "for", 
+    " ", 
+    RowBox[{
+     RowBox[{"\[Phi]", "'"}], "[", "t", "]"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"soln", " ", "=", " ", 
+    RowBox[{
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Lz", "[", "t", "]"}], "==", "Lzi"}], ",", 
+       RowBox[{
+        RowBox[{"\[Phi]", "'"}], "[", "t", "]"}]}], "]"}], "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Integrate", " ", "from", " ", "0", " ", "to", " ", "T", " ", "to", " ", 
+    "find", " ", "the", " ", "angle", " ", "\[Phi]f", " ", "that", " ", "the",
+     " ", "sphere", " ", "goes"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Phi]f", " ", "=", " ", 
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"\[Phi]", "'"}], "[", "t", "]"}], "/.", "soln"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"t", ",", "0", ",", "T"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "alpha", " ", "is", " ", "difference", " ", "between", " ", "\[Omega]T", 
+    " ", "and", " ", "\[Phi]f"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Alpha]", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"\[Omega]", " ", "T"}], " ", "-", " ", "\[Phi]f"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{
+  "\"\<The sphere would've gone through an angle \[Omega] T = \
+\!\(\*FractionBox[\(\[Omega]\\\ \[Pi]\\\ R\), \(v\)]\) without the mass, but \
+with the mass it went through an angle,\\n\[Phi] = \>\"", ",", " ", 
+   "\[Phi]f"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{
+  "\"\<\\nSo the difference is the angle alpha,\\n\[Alpha] = \>\"", ",", 
+   "\[Alpha]", ",", "\"\< = \>\"", ",", " ", 
+   RowBox[{
+    RowBox[{"\[Omega]", " ", "T", 
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       SqrtBox[
+        FractionBox[
+         RowBox[{"2", " ", "M"}], 
+         RowBox[{
+          RowBox[{"2", "M"}], " ", "+", " ", 
+          RowBox[{"5", "m"}]}]]]}], ")"}]}], "//", "HoldForm"}]}], " ", 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.85937327975598*^9, 3.859373312661188*^9}, {
+   3.859373395181918*^9, 3.8593735019085197`*^9}, {3.859373534775406*^9, 
+   3.859373538382871*^9}, {3.859373625525921*^9, 3.859373693868785*^9}, {
+   3.859373733255644*^9, 3.859373735990789*^9}, {3.8593738280226355`*^9, 
+   3.859373862245633*^9}, {3.859373904603146*^9, 3.859374056614607*^9}, {
+   3.8593741035168223`*^9, 3.8593741484122143`*^9}, {3.8593741949033422`*^9, 
+   3.8593741973106346`*^9}, {3.8593748693449416`*^9, 3.859374883185871*^9}, {
+   3.859374917091822*^9, 3.8593749241293635`*^9}, {3.8593750094989567`*^9, 
+   3.859375009946454*^9}, {3.859375278667128*^9, 3.859375281141988*^9}, {
+   3.8593753562012396`*^9, 3.859375359438425*^9}, {3.8593753910482163`*^9, 
+   3.859375393031991*^9}, {3.8593754382498384`*^9, 3.859375438430626*^9}, {
+   3.8593754991699934`*^9, 3.8593755087794666`*^9}, {3.859375581094353*^9, 
+   3.8593757286270003`*^9}, {3.859375765952552*^9, 3.85937591212694*^9}, {
+   3.8593759456935616`*^9, 3.8593759517583675`*^9}, {3.8593766313824015`*^9, 
+   3.8593766485972805`*^9}, {3.8593766936860104`*^9, 
+   3.8593766944838233`*^9}, {3.859376809211999*^9, 3.85937685290111*^9}, {
+   3.8593769174877424`*^9, 3.8593769626258316`*^9}, {3.85937703697398*^9, 
+   3.859377046657837*^9}, {3.8593771491982937`*^9, 3.8593771505888*^9}, {
+   3.8593771894328756`*^9, 3.859377226956343*^9}, {3.859377320334361*^9, 
+   3.8593773261976776`*^9}, {3.8593774444683237`*^9, 
+   3.8593774515294757`*^9}, {3.8593800458116426`*^9, 3.859380097251755*^9}, {
+   3.859380131647587*^9, 3.859380165529133*^9}, {3.859388921425753*^9, 
+   3.859388939560663*^9}, {3.8593889966650524`*^9, 3.8593890093225164`*^9}, {
+   3.8593890708178577`*^9, 3.8593891019245443`*^9}, {3.8593891393300843`*^9, 
+   3.8593892820314455`*^9}, {3.859389394253664*^9, 3.8593893968493323`*^9}, {
+   3.8593894675811234`*^9, 3.859389523955553*^9}, {3.8593896148780146`*^9, 
+   3.8593896206587963`*^9}, {3.85955202841092*^9, 3.859552029660982*^9}, {
+   3.8595521124313235`*^9, 3.8595522191726174`*^9}, {3.859552375121446*^9, 
+   3.859552384422287*^9}, {3.8595524286543665`*^9, 3.8595525983423233`*^9}, {
+   3.8595526812412577`*^9, 3.8595526919790416`*^9}, 3.8595862909558167`*^9, {
+   3.859586322146077*^9, 3.859586521606553*^9}, {3.859586559492463*^9, 
+   3.8595865801751986`*^9}, {3.8595866262337*^9, 3.8595866264008102`*^9}, {
+   3.8595874868866205`*^9, 3.859587487607306*^9}, {3.8595875234283047`*^9, 
+   3.8595875246992664`*^9}, 3.860498122133336*^9, {3.8604982038647614`*^9, 
+   3.8604982539709606`*^9}, {3.860498295849204*^9, 3.8604983543259783`*^9}, {
+   3.86049839226577*^9, 3.8604984572398887`*^9}, {3.860498488408953*^9, 
+   3.8604984949233437`*^9}, {3.860498576441223*^9, 3.860498611988984*^9}, {
+   3.8604986587132225`*^9, 3.8604987282135887`*^9}, {3.8605023394603596`*^9, 
+   3.860502404370576*^9}, {3.860502438282238*^9, 3.8605027401904764`*^9}, {
+   3.860502794199193*^9, 3.860502814835537*^9}, {3.8605028467502546`*^9, 
+   3.8605028479282923`*^9}, {3.8605045074130445`*^9, 
+   3.8605045226452494`*^9}, {3.86050455391039*^9, 3.8605045571049867`*^9}, {
+   3.860504589608584*^9, 3.860504781786311*^9}, {3.860504889623705*^9, 
+   3.860504930443446*^9}, {3.8605050105888786`*^9, 3.860505089050033*^9}, {
+   3.860505321106259*^9, 3.8605054072861943`*^9}, {3.8605054503527627`*^9, 
+   3.860505581827423*^9}, 3.8605056163311596`*^9, {3.86050567384254*^9, 
+   3.8605057169021654`*^9}, {3.860505764038449*^9, 3.8605060186761065`*^9}, {
+   3.860506057073457*^9, 3.8605061422878313`*^9}, {3.8605064972630434`*^9, 
+   3.8605065453862047`*^9}, {3.8605065971144514`*^9, 3.860506607691018*^9}, {
+   3.8605066394493327`*^9, 3.860506703874984*^9}, {3.860506797324317*^9, 
+   3.860506807199047*^9}, {3.860506844724766*^9, 3.8605068552119503`*^9}, {
+   3.860506895538512*^9, 3.8605069450578117`*^9}, {3.86050705225006*^9, 
+   3.8605071499050007`*^9}, {3.860511187587534*^9, 3.8605111963830805`*^9}, {
+   3.860511261753519*^9, 3.860511271553956*^9}, {3.860511322851406*^9, 
+   3.860511328058928*^9}, {3.860511360308075*^9, 3.8605113615310106`*^9}, {
+   3.86051153212668*^9, 3.860511596048064*^9}, {3.8605121217080417`*^9, 
+   3.8605121451446047`*^9}, {3.860512229710165*^9, 3.8605123605338683`*^9}, {
+   3.860512407906386*^9, 3.860512473352096*^9}, {3.860513008876894*^9, 
+   3.8605130273548393`*^9}, {3.8605132256794243`*^9, 3.860513228082988*^9}, {
+   3.8605132952691956`*^9, 3.860513382662016*^9}, {3.8605134323613305`*^9, 
+   3.8605134393483405`*^9}, {3.860513611007329*^9, 3.860513617076445*^9}, {
+   3.8605136578281803`*^9, 3.8605137422034984`*^9}, {3.8605137857962155`*^9, 
+   3.8605139673722277`*^9}, {3.860514000232605*^9, 3.86051404612283*^9}, {
+   3.860514104673335*^9, 3.8605141088489466`*^9}, {3.8605141806251993`*^9, 
+   3.860514222400613*^9}, {3.860514252662916*^9, 3.8605146762424793`*^9}, {
+   3.8605147762016077`*^9, 
+   3.8605148856340823`*^9}},ExpressionUUID->"5a00e2f8-f104-469f-850b-\
+30269927d302"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The sphere would've gone through an angle \[Omega] T = \
+\\!\\(\\*FractionBox[\\(\[Omega]\\\\ \[Pi]\\\\ R\\), \\(v\\)]\\) without the \
+mass, but with the mass it went through an angle,\\n\[Phi] = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{
+     SqrtBox["2"], " ", "M", " ", "\[Pi]", " ", "R", " ", "\[Omega]"}], 
+    RowBox[{
+     SqrtBox[
+      RowBox[{"M", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"5", " ", "m"}], "+", 
+         RowBox[{"2", " ", "M"}]}], ")"}]}]], " ", "v"}]]}],
+  SequenceForm[
+  "The sphere would've gone through an angle \[Omega] T = \
+\!\(\*FractionBox[\(\[Omega]\\ \[Pi]\\ R\), \(v\)]\) without the mass, but \
+with the mass it went through an angle,\n\[Phi] = ", 
+   2^Rational[
+     1, 2] $CellContext`M ($CellContext`M (5 $CellContext`m + 
+      2 $CellContext`M))^Rational[-1, 2] 
+   Pi $CellContext`R $CellContext`v^(-1) $CellContext`\[Omega]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.860513975381199*^9, 3.86051411681786*^9, {3.8605142674937406`*^9, 
+   3.86051431532887*^9}, 3.8605144408521214`*^9, {3.8605145144853935`*^9, 
+   3.8605145503606143`*^9}, 3.860514613652951*^9, 3.860514671066886*^9, 
+   3.8605147489064865`*^9},
+ CellLabel->
+  "During evaluation of \
+In[699]:=",ExpressionUUID->"f1c212c6-e1c2-4d1d-b0ff-e1a18095b3c7"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nSo the difference is the angle alpha,\\n\[Alpha] = \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{
+    FractionBox[
+     RowBox[{"\[Pi]", " ", "R", " ", "\[Omega]"}], "v"], "-", 
+    FractionBox[
+     RowBox[{
+      SqrtBox["2"], " ", "M", " ", "\[Pi]", " ", "R", " ", "\[Omega]"}], 
+     RowBox[{
+      SqrtBox[
+       RowBox[{"M", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5", " ", "m"}], "+", 
+          RowBox[{"2", " ", "M"}]}], ")"}]}]], " ", "v"}]]}], 
+   "\[InvisibleSpace]", "\<\" = \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"\[Omega]", " ", "T", " ", 
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       SqrtBox[
+        FractionBox[
+         RowBox[{"2", " ", "M"}], 
+         RowBox[{
+          RowBox[{"2", " ", "M"}], "+", 
+          RowBox[{"5", " ", "m"}]}]]]}], ")"}]}],
+    HoldForm]}],
+  SequenceForm[
+  "\nSo the difference is the angle alpha,\n\[Alpha] = ", 
+   Pi $CellContext`R $CellContext`v^(-1) $CellContext`\[Omega] - 
+   2^Rational[
+     1, 2] $CellContext`M ($CellContext`M (5 $CellContext`m + 
+      2 $CellContext`M))^Rational[-1, 2] 
+   Pi $CellContext`R $CellContext`v^(-1) $CellContext`\[Omega], " = ", 
+   HoldForm[$CellContext`\[Omega] $CellContext`T (1 - Sqrt[
+     2 $CellContext`M/(2 $CellContext`M + 5 $CellContext`m)])]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.860513975381199*^9, 3.86051411681786*^9, {3.8605142674937406`*^9, 
+   3.86051431532887*^9}, 3.8605144408521214`*^9, {3.8605145144853935`*^9, 
+   3.8605145503606143`*^9}, 3.860514613652951*^9, 3.860514671066886*^9, 
+   3.8605147489104757`*^9},
+ CellLabel->
+  "During evaluation of \
+In[699]:=",ExpressionUUID->"a8f1511e-d493-4020-b6c3-f928378f0005"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Remove", "[", "\"\<Global`*\>\"", "]"}], "//", "Quiet"}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Use", " ", "cylindrical", " ", "coord"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"x", " ", "=", " ", 
+   RowBox[{"r", " ", 
+    RowBox[{"Cos", "[", "\[Phi]", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"y", " ", "=", " ", 
+    RowBox[{"r", " ", 
+     RowBox[{"Sin", "[", "\[Phi]", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"z", " ", "=", " ", 
+    RowBox[{"z", " ", "duh"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Set", " ", "up", " ", "differentials", " ", "and", " ", "geometry"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"d\[Phi]1", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"\[Phi]", ",", "0", ",", "\[Pi]"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"d\[Phi]2", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"\[Phi]", ",", "\[Pi]", ",", 
+     RowBox[{"2", "\[Pi]"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dr", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"r", ",", "0", ",", "R"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dz", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"z", ",", "0", ",", "h"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dv", " ", "=", " ", "r"}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Mass", " ", "of", " ", "the", " ", "Distribution"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"mass", " ", "=", " ", "m"}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Mass", " ", "Density"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dm1", " ", "=", " ", 
+   RowBox[{"\[Rho]1", " ", "dv"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dm2", " ", "=", " ", 
+    RowBox[{"\[Rho]2", " ", "dv"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Reference", " ", "point", " ", "around", " ", "which", " ", 
+    RowBox[{"we", "'"}], "ll", " ", "calculate", " ", "I"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"r0", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{"xcm", ",", "ycm", ",", "zcm"}], "}"}]}], ";"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"r0", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"**", "**", "**", "**", "**", "**", "**", "**", "**", "**"}], 
+   "*****)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Find", " ", "the", " ", "center", " ", "of", " ", "mass"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"xcm", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{"x", " ", "dm1"}], ",", "dr", ",", "d\[Phi]1", ",", "dz"}], 
+       "]"}], "/", "mass"}], "+", 
+     RowBox[{
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{"x", " ", "dm2"}], ",", "dr", ",", "d\[Phi]2", ",", "dz"}], 
+       "]"}], "/", "mass"}]}], "//", "Simplify"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ycm", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{"y", " ", "dm1"}], ",", "dr", ",", "d\[Phi]1", ",", "dz"}], 
+       "]"}], "/", "mass"}], "+", 
+     RowBox[{
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{"y", " ", "dm2"}], ",", "dr", ",", "d\[Phi]2", ",", "dz"}], 
+       "]"}], "/", "mass"}]}], "//", "Simplify"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"zcm", " ", "=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Integrate", "[", 
+        RowBox[{
+         RowBox[{"z", " ", "dm1"}], ",", "dr", ",", "d\[Phi]1", ",", "dz"}], 
+        "]"}], "/", "mass"}], "+", 
+      RowBox[{
+       RowBox[{"Integrate", "[", 
+        RowBox[{
+         RowBox[{"z", " ", "dm2"}], ",", "dr", ",", "d\[Phi]2", ",", "dz"}], 
+        "]"}], "/", "mass"}]}], "//", "Simplify"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<\\nThe center of mass of the cylinder is rcm = \>\"", ",", 
+    RowBox[{"{", 
+     RowBox[{"xcm", ",", "ycm", ",", "zcm"}], "}"}]}], "]"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Tensor", " ", "elements"}], "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "The", " ", "position", " ", "of", " ", "dm", " ", "relative", " ", "to", 
+    " ", "the", " ", "origin"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"r1", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "y", ",", "z"}], "}"}]}], ";"}], "\[IndentingNewLine]",
+   "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "The", " ", "position", " ", "of", " ", "dm", " ", "relative", " ", "to", 
+    " ", "r0"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"r2", " ", "=", " ", 
+    RowBox[{"r1", "-", "r0"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Kronecker", " ", "Delta"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Delta]", "[", 
+    RowBox[{"i_", ",", "j_"}], "]"}], " ", ":=", " ", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"i", "==", "j"}], ",", "1", ",", "0"}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"elem", "[", 
+     RowBox[{"i_", ",", "j_"}], "]"}], " ", ":=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{"dm1", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"\[Delta]", "[", 
+             RowBox[{"i", ",", "j"}], "]"}], " ", 
+            RowBox[{"r2", ".", "r2"}]}], " ", "-", " ", 
+           RowBox[{
+            RowBox[{"r2", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], " ", 
+            RowBox[{"r2", "[", 
+             RowBox[{"[", "j", "]"}], "]"}]}]}], ")"}]}], ",", "dr", ",", 
+        "d\[Phi]1", ",", "dz"}], "]"}], "+", 
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{"dm2", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"\[Delta]", "[", 
+             RowBox[{"i", ",", "j"}], "]"}], " ", 
+            RowBox[{"r2", ".", "r2"}]}], " ", "-", " ", 
+           RowBox[{
+            RowBox[{"r2", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], " ", 
+            RowBox[{"r2", "[", 
+             RowBox[{"[", "j", "]"}], "]"}]}]}], ")"}]}], ",", "dr", ",", 
+        "d\[Phi]2", ",", "dz"}], "]"}]}], "//", "Simplify"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"inertia", " ", "=", " ", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"elem", "[", 
+       RowBox[{"i", ",", "j"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", "3"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"j", ",", "1", ",", "3"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{
+   "\"\<\\nThe moment of inertia tensor about the origin is I = \>\"", ",", 
+    RowBox[{"inertia", "//", "MatrixForm"}]}], "]"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Now", " ", "spin", " ", "around", " ", "the", " ", "z"}], "-", 
+    "axis"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Omega]", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "\[CapitalOmega]"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"L", " ", "=", " ", 
+   RowBox[{"inertia", ".", "\[Omega]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{
+  "\"\<\\nThe angular momentum in the fixed body frame is = \>\"", ",", 
+   RowBox[{"L", "//", "MatrixForm"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"cos", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"L", "[", 
+     RowBox[{"[", "3", "]"}], "]"}], "/", 
+    SqrtBox[
+     RowBox[{"L", ".", "L"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{
+   "\"\<\\nThe cosine of the angle between L and the axis is = \>\"", ",", 
+    RowBox[{"cos", "//", "FullSimplify"}]}], "]"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+       "**", "**", "**", "\[IndentingNewLine]", "Part"}], " ", 
+     RowBox[{"iv", ":", "\[IndentingNewLine]", 
+      RowBox[{
+      "In", " ", "the", " ", "frame", " ", "where", " ", "the", " ", "z", " ",
+        "axis", " ", "is", " ", "fixed", " ", "to", " ", "the", " ", "axis", 
+       " ", "of", " ", "the", " ", "cylinder"}]}]}], ",", " ", 
+    RowBox[{
+    "the", " ", "angular", " ", "momentum", " ", "vector", " ", "L", " ", 
+     "will", " ", "revolve", " ", "around", " ", "the", " ", "z", " ", "axis",
+      " ", "because", " ", "we", " ", "are", " ", "in", " ", "the", " ", 
+     "rotating", " ", 
+     RowBox[{"frame", ".", " ", "In"}], " ", "the", " ", "frame", " ", 
+     "where", " ", "the", " ", "net", " ", "external", " ", "torque", " ", 
+     "is", " ", "zero"}], ",", " ", 
+    RowBox[{
+    "the", " ", "angular", " ", "momentum", " ", "is", " ", "conserved", " ", 
+     "and", " ", "the", " ", "angular", " ", "velocity", " ", "precesses", 
+     " ", "around", " ", 
+     RowBox[{"it", ".", "\[IndentingNewLine]", 
+      RowBox[{
+      "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+       "**"}]}]}]}], "*****)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "Print", "[", 
+   "\"\<Part iv:\[IndentingNewLine]\\nIn the frame where the z axis is fixed \
+to the axis of the cylinder, the angular momentum vector L will revolve \
+around the z axis because we are in the rotating frame. In the frame where \
+the net external torque is zero, the angular momentum is conserved and the \
+angular velocity precesses around it.\>\"", "]"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Principle", " ", "moments", " ", "and", " ", "axes"}], " ", "-", 
+    " ", 
+    RowBox[{
+    "everything", " ", "still", " ", "relative", " ", "to", " ", "the", " ", 
+     "origin"}]}], "*)"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{" ", 
+  RowBox[{
+   RowBox[{"prince", " ", "=", " ", 
+    RowBox[{"Eigensystem", "[", "inertia", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Do", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<For rotations about\>\"", ",", " ", 
+      RowBox[{
+       RowBox[{"prince", "[", 
+        RowBox[{"[", 
+         RowBox[{"2", ",", "i"}], "]"}], "]"}], "//", "FullSimplify"}]}], 
+     "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\< the rot inertia is \>\"", ",", " ", 
+      RowBox[{
+       RowBox[{"prince", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "i"}], "]"}], "]"}], "//", "FullSimplify"}]}], 
+     "]"}], ";"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", "1", ",", "3"}], "}"}]}], "\[IndentingNewLine]", 
+  "]"}]}], "Input",
+ CellChangeTimes->{
+  3.859587008109127*^9, {3.8595870758752584`*^9, 3.8595871353762956`*^9}, {
+   3.859587260548998*^9, 3.8595872791679115`*^9}, {3.859587311398406*^9, 
+   3.8595873553127794`*^9}, {3.8595873865833263`*^9, 
+   3.8595874188274727`*^9}, {3.8595874563391867`*^9, 
+   3.8595874754704657`*^9}, {3.8595875567857523`*^9, 3.859587594618764*^9}, {
+   3.859587648005516*^9, 3.85958767340228*^9}, {3.859587761649878*^9, 
+   3.8595879606434345`*^9}, {3.8595880308122053`*^9, 
+   3.8595880310924234`*^9}, {3.8595880954890704`*^9, 3.859588098906996*^9}, {
+   3.859588139345527*^9, 3.85958821592651*^9}, {3.859588251872099*^9, 
+   3.8595882595021725`*^9}, {3.859588294179364*^9, 3.8595882971707635`*^9}, {
+   3.85958850855068*^9, 3.8595885109232564`*^9}, {3.85958858033223*^9, 
+   3.859588586663184*^9}, {3.85958893577242*^9, 3.8595889498406677`*^9}, {
+   3.8595889944063296`*^9, 3.8595891119340515`*^9}, {3.8595891804669437`*^9, 
+   3.859589278785906*^9}, {3.859589340470233*^9, 3.8595893406281996`*^9}, {
+   3.859589442997235*^9, 3.859589448117484*^9}, {3.8604981418982306`*^9, 
+   3.8604981432668705`*^9}, {3.860680967222949*^9, 3.86068097646268*^9}, {
+   3.860681017995034*^9, 3.860681128766153*^9}, {3.860681190333672*^9, 
+   3.8606812487157197`*^9}, {3.8606812979301233`*^9, 
+   3.8606813247225494`*^9}, {3.8606826430136127`*^9, 
+   3.8606826475083003`*^9}, {3.8606829547396054`*^9, 3.860683006438388*^9}, {
+   3.860683047027588*^9, 3.8606830662982416`*^9}, {3.860686846384333*^9, 
+   3.8606868767276173`*^9}, {3.860686939680512*^9, 3.8606871500605273`*^9}, {
+   3.860687187110817*^9, 3.860687193811837*^9}, 3.8606872401556735`*^9, 
+   3.8606873176608696`*^9, {3.860687452911231*^9, 3.860687553424371*^9}, {
+   3.8606875874615912`*^9, 3.8606876298227406`*^9}, {3.860687669007584*^9, 
+   3.860687700175256*^9}, {3.860687770043541*^9, 3.860687805956357*^9}, {
+   3.86068797503703*^9, 3.8606880719140167`*^9}, {3.860688295250258*^9, 
+   3.8606883354309254`*^9}, {3.8606884110846477`*^9, 
+   3.8606884817541666`*^9}, {3.8606887128903117`*^9, 
+   3.8606888561894374`*^9}, {3.8606890018707676`*^9, 3.860689048052435*^9}, {
+   3.86068910206396*^9, 3.8606892951987123`*^9}, {3.8606893547275534`*^9, 
+   3.860689361697713*^9}, {3.860689412231124*^9, 3.8606894196399717`*^9}, {
+   3.8606894718207746`*^9, 3.860689472480121*^9}, {3.8606905220967064`*^9, 
+   3.8606905528761387`*^9}, {3.8606910439947033`*^9, 3.8606911069992723`*^9}},
+ CellLabel->
+  "In[552]:=",ExpressionUUID->"5c128f66-1a25-4aa3-a97c-fb18c15c8194"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nThe center of mass of the cylinder is rcm = \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     FractionBox[
+      RowBox[{"2", " ", "h", " ", 
+       SuperscriptBox["R", "3"], " ", 
+       RowBox[{"(", 
+        RowBox[{"\[Rho]1", "-", "\[Rho]2"}], ")"}]}], 
+      RowBox[{"3", " ", "m"}]], ",", 
+     FractionBox[
+      RowBox[{
+       SuperscriptBox["h", "2"], " ", "\[Pi]", " ", 
+       SuperscriptBox["R", "2"], " ", 
+       RowBox[{"(", 
+        RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}]}], 
+      RowBox[{"4", " ", "m"}]]}], "}"}]}],
+  SequenceForm[
+  "\nThe center of mass of the cylinder is rcm = ", {
+   0, Rational[
+     2, 3] $CellContext`h $CellContext`m^(-1) $CellContext`R^3 ($CellContext`\
+\[Rho]1 - $CellContext`\[Rho]2), 
+    Rational[1, 4] $CellContext`h^2 $CellContext`m^(-1) 
+    Pi $CellContext`R^2 ($CellContext`\[Rho]1 + $CellContext`\[Rho]2)}],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.860687213501485*^9, 3.86068724175368*^9}, 
+   3.8606873203026505`*^9, 3.8606876379202995`*^9, {3.86068767371272*^9, 
+   3.860687702291997*^9}, {3.860687780450469*^9, 3.860687808216968*^9}, {
+   3.8606880316102657`*^9, 3.8606880510268664`*^9}, 3.860688337391307*^9, 
+   3.860689297763474*^9, 3.8606893642975044`*^9, 3.8606894223126497`*^9, 
+   3.8606911099762907`*^9},
+ CellLabel->
+  "During evaluation of \
+In[552]:=",ExpressionUUID->"dc21c1f8-3466-4020-bcc8-d5b7d68e8d4c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nThe moment of inertia tensor about the origin is I = \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {
+        RowBox[{
+         FractionBox["1", "24"], " ", "h", " ", "\[Pi]", " ", 
+         SuperscriptBox["R", "2"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"4", " ", 
+            SuperscriptBox["h", "2"]}], "+", 
+           RowBox[{"3", " ", 
+            SuperscriptBox["R", "2"]}]}], ")"}], " ", 
+         RowBox[{"(", 
+          RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}]}], "0", "0"},
+       {"0", 
+        RowBox[{
+         FractionBox["1", "24"], " ", "h", " ", "\[Pi]", " ", 
+         SuperscriptBox["R", "2"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"4", " ", 
+            SuperscriptBox["h", "2"]}], "+", 
+           RowBox[{"3", " ", 
+            SuperscriptBox["R", "2"]}]}], ")"}], " ", 
+         RowBox[{"(", 
+          RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}]}], 
+        RowBox[{
+         FractionBox["1", "3"], " ", 
+         SuperscriptBox["h", "2"], " ", 
+         SuperscriptBox["R", "3"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "\[Rho]1"}], "+", "\[Rho]2"}], ")"}]}]},
+       {"0", 
+        RowBox[{
+         FractionBox["1", "3"], " ", 
+         SuperscriptBox["h", "2"], " ", 
+         SuperscriptBox["R", "3"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "\[Rho]1"}], "+", "\[Rho]2"}], ")"}]}], 
+        RowBox[{
+         FractionBox["1", "4"], " ", "h", " ", "\[Pi]", " ", 
+         SuperscriptBox["R", "4"], " ", 
+         RowBox[{"(", 
+          RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}]}]}
+      },
+      GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]]}],
+  SequenceForm["\nThe moment of inertia tensor about the origin is I = ", 
+   MatrixForm[{{
+     Rational[1, 24] $CellContext`h 
+      Pi $CellContext`R^2 (4 $CellContext`h^2 + 
+       3 $CellContext`R^2) ($CellContext`\[Rho]1 + $CellContext`\[Rho]2), 0, 
+      0}, {0, Rational[1, 24] $CellContext`h 
+      Pi $CellContext`R^2 (4 $CellContext`h^2 + 
+       3 $CellContext`R^2) ($CellContext`\[Rho]1 + $CellContext`\[Rho]2), 
+      Rational[1, 
+        3] $CellContext`h^2 $CellContext`R^3 (-$CellContext`\[Rho]1 + \
+$CellContext`\[Rho]2)}, {
+     0, Rational[
+       1, 3] $CellContext`h^2 $CellContext`R^3 (-$CellContext`\[Rho]1 + \
+$CellContext`\[Rho]2), Rational[1, 4] $CellContext`h 
+      Pi $CellContext`R^4 ($CellContext`\[Rho]1 + $CellContext`\[Rho]2)}}]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.860687213501485*^9, 3.86068724175368*^9}, 
+   3.8606873203026505`*^9, 3.8606876379202995`*^9, {3.86068767371272*^9, 
+   3.860687702291997*^9}, {3.860687780450469*^9, 3.860687808216968*^9}, {
+   3.8606880316102657`*^9, 3.8606880510268664`*^9}, 3.860688337391307*^9, 
+   3.860689297763474*^9, 3.8606893642975044`*^9, 3.8606894223126497`*^9, 
+   3.8606911150154448`*^9},
+ CellLabel->
+  "During evaluation of \
+In[552]:=",ExpressionUUID->"098cbee1-8ee9-458f-95e3-811367881db7"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nThe angular momentum in the fixed body frame is = \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", 
+     TagBox[GridBox[{
+        {"0"},
+        {
+         RowBox[{
+          FractionBox["1", "3"], " ", 
+          SuperscriptBox["h", "2"], " ", 
+          SuperscriptBox["R", "3"], " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "\[Rho]1"}], "+", "\[Rho]2"}], ")"}], " ", 
+          "\[CapitalOmega]"}]},
+        {
+         RowBox[{
+          FractionBox["1", "4"], " ", "h", " ", "\[Pi]", " ", 
+          SuperscriptBox["R", "4"], " ", 
+          RowBox[{"(", 
+           RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}], " ", 
+          "\[CapitalOmega]"}]}
+       },
+       GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.5599999999999999]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      Column], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]]}],
+  SequenceForm["\nThe angular momentum in the fixed body frame is = ", 
+   MatrixForm[{
+    0, Rational[
+      1, 3] $CellContext`h^2 $CellContext`R^3 (-$CellContext`\[Rho]1 + \
+$CellContext`\[Rho]2) $CellContext`\[CapitalOmega], 
+     Rational[1, 4] $CellContext`h 
+     Pi $CellContext`R^4 ($CellContext`\[Rho]1 + $CellContext`\[Rho]2) \
+$CellContext`\[CapitalOmega]}]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.860687213501485*^9, 3.86068724175368*^9}, 
+   3.8606873203026505`*^9, 3.8606876379202995`*^9, {3.86068767371272*^9, 
+   3.860687702291997*^9}, {3.860687780450469*^9, 3.860687808216968*^9}, {
+   3.8606880316102657`*^9, 3.8606880510268664`*^9}, 3.860688337391307*^9, 
+   3.860689297763474*^9, 3.8606893642975044`*^9, 3.8606894223126497`*^9, 
+   3.8606911150224257`*^9},
+ CellLabel->
+  "During evaluation of \
+In[552]:=",ExpressionUUID->"c7924eeb-5375-480e-bb9e-9dd8f3b37486"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nThe cosine of the angle between L and the axis is = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{"3", " ", "h", " ", "\[Pi]", " ", 
+     SuperscriptBox["R", "4"], " ", 
+     RowBox[{"(", 
+      RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}], " ", "\[CapitalOmega]"}], 
+    SqrtBox[
+     RowBox[{
+      SuperscriptBox["h", "2"], " ", 
+      SuperscriptBox["R", "6"], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"16", " ", 
+         SuperscriptBox["h", "2"], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"\[Rho]1", "-", "\[Rho]2"}], ")"}], "2"]}], "+", 
+        RowBox[{"9", " ", 
+         SuperscriptBox["\[Pi]", "2"], " ", 
+         SuperscriptBox["R", "2"], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}], "2"]}]}], ")"}], " ", 
+      SuperscriptBox["\[CapitalOmega]", "2"]}]]]}],
+  SequenceForm[
+  "\nThe cosine of the angle between L and the axis is = ", 3 $CellContext`h 
+   Pi $CellContext`R^4 ($CellContext`\[Rho]1 + $CellContext`\[Rho]2) \
+$CellContext`\[CapitalOmega] ($CellContext`h^2 $CellContext`R^6 (
+      16 $CellContext`h^2 ($CellContext`\[Rho]1 - $CellContext`\[Rho]2)^2 + 
+      9 Pi^2 $CellContext`R^2 ($CellContext`\[Rho]1 + \
+$CellContext`\[Rho]2)^2) $CellContext`\[CapitalOmega]^2)^Rational[-1, 2]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.860687213501485*^9, 3.86068724175368*^9}, 
+   3.8606873203026505`*^9, 3.8606876379202995`*^9, {3.86068767371272*^9, 
+   3.860687702291997*^9}, {3.860687780450469*^9, 3.860687808216968*^9}, {
+   3.8606880316102657`*^9, 3.8606880510268664`*^9}, 3.860688337391307*^9, 
+   3.860689297763474*^9, 3.8606893642975044`*^9, 3.8606894223126497`*^9, 
+   3.860691115190976*^9},
+ CellLabel->
+  "During evaluation of \
+In[552]:=",ExpressionUUID->"1c40d0ab-14e9-4fc7-b9c0-b12d0a59b733"],
+
+Cell[BoxData["\<\"Part iv:\[IndentingNewLine]\\nIn the frame where the z axis \
+is fixed to the axis of the cylinder, the angular momentum vector L will \
+revolve around the z axis because we are in the rotating frame. In the frame \
+where the net external torque is zero, the angular momentum is conserved and \
+the angular velocity precesses around it.\"\>"], "Print",
+ CellChangeTimes->{{3.860687213501485*^9, 3.86068724175368*^9}, 
+   3.8606873203026505`*^9, 3.8606876379202995`*^9, {3.86068767371272*^9, 
+   3.860687702291997*^9}, {3.860687780450469*^9, 3.860687808216968*^9}, {
+   3.8606880316102657`*^9, 3.8606880510268664`*^9}, 3.860688337391307*^9, 
+   3.860689297763474*^9, 3.8606893642975044`*^9, 3.8606894223126497`*^9, 
+   3.8606911151940055`*^9},
+ CellLabel->
+  "During evaluation of \
+In[552]:=",ExpressionUUID->"80e12f68-81b2-4a80-9b0b-4d9a2bee473f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"For rotations about\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0"}], "}"}]}],
+  SequenceForm["For rotations about", {1, 0, 0}],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.860687213501485*^9, 3.86068724175368*^9}, 
+   3.8606873203026505`*^9, 3.8606876379202995`*^9, {3.86068767371272*^9, 
+   3.860687702291997*^9}, {3.860687780450469*^9, 3.860687808216968*^9}, {
+   3.8606880316102657`*^9, 3.8606880510268664`*^9}, 3.860688337391307*^9, 
+   3.860689297763474*^9, 3.8606893642975044`*^9, 3.8606894223126497`*^9, 
+   3.8606911153668084`*^9},
+ CellLabel->
+  "During evaluation of \
+In[552]:=",ExpressionUUID->"6c036b93-4b53-47f9-acf8-f6f3865313a5"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" the rot inertia is \"\>", "\[InvisibleSpace]", 
+   RowBox[{
+    FractionBox["1", "24"], " ", "h", " ", "\[Pi]", " ", 
+    SuperscriptBox["R", "2"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"4", " ", 
+       SuperscriptBox["h", "2"]}], "+", 
+      RowBox[{"3", " ", 
+       SuperscriptBox["R", "2"]}]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}]}]}],
+  SequenceForm[
+  " the rot inertia is ", Rational[1, 24] $CellContext`h 
+   Pi $CellContext`R^2 (4 $CellContext`h^2 + 
+    3 $CellContext`R^2) ($CellContext`\[Rho]1 + $CellContext`\[Rho]2)],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.860687213501485*^9, 3.86068724175368*^9}, 
+   3.8606873203026505`*^9, 3.8606876379202995`*^9, {3.86068767371272*^9, 
+   3.860687702291997*^9}, {3.860687780450469*^9, 3.860687808216968*^9}, {
+   3.8606880316102657`*^9, 3.8606880510268664`*^9}, 3.860688337391307*^9, 
+   3.860689297763474*^9, 3.8606893642975044`*^9, 3.8606894223126497`*^9, 
+   3.860691115395173*^9},
+ CellLabel->
+  "During evaluation of \
+In[552]:=",ExpressionUUID->"97fad2c6-36c8-4ffe-9085-5cedcc80be23"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"For rotations about\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "4"}], " ", 
+        SuperscriptBox["h", "2"], " ", "\[Pi]", " ", 
+        RowBox[{"(", 
+         RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}]}], "+", 
+       RowBox[{"3", " ", "\[Pi]", " ", 
+        SuperscriptBox["R", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}]}], "+", 
+       SqrtBox[
+        RowBox[{
+         RowBox[{"16", " ", 
+          SuperscriptBox["h", "4"], " ", 
+          SuperscriptBox["\[Pi]", "2"], " ", 
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}], "2"]}], "+", 
+         RowBox[{"9", " ", 
+          SuperscriptBox["\[Pi]", "2"], " ", 
+          SuperscriptBox["R", "4"], " ", 
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}], "2"]}], "-", 
+         RowBox[{"8", " ", 
+          SuperscriptBox["h", "2"], " ", 
+          SuperscriptBox["R", "2"], " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "32"}], "+", 
+               RowBox[{"3", " ", 
+                SuperscriptBox["\[Pi]", "2"]}]}], ")"}], " ", 
+             SuperscriptBox["\[Rho]1", "2"]}], "+", 
+            RowBox[{"2", " ", 
+             RowBox[{"(", 
+              RowBox[{"32", "+", 
+               RowBox[{"3", " ", 
+                SuperscriptBox["\[Pi]", "2"]}]}], ")"}], " ", "\[Rho]1", " ", 
+             "\[Rho]2"}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "32"}], "+", 
+               RowBox[{"3", " ", 
+                SuperscriptBox["\[Pi]", "2"]}]}], ")"}], " ", 
+             SuperscriptBox["\[Rho]2", "2"]}]}], ")"}]}]}]]}], 
+      RowBox[{"16", " ", "h", " ", "R", " ", 
+       RowBox[{"(", 
+        RowBox[{"\[Rho]1", "-", "\[Rho]2"}], ")"}]}]], ",", "1"}], "}"}]}],
+  SequenceForm[
+  "For rotations about", {
+   0, Rational[
+     1, 16] $CellContext`h^(-1) $CellContext`R^(-1) ($CellContext`\[Rho]1 - \
+$CellContext`\[Rho]2)^(-1) ((-4) $CellContext`h^2 
+      Pi ($CellContext`\[Rho]1 + $CellContext`\[Rho]2) + 
+     3 Pi $CellContext`R^2 ($CellContext`\[Rho]1 + $CellContext`\[Rho]2) + (
+       16 $CellContext`h^4 
+        Pi^2 ($CellContext`\[Rho]1 + $CellContext`\[Rho]2)^2 + 
+       9 Pi^2 $CellContext`R^4 ($CellContext`\[Rho]1 + \
+$CellContext`\[Rho]2)^2 - 
+       8 $CellContext`h^2 $CellContext`R^2 ((-32 + 
+          3 Pi^2) $CellContext`\[Rho]1^2 + 
+        2 (32 + 3 Pi^2) $CellContext`\[Rho]1 $CellContext`\[Rho]2 + (-32 + 
+          3 Pi^2) $CellContext`\[Rho]2^2))^Rational[1, 2]), 1}],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.860687213501485*^9, 3.86068724175368*^9}, 
+   3.8606873203026505`*^9, 3.8606876379202995`*^9, {3.86068767371272*^9, 
+   3.860687702291997*^9}, {3.860687780450469*^9, 3.860687808216968*^9}, {
+   3.8606880316102657`*^9, 3.8606880510268664`*^9}, 3.860688337391307*^9, 
+   3.860689297763474*^9, 3.8606893642975044`*^9, 3.8606894223126497`*^9, 
+   3.8606911159656477`*^9},
+ CellLabel->
+  "During evaluation of \
+In[552]:=",ExpressionUUID->"43a55a0c-046d-44c0-a462-34e632ef5c87"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" the rot inertia is \"\>", "\[InvisibleSpace]", 
+   RowBox[{
+    FractionBox["1", "48"], " ", "h", " ", 
+    SuperscriptBox["R", "2"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"\[Pi]", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"4", " ", 
+          SuperscriptBox["h", "2"]}], "+", 
+         RowBox[{"9", " ", 
+          SuperscriptBox["R", "2"]}]}], ")"}], " ", 
+       RowBox[{"(", 
+        RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}]}], "-", 
+      SqrtBox[
+       RowBox[{
+        RowBox[{"16", " ", 
+         SuperscriptBox["h", "4"], " ", 
+         SuperscriptBox["\[Pi]", "2"], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}], "2"]}], "+", 
+        RowBox[{"9", " ", 
+         SuperscriptBox["\[Pi]", "2"], " ", 
+         SuperscriptBox["R", "4"], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}], "2"]}], "-", 
+        RowBox[{"8", " ", 
+         SuperscriptBox["h", "2"], " ", 
+         SuperscriptBox["R", "2"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"-", "32"}], "+", 
+              RowBox[{"3", " ", 
+               SuperscriptBox["\[Pi]", "2"]}]}], ")"}], " ", 
+            SuperscriptBox["\[Rho]1", "2"]}], "+", 
+           RowBox[{"2", " ", 
+            RowBox[{"(", 
+             RowBox[{"32", "+", 
+              RowBox[{"3", " ", 
+               SuperscriptBox["\[Pi]", "2"]}]}], ")"}], " ", "\[Rho]1", " ", 
+            "\[Rho]2"}], "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"-", "32"}], "+", 
+              RowBox[{"3", " ", 
+               SuperscriptBox["\[Pi]", "2"]}]}], ")"}], " ", 
+            SuperscriptBox["\[Rho]2", "2"]}]}], ")"}]}]}]]}], ")"}]}]}],
+  SequenceForm[
+  " the rot inertia is ", 
+   Rational[1, 48] $CellContext`h $CellContext`R^2 (
+    Pi (4 $CellContext`h^2 + 
+      9 $CellContext`R^2) ($CellContext`\[Rho]1 + $CellContext`\[Rho]2) - (
+     16 $CellContext`h^4 Pi^2 ($CellContext`\[Rho]1 + $CellContext`\[Rho]2)^2 + 
+     9 Pi^2 $CellContext`R^4 ($CellContext`\[Rho]1 + $CellContext`\[Rho]2)^2 - 
+     8 $CellContext`h^2 $CellContext`R^2 ((-32 + 
+        3 Pi^2) $CellContext`\[Rho]1^2 + 
+      2 (32 + 3 Pi^2) $CellContext`\[Rho]1 $CellContext`\[Rho]2 + (-32 + 
+        3 Pi^2) $CellContext`\[Rho]2^2))^Rational[1, 2])],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.860687213501485*^9, 3.86068724175368*^9}, 
+   3.8606873203026505`*^9, 3.8606876379202995`*^9, {3.86068767371272*^9, 
+   3.860687702291997*^9}, {3.860687780450469*^9, 3.860687808216968*^9}, {
+   3.8606880316102657`*^9, 3.8606880510268664`*^9}, 3.860688337391307*^9, 
+   3.860689297763474*^9, 3.8606893642975044`*^9, 3.8606894223126497`*^9, 
+   3.860691116339647*^9},
+ CellLabel->
+  "During evaluation of \
+In[552]:=",ExpressionUUID->"a7ac7982-2ea2-4bb2-99fb-ab2eecbefe7e"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"For rotations about\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"-", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"\[Pi]", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"4", " ", 
+            SuperscriptBox["h", "2"]}], "-", 
+           RowBox[{"3", " ", 
+            SuperscriptBox["R", "2"]}]}], ")"}], " ", 
+         RowBox[{"(", 
+          RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}]}], "+", 
+        SqrtBox[
+         RowBox[{
+          RowBox[{"16", " ", 
+           SuperscriptBox["h", "4"], " ", 
+           SuperscriptBox["\[Pi]", "2"], " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}], "2"]}], "+", 
+          RowBox[{"9", " ", 
+           SuperscriptBox["\[Pi]", "2"], " ", 
+           SuperscriptBox["R", "4"], " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}], "2"]}], "-", 
+          RowBox[{"8", " ", 
+           SuperscriptBox["h", "2"], " ", 
+           SuperscriptBox["R", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"-", "32"}], "+", 
+                RowBox[{"3", " ", 
+                 SuperscriptBox["\[Pi]", "2"]}]}], ")"}], " ", 
+              SuperscriptBox["\[Rho]1", "2"]}], "+", 
+             RowBox[{"2", " ", 
+              RowBox[{"(", 
+               RowBox[{"32", "+", 
+                RowBox[{"3", " ", 
+                 SuperscriptBox["\[Pi]", "2"]}]}], ")"}], " ", "\[Rho]1", " ",
+               "\[Rho]2"}], "+", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"-", "32"}], "+", 
+                RowBox[{"3", " ", 
+                 SuperscriptBox["\[Pi]", "2"]}]}], ")"}], " ", 
+              SuperscriptBox["\[Rho]2", "2"]}]}], ")"}]}]}]]}], 
+       RowBox[{"16", " ", "h", " ", "R", " ", 
+        RowBox[{"(", 
+         RowBox[{"\[Rho]1", "-", "\[Rho]2"}], ")"}]}]]}], ",", "1"}], "}"}]}],
+  SequenceForm[
+  "For rotations about", {
+   0, Rational[-1, 
+      16] $CellContext`h^(-1) $CellContext`R^(-1) ($CellContext`\[Rho]1 - \
+$CellContext`\[Rho]2)^(-1) (
+     Pi (4 $CellContext`h^2 - 
+       3 $CellContext`R^2) ($CellContext`\[Rho]1 + $CellContext`\[Rho]2) + (
+       16 $CellContext`h^4 
+        Pi^2 ($CellContext`\[Rho]1 + $CellContext`\[Rho]2)^2 + 
+       9 Pi^2 $CellContext`R^4 ($CellContext`\[Rho]1 + \
+$CellContext`\[Rho]2)^2 - 
+       8 $CellContext`h^2 $CellContext`R^2 ((-32 + 
+          3 Pi^2) $CellContext`\[Rho]1^2 + 
+        2 (32 + 3 Pi^2) $CellContext`\[Rho]1 $CellContext`\[Rho]2 + (-32 + 
+          3 Pi^2) $CellContext`\[Rho]2^2))^Rational[1, 2]), 1}],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.860687213501485*^9, 3.86068724175368*^9}, 
+   3.8606873203026505`*^9, 3.8606876379202995`*^9, {3.86068767371272*^9, 
+   3.860687702291997*^9}, {3.860687780450469*^9, 3.860687808216968*^9}, {
+   3.8606880316102657`*^9, 3.8606880510268664`*^9}, 3.860688337391307*^9, 
+   3.860689297763474*^9, 3.8606893642975044`*^9, 3.8606894223126497`*^9, 
+   3.860691116675968*^9},
+ CellLabel->
+  "During evaluation of \
+In[552]:=",ExpressionUUID->"9f8be785-56e3-464a-a183-870291aba5e2"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" the rot inertia is \"\>", "\[InvisibleSpace]", 
+   RowBox[{
+    FractionBox["1", "48"], " ", "h", " ", 
+    SuperscriptBox["R", "2"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"\[Pi]", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"4", " ", 
+          SuperscriptBox["h", "2"]}], "+", 
+         RowBox[{"9", " ", 
+          SuperscriptBox["R", "2"]}]}], ")"}], " ", 
+       RowBox[{"(", 
+        RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}]}], "+", 
+      SqrtBox[
+       RowBox[{
+        RowBox[{"16", " ", 
+         SuperscriptBox["h", "4"], " ", 
+         SuperscriptBox["\[Pi]", "2"], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}], "2"]}], "+", 
+        RowBox[{"9", " ", 
+         SuperscriptBox["\[Pi]", "2"], " ", 
+         SuperscriptBox["R", "4"], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"\[Rho]1", "+", "\[Rho]2"}], ")"}], "2"]}], "-", 
+        RowBox[{"8", " ", 
+         SuperscriptBox["h", "2"], " ", 
+         SuperscriptBox["R", "2"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"-", "32"}], "+", 
+              RowBox[{"3", " ", 
+               SuperscriptBox["\[Pi]", "2"]}]}], ")"}], " ", 
+            SuperscriptBox["\[Rho]1", "2"]}], "+", 
+           RowBox[{"2", " ", 
+            RowBox[{"(", 
+             RowBox[{"32", "+", 
+              RowBox[{"3", " ", 
+               SuperscriptBox["\[Pi]", "2"]}]}], ")"}], " ", "\[Rho]1", " ", 
+            "\[Rho]2"}], "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"-", "32"}], "+", 
+              RowBox[{"3", " ", 
+               SuperscriptBox["\[Pi]", "2"]}]}], ")"}], " ", 
+            SuperscriptBox["\[Rho]2", "2"]}]}], ")"}]}]}]]}], ")"}]}]}],
+  SequenceForm[
+  " the rot inertia is ", 
+   Rational[1, 48] $CellContext`h $CellContext`R^2 (
+    Pi (4 $CellContext`h^2 + 
+      9 $CellContext`R^2) ($CellContext`\[Rho]1 + $CellContext`\[Rho]2) + (
+      16 $CellContext`h^4 
+       Pi^2 ($CellContext`\[Rho]1 + $CellContext`\[Rho]2)^2 + 
+      9 Pi^2 $CellContext`R^4 ($CellContext`\[Rho]1 + $CellContext`\[Rho]2)^2 - 
+      8 $CellContext`h^2 $CellContext`R^2 ((-32 + 
+         3 Pi^2) $CellContext`\[Rho]1^2 + 
+       2 (32 + 3 Pi^2) $CellContext`\[Rho]1 $CellContext`\[Rho]2 + (-32 + 
+         3 Pi^2) $CellContext`\[Rho]2^2))^Rational[1, 2])],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.860687213501485*^9, 3.86068724175368*^9}, 
+   3.8606873203026505`*^9, 3.8606876379202995`*^9, {3.86068767371272*^9, 
+   3.860687702291997*^9}, {3.860687780450469*^9, 3.860687808216968*^9}, {
+   3.8606880316102657`*^9, 3.8606880510268664`*^9}, 3.860688337391307*^9, 
+   3.860689297763474*^9, 3.8606893642975044`*^9, 3.8606894223126497`*^9, 
+   3.8606911168934264`*^9},
+ CellLabel->
+  "During evaluation of \
+In[552]:=",ExpressionUUID->"d95f3bf9-f4a0-408b-a125-6f4d5901e3e1"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{949, 497},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+TaggingRules->Association["TryRealOnly" -> False],
+Magnification:>0.7 Inherited,
+FrontEndVersion->"12.3 for Microsoft Windows (64-bit) (July 9, 2021)",
+StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"637d7c10-d651-4414-af4c-ae0ccc236f82"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 270, 7, 39, "Text",ExpressionUUID->"4680e70d-bee4-4e21-acb7-19d7d60986aa"],
+Cell[CellGroupData[{
+Cell[853, 31, 9944, 213, 323, "Input",ExpressionUUID->"5a00e2f8-f104-469f-850b-30269927d302"],
+Cell[CellGroupData[{
+Cell[10822, 248, 1366, 32, 64, "Print",ExpressionUUID->"f1c212c6-e1c2-4d1d-b0ff-e1a18095b3c7"],
+Cell[12191, 282, 1746, 46, 65, "Print",ExpressionUUID->"a8f1511e-d493-4020-b6c3-f928378f0005"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13986, 334, 14045, 353, 936, "Input",ExpressionUUID->"5c128f66-1a25-4aa3-a97c-fb18c15c8194"],
+Cell[CellGroupData[{
+Cell[28056, 691, 1473, 35, 44, "Print",ExpressionUUID->"dc21c1f8-3466-4020-bcc8-d5b7d68e8d4c"],
+Cell[29532, 728, 3424, 85, 75, "Print",ExpressionUUID->"098cbee1-8ee9-458f-95e3-811367881db7"],
+Cell[32959, 815, 2098, 53, 67, "Print",ExpressionUUID->"c7924eeb-5375-480e-bb9e-9dd8f3b37486"],
+Cell[35060, 870, 1913, 43, 51, "Print",ExpressionUUID->"1c40d0ab-14e9-4fc7-b9c0-b12d0a59b733"],
+Cell[36976, 915, 866, 13, 53, "Print",ExpressionUUID->"80e12f68-81b2-4a80-9b0b-4d9a2bee473f"],
+Cell[37845, 930, 737, 15, 17, "Print",ExpressionUUID->"6c036b93-4b53-47f9-acf8-f6f3865313a5"],
+Cell[38585, 947, 1163, 27, 30, "Print",ExpressionUUID->"97fad2c6-36c8-4ffe-9085-5cedcc80be23"],
+Cell[39751, 976, 3362, 82, 37, "Print",ExpressionUUID->"43a55a0c-046d-44c0-a462-34e632ef5c87"],
+Cell[43116, 1060, 3043, 76, 30, "Print",ExpressionUUID->"a7ac7982-2ea2-4bb2-99fb-ab2eecbefe7e"],
+Cell[46162, 1138, 3347, 83, 37, "Print",ExpressionUUID->"9f8be785-56e3-464a-a183-870291aba5e2"],
+Cell[49512, 1223, 3059, 77, 30, "Print",ExpressionUUID->"d95f3bf9-f4a0-408b-a125-6f4d5901e3e1"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
